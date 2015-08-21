@@ -67,7 +67,7 @@ class Laporan_neraca_c extends CI_Controller
 	 function tampil(){
 
 		$this->auth->restrict ();
-		$this->auth->cek_menu ( 32 );
+		$this->auth->cek_menu ( 37 );
 
 		if(isset($_POST["btnLihat"])){
 			$this->tampil_lap_neraca();

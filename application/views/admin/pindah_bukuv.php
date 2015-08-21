@@ -8,12 +8,20 @@
 	foreach($kode_debet_def->result() as $row){
 		$kd1= $row->kode_trans;
 		$gl1=$row->GL_TRANS;
+        $tob1=$row->TOB;
+
 	}
 	foreach($kode_kredit_def->result() as $row){
 		$kd2= $row->kode_trans;
 		$gl2=$row->GL_TRANS;
+        $tob2=$row->TOB;
 	}
 ?>
+<style>
+    .text_kanan td:nth-child(4) {
+        text-align:right !important;
+    }
+</style>
 <div class="row ">
     <div class="col-md-12">
         <!-- BEGIN SAMPLE FORM PORTLET-->
@@ -40,23 +48,31 @@
                         <div class="col-md-6">
                         	<h4>Rekening Asal</h4>
                             <div class="form-body">
-                            	<div class="form-group">
+                            	<div class="form-group" style="display: none;">
                                     <label>Tanggal :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <?php echo form_input(array('name'=>'txtTGlTrans','class'=>'form-control','id'=>'txtTglTrans','value'=>$this->session->userdata('tglD'),'readonly'=>'true'));?>
+                                        <?php echo form_input(array('name'=>'txtTGlTrans','class'=>'form-control input-small','id'=>'txtTglTrans','value'=>$this->session->userdata('tglD'),'readonly'=>'true'));?>
                                         <?php echo  form_input(array('name'=>'txtcounter','class'=>'span1 bersih hidden','type'=>'hidden','id'=>'txtcounter'));?>
+                                        <input type="text" id="idFlagRekTab">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>No rekening :</label>
-                                    <div class="input-group">
+
+                                    <div class="input-group input-medium">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                                        <i class="fa fa-tag"></i>
                                         </span>
-                                        <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rekening" class="form-control bersih" required="">
+                                        <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rekening" class="form-control  input-medium bersih" required="">
+                                        <span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
+                                                     data-toggle="modal" id="idButtonModalRekTab">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -65,7 +81,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <?php echo form_input(array('name'=>'txtNama','id'=>'txtNama','class'=>'bersih form-control','placeholder'=>'Nama nasabah','readonly'=>'true'));?>
+                                        <?php echo form_input(array('name'=>'txtNama','id'=>'txtNama','class'=>'bersih form-control  input-large','placeholder'=>'Nama nasabah','readonly'=>'true'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -80,7 +96,7 @@
                                             'id'          => 'txtAlamat',
                                             'placeholder'     => 'Alamat nasabah',
                                             'rows'        => '2',
-                                            'class'       => 'form-control',
+                                            'class'       => 'form-control  input-large bersih',
                                             'readonly' =>'readonly'
                                           );
                                         echo form_textarea($data);
@@ -93,7 +109,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <?php echo form_input(array('name'=>'txtSaldoSaatIni','id'=>'txtSaldoSaatIni','class'=>'form-control nomor','readonly'=>'true','style'=>'text-align:right'));?>
+                                        <?php echo form_input(array('name'=>'txtSaldoSaatIni','id'=>'txtSaldoSaatIni','class'=>'form-control nomor  input-large','readonly'=>'true','style'=>'text-align:right'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -102,7 +118,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <?php echo form_input(array('name'=>'txtSaldoMin','id'=>'txtSaldoMin','class'=>'form-control nomor','readonly'=>'true','style'=>'text-align:right'));?>
+                                        <?php echo form_input(array('name'=>'txtSaldoMin','id'=>'txtSaldoMin','class'=>'form-control nomor  input-large','readonly'=>'true','style'=>'text-align:right'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -133,12 +149,10 @@
 												?>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-2">
                                             <label>&nbsp;</label>
                                             <div class="input-group">
-                                                <input id="txtJenisTrans" name="txtJenisTrans" type="text" class="form-control" readonly="readonly"> 
+                                                <input id="txtJenisTrans" name="txtJenisTrans" type="text" class="form-control" readonly="readonly" value="<?php echo $tob1; ?>">
                                             </div>                                   
                                         </div>
                                     </div>
@@ -163,11 +177,17 @@
                             	<h4>Rekening Tujuan</h4>
                             	<div class="form-group">
                                     <label>No rekening tujuan :</label>
-                                    <div class="input-group">
+                                    <div class="input-group input-medium">
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <input id="txtRekTujuan" name="txtRekTujuan" type="text" placeholder="No rek tabungan" class="form-control bersih" required="">
+                                        <input id="txtRekTujuan" name="txtRekTujuan" type="text" placeholder="No rek tabungan" class="form-control bersih input-medium" required="">
+                                        <span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
+                                                     data-toggle="modal" id="idButtonModalRekTabTjn">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -176,7 +196,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <input id="txtNamaTujuan" name="txtNamaTujuan" type="text" placeholder="nama nasabah" required="" disabled="" class="form-control bersih">
+                                        <input id="txtNamaTujuan" name="txtNamaTujuan" type="text" placeholder="nama nasabah" required="" disabled="" class="form-control bersih input-large">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -185,7 +205,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <input id="txtSaldoTabTujuan" name="txtSaldoTabTujuan" type="text" class="form-control nomor" required="" style="text-align:right;" disabled="">
+                                        <input id="txtSaldoTabTujuan" name="txtSaldoTabTujuan" type="text" class="form-control nomor  input-large" required="" style="text-align:right;" disabled="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -194,7 +214,7 @@
                                         <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                         </span>
-                                        <input id="txtSaldoMinTujuan" name="txtSaldoMinTujuan" type="text" class="form-control nomor" required="" style="text-align:right;" disabled="">
+                                        <input id="txtSaldoMinTujuan" name="txtSaldoMinTujuan" type="text" class="form-control nomor  input-large" required="" style="text-align:right;" disabled="">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -216,12 +236,11 @@
 												?>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                        </div>
-                                        <div class="col-md-1">
+
+                                        <div class="col-md-2">
                                             <label>&nbsp;</label>
                                             <div class="input-group">
-                                                <?php echo form_input(array('name'=>'txtJenisTrans2','id'=>'txtJenisTrans2','readonly'=>'true','class'=>'form-control')); ?> 
+                                                <?php echo form_input(array('name'=>'txtJenisTrans2','id'=>'txtJenisTrans2', 'value'=>$tob2,'readonly'=>'true','class'=>'form-control')); ?>
                                             </div>                                   
                                         </div>
                                     </div>
@@ -245,16 +264,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input id="txtModal" name="txtModal" type="text" class="input-mini bersih " >
-                                    <input id="txtKdPerk" name="txtKdPerk" type="text" class="input-mini bersih">
-                                    <input id="txtKdPerk2" name="txtKdPerk2" type="text" class="input-mini bersih">
-                                    <input id="txtNasabahID" name="txtNasabahID" type="text" class=" input-mini bersih " >
-                                    <input id="txtNasabahID2" name="txtNasabahID2" type="text" class=" input-mini bersih " >
-                                    <input type="text" id="txtsaldosetor" name="txtsaldosetor" class="input-mini bersih " />
-                                    <input type="text" id="txtsaldotarik" name="txtsaldotarik" class="input-mini bersih " />
-                                    <input type="text" id="txtsaldosetor2" name="txtsaldosetor2" class="input-mini bersih " />
-                                    <input type="text" id="txtsaldotarik2" name="txtsaldotarik2" class="input-mini bersih " />
-                                    <?php echo form_input(array('name'=>'txtTransID','id'=>'txtTransID','class'=>'input-mini','value'=>''));?>
+                                    <input id="txtModal" name="txtModal" type="hidden" class="input-mini bersih hidden" >
+                                    <input id="txtKdPerk" name="txtKdPerk" type="hidden" class="input-mini bersih">
+                                    <input id="txtKdPerk2" name="txtKdPerk2" type="hidden" class="input-mini bersih">
+                                    <input id="txtNasabahID" name="txtNasabahID" type="hidden" class=" input-mini bersih " >
+                                    <input id="txtNasabahID2" name="txtNasabahID2" type="hidden" class=" input-mini bersih " >
+                                    <input type="hidden" id="txtsaldosetor" name="txtsaldosetor" class="input-mini bersih " />
+                                    <input type="hidden" id="txtsaldotarik" name="txtsaldotarik" class="input-mini bersih " />
+                                    <input type="hidden" id="txtsaldosetor2" name="txtsaldosetor2" class="input-mini bersih " />
+                                    <input type="hidden" id="txtsaldotarik2" name="txtsaldotarik2" class="input-mini bersih " />
+                                    <input type="hidden" id="txtTransID" name="txtTransID" class="input-mini bersih " value="" />
                                 </div>   
                                 
                             </div>
@@ -280,6 +299,72 @@
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>
+<!-- /.modal -->
+<div id="idDivTabelRekTab" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Rekening Tabungan</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_Reload" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekTab">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            No Rekening
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Saldo Akhir
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -327,6 +412,7 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
     });
 </script>
 <script>
@@ -335,7 +421,119 @@
 	$("#menu_root_3").addClass('start active open');
 	// END MENU OPEN
 
-//alert("y");
+var TableManaged = function () {
+
+    var initTable1 = function () {
+        var table = $('#idTabelRekTab');
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/setor_tarik_tabungan/getRekTab"); ?>",
+            "columns": [
+                { "data": "norektab" },
+                { "data": "namanasabah" },
+                { "data": "alamat" },
+                { "data": "saldoakhir" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
+
+            var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+            var flagModal = $("#idFlagRekTab").val();
+            var noRekTab = $(this).find("td").eq(0).html();
+            if(flagModal==0){
+                $('#txtRekTab').val(noRekTab);
+                $('#id_button_close_modal').trigger('click');
+                $('#txtRekTab').focus();
+            }else{
+                $('#txtRekTujuan').val(noRekTab);
+                $('#id_button_close_modal').trigger('click');
+                $('#txtRekTujuan').focus();
+            }
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            initTable1();
+        }
+    };
+
+}();
 </script>
 <script type="text/javascript">
 
@@ -465,6 +663,7 @@
 		    return newValue;
 	}
 	function ajax_submit_pindahbuku(){
+            ajaxModal();
 			$.ajax({
 				type:"POST",
 				url:"<?php echo base_url(); ?>pindah_buku/simpan_pindah_buku",
@@ -473,7 +672,8 @@
 				success:function (data) {
 					//$('#btnSimpan').hide();
 					alert('Transaksi setoran telah tersimpan!');
-					$("#btnSimpan").attr("disabled", "disabled");
+                    $( "#id_Reload" ).trigger( "click" );
+                    $("#btnSimpan").attr("disabled", "disabled");
 				}
 		
 			});
@@ -535,12 +735,11 @@
 				$('#txtJenisTrans').val(t);
 			},"json");
 	}
-	function focus_txtJml(){
-		$('#txtJml').val('');
-		$('#txtJml').focus();
-	}
-	function deskrip_norek(){
-		var kd=$('#txtRekTab').val();
+
+	function deskrip_norek(noRekTab1){
+        ajaxModal();
+		//var kd=$('#txtRekTab').val();
+        var kd = noRekTab1;
 	//	kd=kd.trim();
 	//	if(kd!=''){
 		$.post("<?php echo site_url('/setor_tarik_tabungan/deskripsi_norek'); ?>",
@@ -564,7 +763,8 @@
 					var c="<?php echo $count+1; ?>";
 					$("#txtcounter").val(c);
 					$("#txtKuitansi").val(k);
-					$('#txtJml').focus();
+					/*$('#txtJml').val('');*/
+                    $('#txtJml').focus();
 				}else{
 					alert('Data tidak ditemukan!');
 					$('.bersih').val('');
@@ -574,9 +774,11 @@
 			},"json");
 	}
 	
-	function deskrip_norek2(){
-		var kd=$('#txtRekTujuan').val();
-		$.post("<?php echo site_url('/setor_tarik_tabungan/deskripsi_norek'); ?>",
+	function deskrip_norek2(noRekTab2){
+        ajaxModal();
+		//var kd=$('#txtRekTujuan').val();
+		var kd = noRekTab2;
+        $.post("<?php echo site_url('/setor_tarik_tabungan/deskripsi_norek'); ?>",
 			{
 				'norek' : kd
 			},
@@ -592,18 +794,17 @@
 					$('#txtSaldoMinTujuan').val(saldo_min);
 					$('#txtsaldosetor2').val(data.SALDO_SETORAN);
 					$('#txtsaldotarik2').val(data.SALDO_PENARIKAN);
-					$('#btnSimpan').focus();
+					$('#txtKet').focus();
 				}else{
 					alert('Data tidak ditemukan!');
 					$('.bersih').val('');
 					$('.nomor').val('0.00');
-					$('#txtRekTab').focus();
+					$('#txtRekTujuan').focus();
 				}
 			},"json");
 	}
 	$("#txtJml").focus(function(){
 		$('#txtJml').val('');
-		$('#txtJml').focus();
 	});
 	
 	function confirm_reset(){
@@ -614,18 +815,26 @@
 					$('#txtRekTab').focus();
 				}
 	}
-	$(document).ajaxStart(function() {
-		$('.modal_json').fadeIn('fast');
-	  }).ajaxStop(function() {
-		$('.modal_json').fadeOut('fast');
-	});
+	/**/
+    function ajaxModal(){
+        $(document).ajaxStart(function() {
+            $('.modal_json').fadeIn('fast');
+        }).ajaxStop(function() {
+            $('.modal_json').fadeOut('fast');
+        });
+    }
+
+    $("#idButtonModalRekTab").focusout(function(){
+        $("#idFlagRekTab").val('0');
+    });
+    $("#idButtonModalRekTabTjn").focusout(function(){
+        $("#idFlagRekTab").val('1');
+    });
 	$(document).ready(function(){
 		$('#txtRekTab').focus();
 		$('.nomor').val('0.00');
 		//$("#txtDeskripTrans1").val("Pemindabukuan Debet");
 		//$("#txtDeskripTrans2").val("Pemindabukuan Kredit");
-		$("#txtJenisTrans").val("O");
-		$("#txtJenisTrans2").val("O");
 		
 		var gl1="<?php echo $gl1; ?>";
 		var gl2="<?php echo $gl2; ?>";
@@ -647,12 +856,15 @@
 			if(this.value==0){
 				$('#txtJml').val(0.00);
 				$('#terbilang').text("nol");
-			}else{
+			}else if(this.value==''){
+                $('#txtJml').val(0.00);
+                $('#terbilang').text("nol");
+            }else{
 				var angka = $('#txtJml').val();
 				var words = toWords(angka);
 				$('#terbilang').text(words);
 			}
-				saldo_setelah();
+				//saldo_setelah();
 		});
 		$('#txtJml').keyup(function(){
 			var val = $(this).val();
@@ -683,7 +895,7 @@
 			var kd=$("#txtRekTab").val();
 			kd=kd.trim();
 			if(kd!=''){
-				deskrip_norek();
+				deskrip_norek(kd);
 			}
 		});
 		
@@ -691,18 +903,18 @@
 			var kdtj=$("#txtRekTujuan").val();
 			kdtj=kdtj.trim();
 			if(kdtj!=''){
-				deskrip_norek2();	
+				deskrip_norek2(kdtj);
 			}
 		});
 				
 	});//end ready document
 	// jQuery expression for case-insensitive filter
-	$.extend($.expr[":"],
+	/*$.extend($.expr[":"],
 		{
 			"contains-ci": function(elem, i, match, array)
 			{
 				return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
 				.toLowerCase()) >= 0;
 			}
-	});
+	});*/
 	</script>

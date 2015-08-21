@@ -1,7 +1,7 @@
 	<?php
 if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <div class="row ">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <!-- BEGIN SAMPLE TABLE PORTLET-->
         <div class="form-body">
             <div class="table-toolbar">
@@ -75,7 +75,6 @@ jQuery(document).ready(function() {
     Layout.init(); // init current layout
     Demo.init(); // init demo features
     TableManaged.init();
-
 });
 var TableManaged = function () {
 

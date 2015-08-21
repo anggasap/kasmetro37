@@ -9,9 +9,16 @@ class Tellertabmodel extends CI_Model {
 		return $this->db->get ();
 	}
 	*/
+    public function getRekTab()
+    {
+        $sql="SELECT t.NO_REKENING,n.nama_nasabah,n.alamat,t.SALDO_AKHIR from tabung t left join nasabah n on  t.nasabah_id=n.nasabah_id where status_aktif='2'";
+        $query=$this->db->query($sql);
+        return $query->result(); // returning rows, not row
+    }
+
 	public function get_all_kodetrans_setor() {
 		$rows = array(); //will hold all results
-		$sql="select * from kodetranstabungan where TYPE_TRANS= 'K' and (DESKRIPSI_TRANS like '%setor%' or DESKRIPSI_TRANS like '%ABA%') order by KODE_TRANS asc ";
+		$sql="select * from kodetranstabungan where TYPE_TRANS= 'K' and (DESKRIPSI_TRANS like '%etor%' or DESKRIPSI_TRANS like '%ABA%') order by KODE_TRANS asc ";
 		$query=$this->db->query($sql);
 		foreach($query->result_array() as $row){    
 			$rows[] = $row; //add the fetched result to the result array;
@@ -71,13 +78,13 @@ class Tellertabmodel extends CI_Model {
 	}
 /*
 Load nama nasabah, no rekening tabungan untuk modal	*/
-	public function get_rekening(){
+	/*public function get_rekening(){
 	    $this->db->select ( 't.NO_REKENING,n.nama_nasabah,t.SALDO_AKHIR,n.nasabah_id' );
 		$this->db->from ( 'tabung t' );
 		$this->db->join('nasabah n', 't.nasabah_id=n.nasabah_id', 'left');
 		$this->db->where ( 't.status_aktif', '2');
 		return $this->db->get ();
-	}
+	}*/
 
 	public function get_deskripsi_rek($kode) {
 		$this->db->select ( 'T.SALDO_AKHIR,K.DESKRIPSI_JENIS_TABUNGAN,N.NAMA_NASABAH,N.ALAMAT,T.SALDO_BLOKIR,K.MINIMUM_DEFAULT,N.nasabah_id,T.TGL_TRANS_TERAKHIR,T.SALDO_SETORAN,T.SALDO_PENARIKAN,T.SETORAN_MINIMUM,T.ADM_BLN_INI' );

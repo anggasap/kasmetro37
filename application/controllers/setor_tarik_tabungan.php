@@ -75,7 +75,25 @@ class Setor_tarik_tabungan extends CI_Controller {
 		$this->template->load ( 'tempDataTable', 'admin/setor_tabunganv', $data );
 		}	
 	}
-	
+    public function getRekTab(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->tellertabmodel->getRekTab();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+
+            $array = array(
+                'norektab' => trim($row->NO_REKENING),
+                'namanasabah' => trim($row->nama_nasabah),
+                'saldoakhir' =>  number_format($row->SALDO_AKHIR,2),
+                'alamat'    => trim($row->alamat)
+
+            );
+
+            array_push($data['data'],$array);
+        }
+        //echo json_encode($data['data']);
+        $this->output->set_output(json_encode($data));
+    }
 	function deskripsi_trans() {
 		$this->CI =& get_instance();
 		$kode = $this->input->post ( 'kodetrans', TRUE );

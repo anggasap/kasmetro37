@@ -8,7 +8,7 @@ class TksBprM extends CI_Model {
 
     public function getTksUnsur()
     {
-        $sql="SELECT * from webtksunsur";
+        $sql="SELECT * from webtksunsur where flagaktif='1'";
         $query=$this->db->query($sql);
         return $query->result(); // returning rows, not row
     }

@@ -206,6 +206,7 @@ class TksBpr extends CI_Controller {
         $timestamp = strtotime($tgl);
         $tgl_trans = date('Y-m-d', $timestamp);
         $month = date("m",strtotime($tgl_trans));
+        $month = intval($month);
         $data['tgl'] = $this->get_month_name($month);
 
         //$tempPerkiraan = $this->tksBprM->insert_temp_perk($tgl_trans);

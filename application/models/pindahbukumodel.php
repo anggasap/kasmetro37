@@ -21,7 +21,7 @@ class Pindahbukumodel extends CI_Model {
 	/*Fungsi get kode transaksi default untuk transaksi SETOR TABUNGAN*/	
 	function get_kode_debet_source(){
 		$rows = array();
-		$sql="select w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.DESKRIPSI_TRANS,k.TOB from kodetranstabungan k left join web_kode_trans_default w on k.KODE_TRANS=w.kode_trans  where w.modul='TAB' and w.type_trans='ob_setor' ";
+		$sql="select w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.DESKRIPSI_TRANS,k.TOB from kodetranstabungan k left join web_kode_trans_default w on k.KODE_TRANS=w.kode_trans  where w.modul='TAB'";
 		$query=$this->db->query($sql);
 		foreach($query->result_array() as $row){    
 			$rows[] = $row; //add the fetched result to the result array;
@@ -31,7 +31,7 @@ class Pindahbukumodel extends CI_Model {
 	}
 	function get_kode_kredit_tujuan(){
 		$rows = array();
-		$sql="select w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.DESKRIPSI_TRANS,k.TOB from kodetranstabungan k left join web_kode_trans_default w on k.KODE_TRANS=w.kode_trans  where w.modul='TAB' and w.type_trans='ob_tarik' ";
+		$sql="select w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.DESKRIPSI_TRANS,k.TOB from kodetranstabungan k left join web_kode_trans_default w on k.KODE_TRANS=w.kode_trans  where w.modul='TAB'";
 		$query=$this->db->query($sql);
 		foreach($query->result_array() as $row){    
 			$rows[] = $row; //add the fetched result to the result array;
@@ -41,20 +41,20 @@ class Pindahbukumodel extends CI_Model {
 	}
 /* End Fungsi get kode transaksi default untuk transaksi SETOR TABUNGAN*/	
 	function get_kode_kre_tujuan_def(){
-		$this->db->select('w.kode_trans,k.TYPE_TRANS,k.GL_TRANS ');
+		$this->db->select('w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.TOB ');
 		$this->db->from('kodetranstabungan k');
 		$this->db->join('web_kode_trans_default w', 'k.KODE_TRANS=w.kode_trans', 'left');
 		$this->db->WHERE('w.modul','TAB');
-		$this->db->WHERE('w.type_trans','ob_tarik');
+		$this->db->WHERE('w.type_trans','ob_tujuan');
 		return $this->db->get();
 	}
 	function get_kode_debet_source_def(){
 		
-		$this->db->select('w.kode_trans,k.TYPE_TRANS,k.GL_TRANS ');
+		$this->db->select('w.kode_trans,k.TYPE_TRANS,k.GL_TRANS,k.TOB ');
 		$this->db->from('kodetranstabungan k');
 		$this->db->join('web_kode_trans_default w', 'k.KODE_TRANS=w.kode_trans', 'left');
 		$this->db->WHERE('w.modul','TAB');
-		$this->db->WHERE('w.type_trans','ob_setor');
+		$this->db->WHERE('w.type_trans','ob_sumber');
 		return $this->db->get();
 		
 	}
