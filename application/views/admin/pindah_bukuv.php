@@ -121,15 +121,7 @@
                                         <?php echo form_input(array('name'=>'txtSaldoMin','id'=>'txtSaldoMin','class'=>'form-control nomor  input-large','readonly'=>'true','style'=>'text-align:right'));?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Kuitansi :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="no kuitansi" readonly="readonly" class="form-control bersih" required="" onkeyup="ToUpper(this);">
-                                    </div>
-                                </div>
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-8">
@@ -158,17 +150,34 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Jumlah :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <?php echo form_input(array('name'=>'txtJml','style' =>'text-align:right;','id'=>'txtJml','required'=>'required','class'=>'form-control nomor')); ?>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label>Jumlah :</label>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <?php echo form_input(array('name' => 'txtJml', 'style' => 'text-align:right;', 'id' => 'txtJml', 'required' => 'required', 'class' => 'form-control nomor')); ?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Kuitansi</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="no kuitansi" readonly="readonly" class="form-control bersih" required="" onkeyup="ToUpper(this);">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label id="terbilang" style="color: red"></label>
                                 </div>
+
+
                                 
                             </div>    
                         </div><!-- <div class="col-md-6"> -->
@@ -197,6 +206,25 @@
                                         <i class="fa fa-calendar"></i>
                                         </span>
                                         <input id="txtNamaTujuan" name="txtNamaTujuan" type="text" placeholder="nama nasabah" required="" disabled="" class="form-control bersih input-large">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Alamat :</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                        <i class="fa fa-home"></i>
+                                        </span>
+                                        <?php
+                                        $data = array(
+                                            'name'        => 'txtAlamat2',
+                                            'id'          => 'txtAlamat2',
+                                            'placeholder'     => 'Alamat nasabah',
+                                            'rows'        => '2',
+                                            'class'       => 'form-control  input-large bersih',
+                                            'readonly' =>'readonly'
+                                        );
+                                        echo form_textarea($data);
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -244,7 +272,7 @@
                                             </div>                                   
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="form-group">
                                     <label>Keterangan :</label>
                                     <div class="input-group">
@@ -790,6 +818,7 @@ var TableManaged = function () {
 					
 					$('#txtNamaTujuan').val(data.NAMA_NASABAH);
 					$('#txtNasabahID2').val(data.NASABAH_ID);
+                    $('#txtAlamat2').val(data.ALAMAT);
 					$('#txtSaldoTabTujuan').val(saldo);
 					$('#txtSaldoMinTujuan').val(saldo_min);
 					$('#txtsaldosetor2').val(data.SALDO_SETORAN);

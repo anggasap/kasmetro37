@@ -18,7 +18,7 @@ class Main extends CI_Controller {
 		} else {
 			$data['multilevel'] = $this->usermodel->get_data(0,$this->session->userdata('level'));
 			$data ['nama'] = $this->homemodel->get_nama_kantor ();
-			$this->template->set ( 'title', 'home' );
+			$this->template->set ( 'title', 'Home' );
 			$this->template->load ( 'tempDataTable', 'admin/index',$data );
 			
    		}
@@ -51,7 +51,7 @@ class Main extends CI_Controller {
 				if ($success) {
 					$data ['multilevel'] = $this->usermodel->get_data(0,$this->session->userdata('level'));
 					$data ['nama'] = $this->homemodel->get_nama_kantor ();
-					$this->template->set ( 'title', 'home' );
+					$this->template->set ( 'title', 'Home' );
 	
 					$this->template->load ( 'tempDataTable', 'admin/index',$data );
 				} else {
@@ -69,7 +69,7 @@ class Main extends CI_Controller {
 				if ($success) {
 					$data ['multilevel'] = $this->usermodel->get_data(0,$this->session->userdata('level'));
 					$data ['nama'] = $this->homemodel->get_nama_kantor ();
-					$this->template->set ( 'title', 'home' );
+					$this->template->set ( 'title', 'Home' );
 	
 					$this->template->load ( 'tempDataTable', 'admin/index',$data );
 				} else {

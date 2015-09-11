@@ -58,6 +58,12 @@
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80);
   filter: alpha(opacity = 80)
 }
+    .kanan{
+        text-align: right;
+    }
+    .sembunyi{
+        display: none;
+    }
 </style>
 </head>
 <!-- END HEAD -->

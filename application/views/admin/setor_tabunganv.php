@@ -59,7 +59,7 @@ if ($judul == 'Setoran Tabungan') {
 <div class="col-md-6">
     <div class="form-body">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" style="display: none;">
                 <div class="form-group">
                     <label>Tanggal</label>
 
@@ -360,6 +360,11 @@ if ($judul == 'Setoran Tabungan') {
                     <div class="scroller" style="height:400px; ">
                         <div class="row">
                             <div class="col-md-12">
+                                <button id="id_Reload" style="display: none;"></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-body">
                                     <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekTab">
                                         <thead>
@@ -531,6 +536,9 @@ var TableManaged = function () {
                 [0, "asc"]
             ] // set first column as a default sort by asc
         });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
 
         var tableWrapper = jQuery('#example_wrapper');
 
@@ -554,15 +562,10 @@ var TableManaged = function () {
         });
         table.on('click', 'tbody tr', function () {
             var noRekTab = $(this).find("td").eq(0).html();
-            var namaRekTab = $(this).find("td").eq(1).html();
-            var alamatRekTab = $(this).find("td").eq(2).html();
             $('#txtRekTab').val(noRekTab);
-            $('#txtNama').val(namaRekTab);
-            $('#txtAlamat').val(alamatRekTab);
             $('#id_button_close_modal').trigger('click');
+            $('#txtRekTab').focus();
 
-            getDeskripsiRekTab(noRekTab);
-            //$('#txtRekTab').focus();
         });
 
         tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
@@ -772,6 +775,7 @@ function confirm_reset() {
     }
 }
 function ajax_submit_setor() {
+    ajaxModal();
     $.ajax({
         type: "POST",
         url: "<?php echo base_url(); ?>setor_tarik_tabungan/setor_tabungan",
@@ -780,6 +784,7 @@ function ajax_submit_setor() {
         success: function (data) {
             //$('#btnSimpan').hide();
             alert('Transaksi setoran telah tersimpan!');
+            $( "#id_Reload" ).trigger( "click" );
             $("#btnSimpan").attr("disabled", "disabled");
         }
 
@@ -787,6 +792,7 @@ function ajax_submit_setor() {
     event.preventDefault();
 }
 function ajax_submit_tarik() {
+    ajaxModal();
     $.ajax({
         type: "POST",
         url: "<?php echo base_url(); ?>setor_tarik_tabungan/tarik_tabungan",
@@ -794,6 +800,7 @@ function ajax_submit_tarik() {
 
         success: function (data) {
             alert('Transaksi penarikan tersimpan!');
+            $( "#id_Reload" ).trigger( "click" );
             //$('#btnSimpan').hide();
             $("#btnSimpan").attr("disabled", "disabled");
         }
@@ -856,11 +863,13 @@ $(function () {
 
 
 });/// end $func
-$(document).ajaxStart(function () {
-    $('.modal_json').fadeIn('fast');
-}).ajaxStop(function () {
-    $('.modal_json').fadeOut('fast');
-});
+function ajaxModal(){
+    $(document).ajaxStart(function() {
+        $('.modal_json').fadeIn('fast');
+    }).ajaxStop(function() {
+        $('.modal_json').fadeOut('fast');
+    });
+}
 $(document).ready(function () {
     $('#txtRekTab').focus();
     $('#lblStatus').text('');
@@ -934,6 +943,7 @@ $(document).ready(function () {
 }); //end ready document
 
 function getDeskripsiRekTab(noRekTab){
+    ajaxModal();
     var kd = noRekTab;
     if (kd != '') {
         //  alert(kd);
@@ -998,11 +1008,11 @@ function getDeskripsiRekTab(noRekTab){
 
 }
 // jQuery expression for case-insensitive filter
-$.extend($.expr[":"],
+/*$.extend($.expr[":"],
     {
         "contains-ci": function (elem, i, match, array) {
             return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
                 .toLowerCase()) >= 0;
         }
-    });
+    });*/
 </script>
