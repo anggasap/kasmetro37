@@ -6,7 +6,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-pin"></i>
-                    <span class="caption-subject bold uppercase">Pencatatan Transaksi</span>
+                    <span class="caption-subject bold uppercase">Buku Besar</span>
                 </div>
                 <div class="tools">
                     <a href="" class="collapse">
@@ -14,7 +14,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
                 </div>
             </div>
             <div class="portlet-body form">
-                <form id="forminputjurnal" class="confTrans" role="form" method="post" action="<?php echo base_url('akuntansi/simpanJurnal'); ?>">
+                <form id="forminputjurnal" class="confTrans" role="form" method="post" action="<?php echo base_url('bukubesar/home'); ?>">
                     <!-- START DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-body">
                         <div>
@@ -34,45 +34,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
                     ?>
                             </span>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>No Referensi :</label>
-                                    <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
-                                                </span>
-                                        <?php echo  form_input(array('name'=>'txtNoRef','class'=>'form-control','id'=>'idTxtNoRef','required'=>true));?>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <label>Kode Jurnal :</label>
-                                    <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-arrows"></i>
-                                                </span>
-                                        <?php
-                                        $data = array();
-                                        foreach($kodeJurnal as $row) :
-                                            $data[$row['kode_jurnal']] = $row['nama_jurnal'];
-                                        endforeach;
-                                        echo form_dropdown('dLKodeJurnal', $data,'','id="idDLKodeJurnal"  class="form-control"');
-                                        ?>
-                                    </div>
 
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Judul jurnal :</label>
-                                    <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-minus-square-o"></i>
-                                                </span>
-                                        <?php echo  form_input(array('name'=>'txtJudulJurnal','class'=>'form-control','id'=>'idtxtJudulJurnal'));?>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-2">
@@ -96,95 +58,35 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 
                                 </div>
                                 <div class="col-md-1">
+                                    <input id="idTxtNamaPerk" name="txtNamaPerk" type="text" placeholder=""
+                                           class="form-control bersih sembunyi" required="" readonly>
                                 </div>
-                                <div class="col-md-2">
-                                    <label>Debet :</label>
-                                        <?php echo form_input(array('name' => 'txtSaldoDebet', 'id' => 'idTxtSaldoDebet', 'class' => 'form-control nomor', 'style' => 'text-align:right')); ?>
-                                </div>
-                                <div class="col-md-2">
-                                    <label>Kredit :</label>
-
-                                        <?php echo form_input(array('name' => 'txtSaldoKredit', 'id' => 'idTxtSaldoKredit', 'class' => 'form-control nomor', 'style' => 'text-align:right')); ?>
-                                    </div>
                                 <div class="col-md-4">
-                                    <label>Uraian :</label>
-
-
-                                        <?php
-                                        $data = array(
-                                            'name' => 'txtUraian',
-                                            'id' => 'idTxtUraian',
-                                            'onkeyup' => 'ToUpper(this)',
-                                            'rows' => '2',
-                                            'class' => 'form-control',
-                                        );
-                                        echo form_textarea($data);
-                                        ?>
-
+                                    <label>Dari tanggal :</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <input name="txtTGlTrans1" id="idTxtTGlTrans1" class="form-control form-control-inline input-medium date-picker " data-date-format="dd-mm-yyyy" type="text" placeholder="dd-mm-yyyy" required="required"/>
+                                    </div>
                                 </div>
-                                <div class="col-md-1">
-                                    <label>&nbsp;</label>
-                                    <a id="idBtnAddPerk" href="javascript:;" class="form-control btn btn-icon-only green">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                    <input type="text" id="idTxtTempLoop" name="txtTempLoop" class="form-control sembunyi">
-
-                                </div>
-
+                                <div class="col-md-5">
+                                    <label>Sampai tanggal :</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                        <input name="txtTGlTrans2" id="idTxtTGlTrans2" class="form-control form-control-inline input-medium date-picker " data-date-format="dd-mm-yyyy" type="text" placeholder="dd-mm-yyyy" required="required"/>
+                                    </div>
 
                             </div>
                         </div>
                     </div>
-                    <div class="form-body">
-                        <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                            <thead>
-                            <tr>
-                                <th width="10%">
-                                    Kode Perk
-                                </th>
-                                <th width="20%">
-                                    Nama Perk
-                                </th>
-                                <th width="15%">
-                                    Debet
-                                </th>
-                                <th width="15%">
-                                    Kredit
-                                </th>
-                                <th width="30%">
-                                    Uraian
-                                </th>
-                                <th width="10%">
-                                    Act
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody id="id_body_data">
 
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="form-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total debet :</label>
-                                        <input type="text" name="totalDebet" class="form-control nomor kanan" id="idTotalDebet" readonly>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Total kredit :</label>
-                                        <input type="text" name="totalKredit" class="form-control nomor kanan" id="idTotalKredit" readonly>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- END DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-actions">
-                        <button type="submit" class="btn blue" id="btnSimpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>
+                        <button type="submit" class="btn blue" name="btnPreview" id="idBtnPreview"><span class="glyphicon glyphicon-floppy-disk"></span> Tampilkan</button>
 
                         <a class="btn red" id="btnReset" name="btnReset" onclick="confirm_reset();">
                             <span class="glyphicon glyphicon-repeat"></span>  Reset
@@ -284,6 +186,12 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
 <script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"
         type="text/javascript"></script>
 <!-- END DATATABLE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="<?php echo base_url('metronic/admin/pages/scripts/components-pickers.js'); ?>"></script>
+<script src="<?php echo base_url('metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>"
+        type="text/javascript"></script>
+<script src="<?php echo base_url('metronic/admin/pages/scripts/ui-general.js'); ?>" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
 <!-- END PAGE LEVEL SCRIPTS -->
 <script src="<?php echo base_url('metronic/global/scripts/metronic.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/admin/layout/scripts/layout.js'); ?>" type="text/javascript"></script>
@@ -298,6 +206,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        ComponentsPickers.init();
         TableManaged.init();
     });
 </script>
@@ -306,7 +215,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
     // MENU OPEN
     $(".menu_root").removeClass('start active open');
     $("#menu_root_11").addClass('start active open');
-    $("#idTxtNoRef").focus();
+    $("#idTxtKodePerk").focus();
     $(document).keyup(function(e) {
         if(e.which == 36) {
             $('#idBtnGL').trigger('click');
@@ -314,42 +223,10 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
             $('#idBtnAddPerk').trigger('click');
         }
     });
-    function CleanNumber(value) {
-        newValue = value.replace(/\,/g, '');
-        return newValue;
-    }
-    $(".nomor").focus(function(){
-        if($(this).val() == 0 || $(this).val() == 0.00){
-            $(this).val('');
-        }
-    });
-    $('.nomor').val('0.00');
-    $(".nomor").focusout(function(){
-        if ($(this).val() == '') {
-            $(this).val('0.00');
-        }else if($(this).val() == 0){
-            $(this).val('0.00');
-        }else{
-            var angka = $(this).val();
-            var result = number_format(angka,2);
-            $(this).val(result);
-        }
-    });
-    $('.nomor').keyup(function(){
-        var val = $(this).val();
-        if(isNaN(val)){
-            val = val.replace(/[^0-9\.]/g,'');
-            if(val.split('.').length>2)
-                val =val.replace(/\.+$/,"");
-        }
-        $(this).val(val);
-    });	// END $('.nomor').keyup(function(){
+
     function kosongkan(){
         $('#idTxtKodePerk').val('');
         $('#idNamaPerk').text('');
-        $('#idTxtSaldoDebet').val('0.00');
-        $('#idTxtSaldoKredit').val('0.00');
-        $('#idTxtUraian').val('');
     }
     // END MENU OPEN
     var TableManaged = function () {
@@ -431,6 +308,7 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
                 $('#idTxtKodePerk').val(idPerkiraan);
                 var namaPerkiraan = $(this).find("td").eq(1).html();
                 $('#idNamaPerk').text(namaPerkiraan);
+                $('#idTxtNamaPerk').val(namaPerkiraan);
 
                 $( "#id_button_close_modal" ).trigger( "click" );
             });
@@ -448,63 +326,17 @@ if( ! defined('BASEPATH')) exit('No direct script access allowed');?>
             }
         };
     }();
-    var i =0;
-    $('#idTxtTempLoop').val(i);
-    $('#idBtnAddPerk').click(function(){
-        if($('#idTxtKodePerk').val() =='' && $('#idNamaPerk').text() == ''){
-            alert("Akun GL tidak boleh kosong.");
-        }else{
-            i=i+1;
-            var kodePerk        = $('#idTxtKodePerk').val();
-            var namaPerk        = $('#idNamaPerk').text();
-            var saldoDebet      = $('#idTxtSaldoDebet').val();
-            var saldoKredit     = $('#idTxtSaldoKredit').val();
-            var uraian          = $('#idTxtUraian').val();
 
-
-            tr = '<tr class="listdata" id="listdata'+i+'">';
-            tr+='<td><input type="text" class="form-control" name="tempKodePerk'+i+'" readonly="true" value="'+kodePerk+'"></td>';
-            tr+='<td><input type="text" class="form-control" name="tempNamaPerk'+i+'" readonly="true" value="'+namaPerk+'" ></td>';
-            tr+='<td><input type="text" class="form-control kanan" id="tempSaldoDebet'+i+'"  name="tempSaldoDebet'+i+'" value="'+saldoDebet+'"></td>';
-            tr+='<td><input type="text" class="form-control kanan" id="tempSaldoKredit'+i+'" name="tempSaldoKredit'+i+'" value="'+saldoKredit+'"></td>';
-            tr+='<td><input type="text" class="form-control kanan" id="tempUraian'+i+'" name="tempUraian'+i+'" value="'+uraian+'"></td>';
-            tr+='<td><a href="#" class="btn yellow"><i class="fa fa-edit"></i></a>';
-            tr+='<a href="#" class="btn red" id="idBtnRemTR'+i+'"><i class="fa fa-trash-o"></i></a></td>';
-            tr+= '</tr>';
-
-
-            saldoDebet          = parseFloat(CleanNumber(saldoDebet));
-            saldoKredit         = parseFloat(CleanNumber(saldoKredit));//saldoKredit.replace(",", "");
-
-            var totDebet        = parseFloat(CleanNumber($('#idTotalDebet').val()));
-            var totKredit       = parseFloat(CleanNumber($('#idTotalKredit').val()));
-
-            var totalDebet      = totDebet+saldoDebet;
-            var totalKredit     = totKredit+saldoKredit;
-
-            $('#idTotalDebet').val(number_format(totalDebet,2));
-            $('#idTotalKredit').val(number_format(totalKredit,2));
-
-            $('#id_body_data').append(tr);
-            $('#idTxtTempLoop').val(i);
-            kosongkan();
-
-            /*$('#idBtnRemTR').click(function(){
-                //$('#listdata').detach();
-                alert("x");
-            });​*/
-        }
-    });
     $(".confTrans").submit(function(e){
-        var totDebet        = parseFloat(CleanNumber($('#idTotalDebet').val()));
-        var totKredit       = parseFloat(CleanNumber($('#idTotalKredit').val()));
-        if(totDebet == totKredit){
+        var tgl1        = parseFloat(CleanNumber($('#idTxtTGlTrans1').val()));
+        var tgl2       = parseFloat(CleanNumber($('#idTxtTGlTrans2').val()));
+        if(tgl2 >= tgl1){
             if (!confirm("Anda yakin melakukan proses ini ?")){
                 e.preventDefault();
                 return;
             }
         }else{
-            alert("Saldo debet dan kredit tidak sama.");
+            alert("Tanggal sampai tidak boleh lebih kecil.");
             return false;
         }
     });
