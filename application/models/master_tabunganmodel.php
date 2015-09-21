@@ -13,12 +13,12 @@ class Master_tabunganmodel extends CI_Model {
 		return $query->result(); // returning rows, not row
 	}
 	public function getDeskripsiRekTab($noRekTab){
-		$sql ="select jenis_tabungan, status_aktif, no_alternatif,suku_bunga,
-				persen_pph, tgl_bunga, kode_group1, kode_group2, kode_group3, 
-				kode_bi_pemilik, kode_bi_metoda, kode_bi_hubungan, flag_restricted, 
-				abp, minimum, adm_per_bln, periode_adm, setoran_minimum, setoran_per_bln, 
-				jkw, transaksi_normal
-				from tabung 
+		$sql ="select t.jenis_tabungan, t.status_aktif, t.no_alternatif,t.suku_bunga,
+				t.persen_pph, t.tgl_bunga, t.kode_group1, t.kode_group2, t.kode_group3, 
+				t.kode_bi_pemilik, t.kode_bi_metoda, t.kode_bi_hubungan, t.flag_restricted, 
+				t.abp, t.minimum, t.adm_per_bln, t.periode_adm, t.setoran_minimum, t.setoran_per_bln, 
+				t.jkw, t.transaksi_normal,n.nasabah_id,n.nama_nasabah, n.alamat 
+				from tabung t left join nasabah n on t.nasabah_id = n.nasabah_id  
 				where no_rekening = '$noRekTab'";
 		$query	= $this->db->query($sql);
 		return $query->result();
@@ -192,6 +192,15 @@ class Master_tabunganmodel extends CI_Model {
 	function ajaxUpdateRekTab($data,$noRekTab){
 		$query1 = $this->db->where('no_rekening', $noRekTab);
 		$query2 = $this->db->update('tabung', $data);
+		if($query1 && $query2){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function ajaxHapusRekTab($noRekTab){
+		$query1	=	$this->db->where('no_rekening',$noRekTab);
+		$query2	=   $this->db->delete('tabung');
 		if($query1 && $query2){
 			return true;
 		}else{

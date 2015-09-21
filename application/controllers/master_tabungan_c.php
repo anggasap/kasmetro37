@@ -239,7 +239,10 @@ class Master_tabungan_c extends CI_Controller {
 					'setorMin' => $rows[0]->setoran_minimum,
 					'setorWajib' => $rows[0]->setoran_per_bln,
 					'jkw' => $rows[0]->jkw,
-					'transNormal' => $rows[0]->transaksi_normal
+					'transNormal' => $rows[0]->transaksi_normal,
+					'nasabahId'	=>$rows[0]->nasabah_id,
+					'namaNasabah'=>$rows[0]->nama_nasabah,
+					'alamat'=>$rows[0]->alamat
 			);
 		}else{
 			$array=array('baris'=>0);
@@ -375,26 +378,26 @@ class Master_tabungan_c extends CI_Controller {
 	public function ajaxUbahRekTab(){	
 		$noRekTab	= trim($this->input->post('txtNoRekTab'));
 		$data = array (
-				'jenisTab' => trim($this->input->post('DL_jenis_tab')),
-				'noAlternatif' => trim($this->input->post('txtNoSeries')),
-				'sukuBunga' => str_replace(',', '', trim($this->input->post('txtBunga'))),
-				'persenPph' => str_replace(',', '', trim($this->input->post('txtPph'))),
-				'tglBunga' => date('Y-m-d', strtotime(trim($this->input->post('txtTerhitungBunga')))),
-				'kodeGroup1' => trim($this->input->post('DL_kodegroup1_tab')),
-				'kodeGroup2' => trim($this->input->post('DL_kodegroup2_tab')),
-				'kodeGroup3' => trim($this->input->post('DL_kodegroup3_tab')),
-				'kodeBiPemilik' => trim($this->input->post('DL_kodegoldeb_tab')),
-				'kodeBiMetoda' => trim($this->input->post('DL_kodemetoda')),
-				'kodeBiHub' => trim($this->input->post('DL_kodehub_tab')),
-				'flagRes' => trim($this->input->post('DL_restrict')),
+				'jenis_tabungan' => trim($this->input->post('DL_jenis_tab')),
+				'no_alternatif' => trim($this->input->post('txtNoSeries')),
+				'suku_bunga' => str_replace(',', '', trim($this->input->post('txtBunga'))),
+				'persen_pph' => str_replace(',', '', trim($this->input->post('txtPph'))),
+				'tgl_bunga' => date('Y-m-d', strtotime(trim($this->input->post('txtTerhitungBunga')))),
+				'kode_group1' => trim($this->input->post('DL_kodegroup1_tab')),
+				'kode_group2' => trim($this->input->post('DL_kodegroup2_tab')),
+				'kode_group3' => trim($this->input->post('DL_kodegroup3_tab')),
+				'kode_bi_pemilik' => trim($this->input->post('DL_kodegoldeb_tab')),
+				'kode_bi_metoda' => trim($this->input->post('DL_kodemetoda')),
+				'kode_bi_hubungan' => trim($this->input->post('DL_kodehub_tab')),
+				'flag_restricted' => trim($this->input->post('DL_restrict')),
 				'abp' => trim($this->input->post('DL_tipe_tab')),
-				'saldoMin' => str_replace(',', '', trim($this->input->post('txtSaldoMin'))),
-				'admPerBln' => str_replace(',', '', trim($this->input->post('txtBiayaAdm'))),
-				'periodeAdm' => trim($this->input->post('DL_frek_adm')),
-				'setorMin' => str_replace(',', '', trim($this->input->post('txtSetoranMin'))),
-				'setorWajib' => str_replace(',', '', trim($this->input->post('txtSetoranWajib'))),
+				'minimum' => str_replace(',', '', trim($this->input->post('txtSaldoMin'))),
+				'adm_per_bln' => str_replace(',', '', trim($this->input->post('txtBiayaAdm'))),
+				'periode_adm' => trim($this->input->post('DL_frek_adm')),
+				'setoran_minimum' => str_replace(',', '', trim($this->input->post('txtSetoranMin'))),
+				'setoran_per_bln' => str_replace(',', '', trim($this->input->post('txtSetoranWajib'))),
 				'jkw' => trim($this->input->post('txtJangkaWaktu')),
-				'transNormal' => str_replace(',', '', trim($this->input->post('txtTransaksiNormal')))
+				'transaksi_normal' => str_replace(',', '', trim($this->input->post('txtTransaksiNormal')))
 		);
 		$query = $this->master_tabunganmodel->ajaxUpdateRekTab($data,$noRekTab);
 		if($query){
@@ -410,6 +413,23 @@ class Master_tabungan_c extends CI_Controller {
 		}
 		$this->output->set_output(json_encode($array));
 	
+	}
+	function ajaxHapusRekTab(){
+		$this->CI =& get_instance();
+		$noRekTab = $this->input->post ( 'noRekTab', TRUE );
+		$query = $this->master_tabunganmodel->ajaxHapusRekTab( $noRekTab);
+		if($query){
+			$array = array(
+					'act'	=>1,
+					'notif' =>'Data berhasil dihapus'
+			);
+		}else{
+			$array = array(
+					'act'	=>0,
+					'notif' =>'Data gagal dihapus'
+			);
+		}
+		$this->output->set_output(json_encode($array));
 	}
 	
 }

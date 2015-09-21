@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <form id="formtabungan" role="form" method="post" >
+                <form id="formtabungan" role="form" method="post" action="">
 				<!-- START DIV CLASS ROW FOR SIZE 6 -->
                 	<div class="row">
                         <div class="col-md-6">
@@ -912,8 +912,11 @@ var TableManaged = function () {
 							$('#txtSetoranWajib').val(data.setorWajib);
 							$('#txtJangkaWaktu').val(data.jkw);
 							$('#txtTransaksiNormal').val(data.transNormal);
+							$('#txtNasabahId').val(data.nasabahId);
+							$('#txtNama').val(data.namaNasabah);
+							$('#txtAlamat').val(data.alamat);
 						}else{
-							 alert('Data tidak ditemukan!');
+							 //alert('Data tidak ditemukan!');
 							 /* $('#txtNasabahId').val('');
 							 $('#txtNama').val('');
 							 $('#txtAlamat').val(''); */
@@ -992,7 +995,8 @@ var TableManaged = function () {
 				url:"<?php echo base_url(); ?>master_tabungan_c/simpan_tabungan",
 				data:dataString,
 				dataType:"json",
-				success:function (data) {					
+				success:function (data) {	
+					$('#id_ReloadRekTab').trigger('click');				
 					$('#btnSimpan').hide();
 					alert(data.notif);
 					$("#btnSimpan").attr("disabled", "disabled");
@@ -1009,7 +1013,7 @@ var TableManaged = function () {
 				data:dataString,
 		
 				success:function (data) {
-					$('#id_Reload').trigger('click');
+					$('#id_ReloadRekTab').trigger('click');
 					$('#btnUbah').attr("disabled","disabled");
 					alert(data.notif);				
 				}
@@ -1017,21 +1021,27 @@ var TableManaged = function () {
 			});
 			event.preventDefault();
 		}
+		
 		function ajaxHapusRekTab(){
-			var nasabahId	= $('#txtNasabahId').val();
-			nasabahId		= nasabahId.trim();
-			$.post("<?php echo site_url('/master_nasabah_c/ajaxHapusRekTab'); ?>",
-					{
-						'nasabahId' 		: nasabahId,
-					},
-					function(data){
-						alert(data.notif);
-						
-					},"json");
+			var noRekTab	= $('#txtNoRekTab').val();
+			noRekTab		= noRekTab.trim();
+			$.ajax({
+				type:"POST",
+				dataType: "json",
+				url:"<?php echo base_url(); ?>master_tabungan_c/ajaxHapusRekTab",
+				data:{noRekTab :noRekTab},
+				success:function (data) {
+					$('#id_ReloadRekTab').trigger('click');
+					$('#btnHapus').attr("disabled","disabled");
+					alert(data.notif);				
+				}
+		
+			});
+			event.preventDefault();
 		}
 		$('#formtabungan').submit(function (event) {
 			ajaxModal();
-			dataString = $("#formtabungan").serialize();
+			dataString = $("#formtabungan").serialize(); 
 	        var aksiBtn       = $('#idTmpAksiBtn').val();
 	        if(aksiBtn == '1'){
 	        	var r = confirm('Anda yakin menyimpan data ini?');
