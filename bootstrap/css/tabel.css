@@ -1,0 +1,90 @@
+.tablediv
+{
+	display: table;
+	width: 98%
+}
+.rowdiv
+{
+	display: table-row;
+	width: auto
+}
+.celldiv
+{
+	display: table-cell;
+	width: auto;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.mini-celldiv
+{
+	display: table-cell;
+	width: 60px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.small-celldiv
+{
+	display: table-cell;
+	width: 90px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.medium-celldiv
+{
+	display: table-cell;
+	width: 150px;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.large-celldiv
+{
+	display: table-cell;
+	width: 210px ;
+	float: left;
+	padding-bottom: 5px;	
+	padding-right: 10px
+}
+.xlarge-celldiv
+{
+	display: table-cell;
+	width: 270px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.xxlarge-celldiv
+{
+	display: table-cell;
+	width: 530px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.large-btn-celldiv
+{
+	display: table-cell;
+	width: 265px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.medium-btn-celldiv
+{
+	display: table-cell;
+	width: 205px;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}
+.small-plus-celldiv
+{
+	display: table-cell;
+	width: 110px ;
+	float: left;
+	padding-bottom: 5px;
+	padding-right: 10px
+}

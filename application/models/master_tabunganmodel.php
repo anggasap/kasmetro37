@@ -4,6 +4,25 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class Master_tabunganmodel extends CI_Model {
+	public function getRekTabAll()
+	{
+		$sql="SELECT n.nasabah_id,t.no_rekening,n.nama_nasabah,n.alamat,t.saldo_akhir 
+				from tabung t left join nasabah n on t.nasabah_id = n.nasabah_id 
+				order by no_rekening asc";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
+	public function getDeskripsiRekTab($noRekTab){
+		$sql ="select jenis_tabungan, status_aktif, no_alternatif,suku_bunga,
+				persen_pph, tgl_bunga, kode_group1, kode_group2, kode_group3, 
+				kode_bi_pemilik, kode_bi_metoda, kode_bi_hubungan, flag_restricted, 
+				abp, minimum, adm_per_bln, periode_adm, setoran_minimum, setoran_per_bln, 
+				jkw, transaksi_normal
+				from tabung 
+				where no_rekening = '$noRekTab'";
+		$query	= $this->db->query($sql);
+		return $query->result();
+	}
 	public function get_rektab_byname($nama_nasabah){
 		$this->db->select('t.no_rekening,n.nama_nasabah,n.alamat');
 		$this->db->from('nasabah n');
@@ -79,7 +98,7 @@ class Master_tabunganmodel extends CI_Model {
 	}
 	public function get_kode_metoda() {
 		$rows = array(); //will hold all results
-		$sql="select * from kodemetoda order by DESKRIPSI_METODA asc ";
+		$sql="select * from kodemetoda order by deskripsi_metoda asc ";
 		$query=$this->db->query($sql);
 		foreach($query->result_array() as $row){    
 			$rows[] = $row; //add the fetched result to the result array;
@@ -102,6 +121,15 @@ class Master_tabunganmodel extends CI_Model {
 		$query = $this->db->get ();
 		if($query->num_rows()== '1'){
 			return $query->result ();
+		}else{
+			return false;
+		}
+	}
+	function lastNoRek($kode){
+		$query	= "select no_rekening from tabung where tgl_registrasi = (select max(tgl_registrasi) from tabung where jenis_tabungan='$kode')  order by no_rekening desc limit 1";
+		$query=$this->db->query($query);
+		if($query){
+			return $query->result();
 		}else{
 			return false;
 		}
@@ -155,6 +183,20 @@ class Master_tabunganmodel extends CI_Model {
 	}
 	function insert_tabungan($data){
 	   $query=$this->db->insert('tabung',$data);
+	   if($query){
+	   	return true;
+	   }else{
+	   	return false;
+	   }
+	}
+	function ajaxUpdateRekTab($data,$noRekTab){
+		$query1 = $this->db->where('no_rekening', $noRekTab);
+		$query2 = $this->db->update('tabung', $data);
+		if($query1 && $query2){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 

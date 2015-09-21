@@ -42,13 +42,21 @@ class Kreditmodel extends CI_Model {
 	}
 	
 	public function get_deskripsi_rek_kre($kode) {
-		$this->db->select ( 'T.JML_PINJAMAN,N.NAMA_NASABAH,T.POKOK_SALDO_AKHIR,T.BUNGA_SALDO_AKHIR,N.nasabah_id,T.TYPE_ABP,T.POKOK_SALDO_SETORAN,T.BUNGA_SALDO_SETORAN' );
+		$this->db->select ( 'T.JENIS_PINJAMAN,T.JML_PINJAMAN,N.NAMA_NASABAH,T.POKOK_SALDO_AKHIR,T.BUNGA_SALDO_AKHIR,N.nasabah_id,T.TYPE_ABP,T.POKOK_SALDO_SETORAN,T.BUNGA_SALDO_SETORAN' );
 		$this->db->from('KREDIT T');
 		$this->db->join('NASABAH N', 'T.NASABAH_ID=N.NASABAH_ID', 'LEFT');
 		$this->db->where ( 'T.NO_REKENING', $kode );
 		$query = $this->db->get ();
 		return $query->result ();
 	}
+    public function getRekKreAll() {
+        $this->db->select ( 'T.JENIS_PINJAMAN,T.NO_REKENING,T.JML_PINJAMAN,N.NAMA_NASABAH,N.alamat,T.POKOK_SALDO_AKHIR,T.BUNGA_SALDO_AKHIR,N.nasabah_id,T.TYPE_ABP,T.POKOK_SALDO_SETORAN,T.BUNGA_SALDO_SETORAN' );
+        $this->db->from('KREDIT T');
+        $this->db->join('NASABAH N', 'T.NASABAH_ID=N.NASABAH_ID', 'LEFT');
+        $this->db->where ( 'T.STATUS_AKTIF', 2 );
+        $query = $this->db->get ();
+        return $query->result ();
+    }
 //==========================ANGSURAN YANG MINUS===========================		
 	public function get_nilai_tagihan_pokok($kode,$bln,$thn,$tglsys) {
 		$sql="SELECT kredit.type_pinjaman,kredit.denda_per_angsuran,kredit.tgl_realisasi,kredit.satuan_waktu_angsuran,  

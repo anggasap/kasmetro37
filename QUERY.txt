@@ -1,0 +1,133 @@
+/* UDAH 
+F ALLTRIM(thisform.TYPEKREDIT.Value) <>'500'
+   cSQL = "SELECT kredit.type_pinjaman,kredit.denda_per_angsuran,kredit.tgl_realisasi,kredit.satuan_waktu_angsuran,"+;
+		       "kredit.pokok_tunggakan_awal + "+;
+	           "sum(if(floor(my_kode_trans/100)=2,pokok_trans,0)) as JPokok, "+;
+		       "kredit.bunga_tunggakan_awal - kredit.bunga_disc_awal + "+;
+		       "sum(if(floor(my_kode_trans/100)=2,bunga_trans,0)) as JBunga, " +;
+		       "kredit.denda_tunggakan_awal - kredit.denda_disc_awal + "+;
+		       "sum(if(floor(my_kode_trans/100)=2,denda_trans,0)) as JDenda, "+;
+		       "kredit.admin_tunggakan_awal - kredit.admin_disc_awal + "+;
+		       "sum(if(floor(my_kode_trans/100)=2,admin_trans,0)) as JAdmin, "+;
+		       "sum(if(floor(my_kode_trans/100)=8,adminlain_trans,0)) as LAdmin "+;
+		       "from kredit left join kretrans on kredit.no_rekening=kretrans.no_rekening "+;
+		       "AND kretrans.tgl_trans<=?dTglTagih " +;
+		       "WHERE kredit.no_rekening=?cnorekening group by kretrans.no_rekening"
+*/ END UDAH
+
+   cCursor = SYS(2015)
+   nRet = SQLEXEC(thisform.mymainconnectionhandle,cSQL,cCursor)
+   IF nREt = -1
+	  errormsg(cSQL+MESSAGE())
+	  RETURN .f.
+   ENDIF
+   SELECT (cCursor)
+   nJPokok = IIF(ISNULL(JPokok) or JPokok < 0,0,JPokok) 
+   nJBunga = IIF(ISNULL(JBunga) or JBunga < 0,0,JBunga) 
+   nJDenda = IIF(ISNULL(JDenda) or JDenda < 0,0,JDenda) 
+   nJAdmin = IIF(ISNULL(JAdmin) or JAdmin < 0,0,JAdmin) 
+   nLAdmin = IIF(ISNULL(LAdmin) or LAdmin < 0,0,LAdmin) 
+   USE 
+		
+   * Type 200 ditutup Arya   IF ALLTRIM(thisform.TYPEKREDIT.Value) ='200' OR ALLTRIM(thisform.tyPEKREDIT.Value) ='300'
+   IF ALLTRIM(thisform.tyPEKREDIT.Value) ='300'
+	  *- Jadwal Bunga yang diakui sebelum jatuh tempo
+	  cSQL = "SELECT kredit.bunga_tunggakan_awal + "
+	  cSQL = cSQL + "sum(if(floor(my_kode_trans/100)=2,bunga_trans,0)) as JBunga "
+	  cSQL = cSQL + "from kredit left join kretrans on kredit.no_rekening=kretrans.no_rekening "
+	  cSQL = cSQL + "AND kretrans.tgl_trans<=?dTglJadwal "
+	  cSQL = cSQL + "WHERE kredit.no_rekening=?cnorekening group by kretrans.no_rekening"
+
+	  cCursor = SYS(2015)
+	  nRet = SQLEXEC(thisform.mymainconnectionhandle,cSQL,cCursor)
+	  IF nREt = -1
+		 errormsg(cSQL+MESSAGE())
+		 RETURN .f.
+	  ENDIF
+	  SELECT (cCursor)
+	  nJBunga = IIF(ISNULL(JBunga) or JBunga < 0,0,JBunga) 
+	  USE
+			
+   ENDIF
+		
+   * Yang sudah dibayar
+   cSQL = "SELECT kredit.type_pinjaman,kredit.denda_per_angsuran,kredit.tgl_realisasi,kredit.satuan_waktu_angsuran,"+;
+		       "sum(if(floor(my_kode_trans/100)=3 and my_kode_trans <> 395,pokok_trans,0)) + "+;
+		       "sum(if(floor(my_kode_trans/100)=3 and my_kode_trans <> 395,Disc_Pokok,0)) as BPokok, "+;
+		       "sum(if(floor(my_kode_trans/100)=3 and my_kode_trans <> 395,bunga_trans,0))+ "+;
+		       "sum(if(floor(my_kode_trans/100)=3,Disc_Bunga,0)) as BBunga, "+;
+		       "sum(if(floor(my_kode_trans/100)=3,denda_trans,0))+"+;
+		       "sum(if(floor(my_kode_trans/100)=3,disc_denda,0)) as BDenda, "+;
+		       "sum(if(floor(my_kode_trans/100)=3,admin_trans,0))+"+;
+		       "sum(if(floor(my_kode_trans/100)=3,disc_admin,0)) as BAdmin, "+;
+		       "sum(if(floor(my_kode_trans/100)=3,adminlain_trans,0)) as PAdmin "+;
+		       "from kredit left join kretrans on kredit.no_rekening=kretrans.no_rekening "+;
+		       "WHERE kredit.no_rekening=?cnorekening group by kretrans.no_rekening"
+   nRet = SQLEXEC(thisform.mymainconnectionhandle,cSQL,cCursor)
+   IF nREt = -1
+	  errormsg(cSQL+MESSAGE())
+	  RETURN .f.
+   ENDIF
+   SELECT (cCursor)
+   nBPokok = IIF(ISNULL(BPokok) or BPokok < 0,0,BPokok) 
+   nBBunga = IIF(ISNULL(BBunga) or BBunga < 0,0,BBunga) 
+   nBDenda = IIF(ISNULL(BDenda) or BDenda < 0,0,BDenda) 
+   nBAdmin = IIF(ISNULL(BAdmin) or BAdmin < 0,0,BAdmin) 
+   nPAdmin = IIF(ISNULL(PAdmin) or PAdmin < 0,0,PAdmin) 
+                
+   thisform.Bpokok = nBPokok
+   thisform.BBunga = nBBunga
+   thisform.BDenda = nBDenda
+   thisform.BAdmin = nBAdmin
+   
+   nTPokok = nJPokok - nBPokok 
+   nTBunga = nJBunga - nBBunga
+   nTDenda = nJDenda - nBDenda
+   nTAdmin = nJAdmin - nBAdmin 
+   nTAdminLain = nLAdmin - nPAdmin 
+		
+   thisform.TotalPokok.value = IIF(nTPokok < 0,0,nTPokok) 
+   thisform.totalbunga.Value = IIF(nTBunga < 0,0,nTBunga) 
+   thisform.totaldenda.Value = IIF(nTDenda < 0,0,nTDenda) 
+   thisform.Administrasi.Value = IIF(nTAdmin < 0,0,nTAdmin) 
+   thisform.AdministrasiLain.Value = IIF(nTAdminLain < 0,0,nTAdminLain) 
+		
+   thisform.TagihanPokok.value = IIF(nTPokok < 0,0,nTPokok) 
+   thisform.Tagihanbunga.Value = IIF(nTBunga < 0,0,nTBunga) 
+		
+		
+   Thisform.PDenda.Value = IIF(ISNULL(denda_per_angsuran) or denda_per_angsuran < 0,0,denda_per_angsuran) 
+   *thisform.totaldenda.Value = IIF(ISNULL(tunggakan_denda) or tunggakan_denda < 0,0, tunggakan_denda) 
+   *Thisform.jmlsetoran.Value= thisform.TotalPokok.value   + thisform.totalbunga.Value + thisform.totaldenda.Value 
+   USE 
+
+   Thisform.JmlHarian.Value = dTglTrans - dTglTagih
+   IF Thisform.JmlHarian.Value < 0 
+		
+	  Thisform.JmlHarian.Value = 0
+		
+   ENDIF
+ENDIF
+
+// UDAH DI EDIT 
+
+SELECT kredit.type_pinjaman,kredit.denda_per_angsuran,kredit.tgl_realisasi,kredit.satuan_waktu_angsuran,  
+		         kredit.pokok_tunggakan_awal +   
+	             sum(if(floor(my_kode_trans/100)=2,pokok_trans,0)) as JPokok,   
+		         kredit.bunga_tunggakan_awal - kredit.bunga_disc_awal +   
+		         sum(if(floor(my_kode_trans/100)=2,bunga_trans,0)) as JBunga, 
+		         kredit.denda_tunggakan_awal - kredit.denda_disc_awal +   
+		         sum(if(floor(my_kode_trans/100)=2,denda_trans,0)) as JDenda,   
+		         kredit.admin_tunggakan_awal - kredit.admin_disc_awal +   
+		         sum(if(floor(my_kode_trans/100)=2,admin_trans,0)) as JAdmin,   
+		         sum(if(floor(my_kode_trans/100)=8,adminlain_trans,0)) as LAdmin   
+		         from kredit left join kretrans on kredit.no_rekening=kretrans.no_rekening   
+		         AND kretrans.tgl_trans<='2014-02-21'   
+		         WHERE kredit.no_rekening='8743-0' group by kretrans.no_rekening  
+				 
+//
+SELECT kredit.bunga_tunggakan_awal + 
+sum(if(floor(my_kode_trans/100)=2,bunga_trans,0)) as JBunga 
+from kredit left join kretrans on kredit.no_rekening=kretrans.no_rekening 
+AND kretrans.tgl_trans<='2014-01-21' 
+WHERE kredit.no_rekening='8743-0' group by kretrans.no_rekening

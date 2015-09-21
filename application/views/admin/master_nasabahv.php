@@ -29,14 +29,38 @@ foreach($counter_nasabah_id_length->result() as $row){
                 	<div class="row">
                         <div class="col-md-6">
                         	<div class="form-body">
-                            	<div class="form-group">
+                            	<!--<div class="form-group">
                                     <label>Nasabah id :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                         </span>
-                                         <?php echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','readonly'=>'readonly')); ?>
+                                         <?php /*echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','readonly'=>'readonly')); */?>
                                     </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Nasabah id :</label>
+
+                                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-tag"></i>
+                                    </span>
+                                    			<input type="text" id="idTmpAksiBtn" class="hidden">
+                                                <input id="txtNasabahId" name="txtNasabahId" type="text" placeholder="Nasabah Id"
+                                                       class="form-control bersih input-medium" readonly>
+                                    <span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelNasabah"
+                                                     data-toggle="modal">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Nama nasabah :</label>
@@ -56,14 +80,14 @@ foreach($counter_nasabah_id_length->result() as $row){
                                         <span class="input-group-addon">
                                         <i class="fa fa-user"></i>
                                         </span>
-                                         <?php echo  form_input(array('name'=>'txtNamaAlias','class'=>'bersih form-control','id'=>'txtNamaAlias','required'=>'required','placeholder'=>'Nama Alias'));?>
+                                         <?php echo  form_input(array('name'=>'txtNamaAlias','class'=>'bersih form-control','id'=>'txtNamaAlias','placeholder'=>'Nama Alias'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-home"></i>
                                         </span>
                                          <?php
 										  $data = array(
@@ -86,7 +110,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Tempat lahir :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtTempatLahir','class'=>'bersih form-control','id'=>'txtTempatLahir','required'=>'required','placeholder'=>'Tempat Lahir'));?>
                                             </div>
@@ -95,7 +119,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Tanggal lahir :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-calendar"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtTanggalLahir','class'=>'bersih form-control','id'=>'txtTanggalLahir','required'=>'required','placeholder'=>'Tanggal Lahir (dd-mm-yyyy)'));?>
                                             </div>
@@ -109,7 +133,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Jenis kelamin :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-dot-circle-o"></i>
                                                 </span>
                                                  <?php
                                                   $data = array(
@@ -118,7 +142,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                                       $data['P']='P',
                                                       );
                                                       
-                                                      echo form_dropdown('DL_jenis_kelamin', $data,'id="DL_jenis_kelamin"','class="form-control"');
+                                                      echo form_dropdown('DL_jenis_kelamin', $data,'','class="form-control" id="DL_jenis_kelamin"');
                                                   ?>
                                             </div>
                                         </div>
@@ -126,7 +150,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Agama :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-bullseye"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -135,7 +159,7 @@ foreach($counter_nasabah_id_length->result() as $row){
 													  foreach($kode_group1 as $row) : 
 															  $data[$row['NASABAH_GROUP1']] = $row['DESKRIPSI_GROUP1'];
 													  endforeach; 
-													  echo form_dropdown('DL_kode_group1', $data,'id="DL_kode_group1"','class="form-control"');
+													  echo form_dropdown('DL_kode_group1', $data,'','class="form-control" id="DL_kode_group1"');
 												  ?>
                                             </div>
                                                                                
@@ -148,7 +172,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Status gelar :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa  fa-mortar-board"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -157,7 +181,7 @@ foreach($counter_nasabah_id_length->result() as $row){
 												  foreach($jenis_gelar as $row) : 
 														  $data[$row['Gelar_ID']] = $row['Deskripsi_Gelar'];
 												  endforeach; 
-												  echo form_dropdown('DL_jenis_gelar', $data,'id="DL_jenis_gelar"','class="form-control"');
+												  echo form_dropdown('DL_jenis_gelar', $data,'','class="form-control" id="DL_jenis_gelar"');
 												  
 												  ?>
                                             </div>
@@ -166,7 +190,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Deskripsi gelar :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-tasks"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtDesGelar','class'=>'bersih form-control','id'=>'txtDesGelar','placeholder'=>'Keterangan Gelar'));?>
                                             </div>
@@ -180,7 +204,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Jenis ID :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa  fa-tags"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -190,7 +214,7 @@ foreach($counter_nasabah_id_length->result() as $row){
 												  foreach($jenis_id as $row) : 
 														  $data[$row['jenis_id']] = $row['nama_identitas'];
 												  endforeach; 
-												  echo form_dropdown('DL_jenis_Id', $data,'id="DL_jenis_Id"','class="form-control"');
+												  echo form_dropdown('DL_jenis_Id', $data,'','class="form-control" id="DL_jenis_Id"');
 												  ?>
                                             </div>
                                         </div>
@@ -198,7 +222,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>No ID :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-navicon"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtNoId','class'=>'bersih form-control','id'=>'txtNoId','required'=>'required','placeholder'=>'Nomor Identitas'));?>
                                             </div>
@@ -210,9 +234,9 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <label>Masa berlaku :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-calendar"></i>
                                         </span>
-                                         <?php echo  form_input(array('name'=>'txtIdMasaBerlaku','class'=>'bersih form-control','id'=>'txtIdMasaBerlaku','required'=>'required','placeholder'=>'Masa berlaku ID (dd-mm-yyyy)'));?>
+                                         <?php echo  form_input(array('name'=>'txtIdMasaBerlaku','class'=>'bersih form-control input-medium','id'=>'txtIdMasaBerlaku','required'=>'required','placeholder'=>'Masa berlaku ID (dd-mm-yyyy)'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -221,7 +245,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>No telepon :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtKodeArea','class'=>'nomor bersih form-control','id'=>'txtKodeArea','placeholder'=>'Kd Area'));?>
                                             </div>
@@ -234,7 +258,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>No HP :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-phone-square"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtNoHp','class'=>'nomor bersih form-control','id'=>'txtNoHp','placeholder'=>'No. Handphone'));?>
                                             </div>
@@ -244,11 +268,11 @@ foreach($counter_nasabah_id_length->result() as $row){
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <label>Alamat :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                   <?php 
 												  // echo  form_input(array('name'=>'txtAlamatKtp','class'=>'bersih span11','id'=>'txtAlamatKtp','required'=>'required','placeholder'=>'Alamat KTP'));
@@ -266,11 +290,11 @@ foreach($counter_nasabah_id_length->result() as $row){
 												   ?>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Kode pos :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-bars"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtKodePos','class'=>'nomor bersih form-control','id'=>'txtKodePos','required'=>'required','placeholder'=>'Kode Pos','maxlength'=>'5'));?>
                                             </div>
@@ -292,16 +316,16 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Kelurahan :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtKelurahan','class'=>'bersih form-control','id'=>'txtNamaAlias','required'=>'required','placeholder'=>'Kelurahan'));?>
+                                                 <?php echo  form_input(array('name'=>'txtKelurahan','class'=>'bersih form-control','id'=>'txtKelurahan','required'=>'required','placeholder'=>'Kelurahan'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Kecamatan :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtKecamatan','class'=>'bersih form-control','id'=>'txtKecamatan','required'=>'required','placeholder'=>'Kecamatan'));?>
                                             </div>
@@ -315,7 +339,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Kota :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-home"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -335,7 +359,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Domisili negara :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-building"></i>
                                                 </span>
                                                  <?php
 												$data = array(
@@ -358,7 +382,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Pekerjaan :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-tasks"></i>
                                                 </span>
                                                  <?php
 												$data = array(
@@ -376,7 +400,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Keterangan pekerjaan :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-list-alt"></i>
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtKetKerja','class'=>'bersih form-control','id'=>'txtKetKerja','required'=>'required','placeholder'=>'Keterangan Pekerjaan'));?>
                                             </div>
@@ -388,9 +412,9 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <label>Nama perusahaan :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-bank"></i>
                                         </span>
-                                         <?php echo  form_input(array('name'=>'txtNamaPerush','class'=>'bersih form-control','id'=>'txtNamaPerush','required'=>'required','placeholder'=>'Nama Perusahaan'));?>
+                                         <?php echo form_input(array('name'=>'txtNamaPerush','class'=>'bersih form-control','id'=>'txtNamaPerush','placeholder'=>'Nama Perusahaan'));?>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -399,18 +423,18 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>NIP :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-tag"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtNip','class'=>'bersih form-control','id'=>'txtNip','required'=>'required','placeholder'=>'NIP'));?>
+                                                 <?php echo  form_input(array('name'=>'txtNip','class'=>'bersih form-control','id'=>'txtNip','placeholder'=>'NIP'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>NPWP :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-tag"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtNpwp','class'=>'bersih form-control','id'=>'txtNpwp','required'=>'required','placeholder'=>'NPWP'));?>
+                                                 <?php echo  form_input(array('name'=>'txtNpwp','class'=>'bersih form-control','id'=>'txtNpwp','placeholder'=>'NPWP'));?>
                                             </div>
                                                                                
                                         </div>
@@ -422,7 +446,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Bidang usaha SID :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-list"></i>
                                                 </span>
                                                  <?php
 												$data = array(
@@ -440,7 +464,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Gol debitur :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-list"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -463,7 +487,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>Hubungan dengan bank SID :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-list"></i>
                                                 </span>
                                                 <?php
 												$data = array(
@@ -481,7 +505,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                             <label>AO :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
+                                                <i class="fa fa-list"></i>
                                                 </span>
                                                  <?php
 												  $data = array(
@@ -502,7 +526,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <label>Tujuan pembukaan rekening :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-list"></i>
                                         </span>
                                          <?php echo  form_input(array('name'=>'txtTujuanPembRek','class'=>'bersih form-control','id'=>'txtTujuanPembRek','placeholder'=>'Tujuan Pembukaan Rekening'));?>
                                     </div>
@@ -511,7 +535,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <label>Sumber dana :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-list"></i>
                                         </span>
                                          <?php echo  form_input(array('name'=>'txtSumberDana','class'=>'bersih form-control','id'=>'txtSumberDana','placeholder'=>'Sumber Dana'));?>
                                     </div>
@@ -520,7 +544,7 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <label>Penggunaan dana :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fa fa-list"></i>
                                         </span>
                                          <?php echo  form_input(array('name'=>'txtPenggunaanDana','class'=>'bersih form-control','id'=>'txtPenggunaanDana','placeholder'=>'Penggunaan Dana'));?>
                                     </div>
@@ -542,16 +566,17 @@ foreach($counter_nasabah_id_length->result() as $row){
                     </div>
                     <!-- END DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-actions">
-                        <button type="submit" class="btn blue" id="btnSimpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>               
-       					<a class="btn green" onclick="cetak_validasi();" id="btnUbah" name="btnUbah">
+                        <button type="submit" class="btn blue" id="btnSimpan" name="btnSimpan">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>               
+       					<button class="btn green"  id="btnUbah" name="btnUbah">
                         	<span class="glyphicon glyphicon-edit"></span> Ubah
-                        </a>
+                        </button>
        					<a class="btn red" id="btnReset" name="btnReset" onclick="confirm_reset();">
        						<span class="glyphicon glyphicon-repeat"></span>  Reset
        					</a>
-       					<a class="btn yellow" id="btnHapus" name="btnHapus">
+       					<button class="btn yellow" id="btnHapus" name="btnHapus">
                         	<span class="glyphicon glyphicon-trash"></span> Hapus
-                        </a>
+                        </button>
                     </div>
             	</form>    
             </div>
@@ -559,6 +584,73 @@ foreach($counter_nasabah_id_length->result() as $row){
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>
+
+<!-- /.modal -->
+<div id="idDivTabelNasabah" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Nasabah</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_Reload" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelNasabah">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Id Nasabah
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            No ID
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
 
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
@@ -599,14 +691,14 @@ foreach($counter_nasabah_id_length->result() as $row){
 <script src="<?php echo base_url('metronic/admin/layout/scripts/demo.js'); ?>" type="text/javascript"></script>
 
 <script src="<?php echo base_url('bootstrap/js/pembantu.js') ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/terbilang.js') ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/php_number_format.js') ?>"></script>
+
 <script>
 
     jQuery(document).ready(function () {
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
     });
 </script>
 <script>
@@ -617,6 +709,118 @@ foreach($counter_nasabah_id_length->result() as $row){
 
 </script>
 <script type="text/javascript">
+var TableManaged = function () {
+
+    var initTable1 = function () {
+
+        var table = $('#idTabelNasabah');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_nasabah_c/getNasabahAll"); ?>",
+            "columns": [
+                { "data": "nasabah_id" },
+                { "data": "nama_nasabah" },
+                { "data": "alamat" },
+                { "data": "no_id" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+            var nasabahId = $(this).find("td").eq(0).html();           
+            $('#txtNasabahId').val(nasabahId);
+            $('#id_button_close_modal').trigger('click');
+            $('#txtNasabahId').focus();
+            $("#btnSimpan").attr("disabled", "disabled");
+            $("#btnUbah").removeAttr("disabled");
+			$("#btnHapus").removeAttr("disabled");
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            initTable1();
+        }
+    };
+
+}();
 		
 		
 		// end angga print
@@ -626,27 +830,25 @@ foreach($counter_nasabah_id_length->result() as $row){
 				
 				$('.bersih').val('');
 				$('.nomor').val('0.00');
-				$('#txtRekKre').focus();
-				//$('input[name=chkPelunasan]').attr('checked', false);
-				$('#txtCicilan').val('0');
-				$('#terbilang').text("nol");
+				$('#txtNamaNasabah').focus();
 				$("#btnSimpan").removeAttr("disabled");
-				//$('#btnSimpan').show();
-				//check_load();
-				
+				$("#btnUbah").attr("disabled", "disabled");
+				$("#btnHapus").attr("disabled", "disabled");
 				//location.reload();
 			}
 		}
 		
+		function ajaxModal(){
+		    $(document).ajaxStart(function() {
+		        $('.modal_json').fadeIn('fast');
+		    }).ajaxStop(function() {
+		        $('.modal_json').fadeOut('fast');
+		    });
+		}
 		
-		$(document).ajaxStart(function() {
-			$('.modal_json').fadeIn('fast');
-		  }).ajaxStop(function() {
-			$('.modal_json').fadeOut('fast');
-		});
 		$(document).ready(function(){
 			$("#btnUbah").attr("disabled", "disabled");
-			
+			$("#btnHapus").attr("disabled", "disabled");
 			function validatedate(inputText,vbl) {  
 				var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
 				// Match the date format through regular expression  
@@ -701,7 +903,11 @@ foreach($counter_nasabah_id_length->result() as $row){
 					return false;  
 				}  
 		  }  //function validatedate(inputText)
-			
+		  $("#txtNasabahId").focusout(function () {
+		        var kd = $(this).val();
+		        kd = kd.trim();
+		        getDeskripsiNasabah(kd);
+		    });
 			$('#divNasabahId').hide();
 			$( "#txtTanggalLahir" ).focusout(function() {
 				var tgl = $(this).val();
@@ -766,19 +972,82 @@ foreach($counter_nasabah_id_length->result() as $row){
 				success:function (data) {
 					//$('#txtNasabahId').val(data.masuk);
 					//$('#divNasabahId').show();
-					
-					//$('#btnSimpan').hide();
-					alert('Data Nasabah telah tersimpan!');
+					$('#id_Reload').trigger('click');
 					$("#btnSimpan").attr("disabled", "disabled");
 					show_nasabah_id();
+					alert(data.notif);	
 					
 				}
 		
 			});
 			event.preventDefault();
 		}
+		function ajaxUbahNasabah(){
+			$.ajax({
+				type:"POST",
+				dataType: "json",
+				url:"<?php echo base_url(); ?>master_nasabah_c/ubahDataNasabah",
+				data:dataString,
 		
-		$(function() {
+				success:function (data) {
+					$('#id_Reload').trigger('click');
+					$('#btnUbah').attr("disabled","disabled");
+					alert(data.notif);				
+				}
+		
+			});
+			event.preventDefault();
+		}
+		function ajaxHapusNasabah(){
+			var nasabahId	= $('#txtNasabahId').val();
+			nasabahId		= nasabahId.trim();
+			$.post("<?php echo site_url('/master_nasabah_c/ajaxHapusNasabah'); ?>",
+					{
+						'nasabahId' 		: nasabahId,
+					},
+					function(data){
+						alert(data.notif);
+						
+					},"json");
+		}
+		$('#btnSimpan').click(function(){
+			$('#idTmpAksiBtn').val('1');
+		});
+		$('#btnUbah').click(function(){
+			$('#idTmpAksiBtn').val('2');
+		});
+		$('#btnHapus').click(function(){
+			$('#idTmpAksiBtn').val('3');
+		});
+		$('#formnasabah').submit(function (event) {
+			ajaxModal();
+			dataString = $("#formnasabah").serialize();
+	        var aksiBtn       = $('#idTmpAksiBtn').val();
+	        if(aksiBtn == '1'){
+	        	var r = confirm('Anda yakin menyimpan data ini?');
+				 if (r== true){
+					ajax_submit_nasabah();
+				 }else{//if(r)
+					return false;
+				}
+	        }else if(aksiBtn == '2'){ 
+	        	var r = confirm('Anda yakin merubah data ini?');
+				 if (r== true){
+					 ajaxUbahNasabah();
+				 }else{//if(r)
+					return false;
+				}
+	        }else if(aksiBtn == '3'){
+	        	var r = confirm('Anda yakin menghapus data ini?');
+				 if (r== true){
+					 ajaxHapusNasabah();
+				 }else{//if(r)
+					return false;
+				}
+	        }
+	    }); 
+		
+		  /* $(function() {
 				$('#formnasabah').submit(function (event) {
 					  dataString = $("#formnasabah").serialize();
 					  var r = confirm('Anda yakin menyimpan data ini?');
@@ -788,15 +1057,62 @@ foreach($counter_nasabah_id_length->result() as $row){
 						return false;
 					  }
 				 }); //end  $contact form
-		});/// end $func
+		});/// end $func   */
 		
-		// jQuery expression for case-insensitive filter
-		$.extend($.expr[":"],
-			{
-				"contains-ci": function(elem, i, match, array)
-				{
-					return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
-					.toLowerCase()) >= 0;
-				}
-		});
+		function getDeskripsiNasabah(nasabahId){
+		    //ajaxModal();
+		    var kd = nasabahId;
+		    if (kd != '') {
+		        //  alert(kd);
+		        $.post("<?php echo site_url('/master_nasabah_c/deskripsiNasabah'); ?>",
+		            {
+		                'nId': kd
+		            },
+		            function (data) {
+		                if (data.baris == 1) {
+		                	$('#txtNasabahId').val(data.nasabah_id);
+		                    $('#txtNamaNasabah').val(data.nama_nasabah);
+		                    $('#txtNamaAlias').val(data.nama_alias);
+		                    $('#txtAlamatDom').val(data.alamatDom);
+		                    $('#txtTempatLahir').val(data.tempatlahir);
+		                    $('#txtTanggalLahir').val(data.tgllahir);
+		                    $('#DL_jenis_kelamin').val(data.jenis_kelamin);
+		                    $('#DL_kode_group1').val(data.nasabah_group1);
+		                    $('#DL_jenis_gelar').val(data.gelar_id);
+		                    $('#txtDesGelar').val(data.KET_GELAR);
+		                    $('#DL_jenis_Id').val(data.jenis_id);
+		                    $('#txtNoId').val(data.no_id);
+		                    $('#txtIdMasaBerlaku').val(data.tglid);
+		                    $('#txtKodeArea').val(data.KODE_AREA);
+		                    $('#txtNoTelp').val(data.telpon);
+		                    $('#txtNoHp').val(data.NO_HP);
+		                    $('#txtAlamatKtp').val(data.alamat);
+		                    $('#txtKodePos').val(data.kode_pos);
+		                    $('#txtKelurahan').val(data.kelurahan);
+		                    $('#txtKecamatan').val(data.kecamatan);
+		                    $('#DL_jenis_kota').val(data.kota_id);
+		                    //$('#txtKota').val(data.);
+		                    $('#DL_jenis_negara').val(data.KODE_NEGARA);
+		                    $('#DL_jenis_kerja').val(data.pekerjaan_id);
+		                    $('#txtKetKerja').val(data.pekerjaan);
+		                    $('#txtNamaPerush').val(data.Tempat_Kerja);
+		                    $('#txtNip').val(data.NO_NIP);
+		                    $('#txtNpwp').val(data.NPWP);
+		                    $('#DL_sid_bidang_usaha').val(data.Kode_Bidang_Usaha);
+		                    $('#DL_sid_gol_debitur').val(data.kode_golongan_debitur);
+		                    $('#DL_sid_hubungan').val(data.Kode_Hubungan_Debitur);
+		                    $('#DL_kode_group4').val(data.NASABAH_GROUP4);
+		                    $('#txtTujuanPembRek').val(data.TUJUAN_PEMBUKAAN_KYC);
+		                    $('#txtSumberDana').val(data.SUMBER_DANA_KYC);
+		                    $('#txtPenggunaanDana').val(data.PENGGUNAAN_DANA_KYC);
+		                    $('#txtNamaWaris').val(data.nama_kuasa);
+		                } else {
+		                    alert('Data tidak ditemukan!');
+		                    $('.bersih').val('');
+		                    $('#txtNasabahId').focus();
+		                }
+		            }, "json");
+		    }//if kd<>''
+
+		}
 	</script>

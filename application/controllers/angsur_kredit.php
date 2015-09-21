@@ -39,7 +39,24 @@ class Angsur_kredit extends CI_Controller {
 		
 		$this->output->set_output(json_encode($array));
 	}
-	
+    public function getRekKreAll(){
+        $this->CI =& get_instance();//and a.kcab_id<>'1100'
+        $rows = $this->kreditmodel->getRekKreAll();
+        $data['data'] = array();
+        foreach( $rows as $row ) {
+
+            $array = array(
+                'norekkre' => trim($row->NO_REKENING),
+                'namanasabah' => trim($row->NAMA_NASABAH),
+                'jmlPinj' =>  number_format($row->JML_PINJAMAN,2),
+                'alamat'    => trim($row->alamat)
+            );
+
+            array_push($data['data'],$array);
+        }
+        //echo json_encode($data['data']);
+        $this->output->set_output(json_encode($data));
+    }
 	function deskripsi_norek_kre(){
 		$this->CI =& get_instance();
 		$kode = $this->input->post ( 'norek', TRUE );
@@ -55,7 +72,8 @@ class Angsur_kredit extends CI_Controller {
 				  'BUNGA_SALDO_AKHIR' => $row->BUNGA_SALDO_AKHIR,
 				  'POKOK_SALDO_SETORAN' => $row->POKOK_SALDO_SETORAN,
 				  'BUNGA_SALDO_SETORAN' => $row->BUNGA_SALDO_SETORAN,
-				  'TYPE_ABP' => $row->TYPE_ABP
+				  'TYPE_ABP' => $row->TYPE_ABP,
+                  'JENIS_PINJ' => $row->JENIS_PINJAMAN
 			  );
 		}else{
 			$array=array('baris'=>0);

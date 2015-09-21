@@ -1,0 +1,22 @@
+.prev, .next {
+	padding: 1px 3px;
+	line-height: 20px;
+	text-decoration: none;
+	font-weight: bold;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	color: #999;
+	color: #000;
+	cursor: default
+    
+}
+
+.prev, .next {
+    border: 1px solid green;
+    cursor: pointer;
+}
+
+.prev.disabled, .next.disabled {
+    border: 1px solid red;
+    cursor: default;
+}

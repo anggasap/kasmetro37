@@ -9,16 +9,15 @@ class Master_tabungan_c extends CI_Controller {
 		$this->load->model('homemodel');
 		$this->load->model('master_tabunganmodel');
 		$this->load->helper('form','url');
-		//$this->load->driver('cache');
-		//$this->cache->useMemcache('127.0.0.1', '11211');
-		//$this->load->library('memcached_library');
+		
     }
 	function desk_prod_tabungan(){
 		$this->CI =& get_instance();
-		$kode = $this->input->post ( 'kd_tab', TRUE );
-		$rows = $this->master_tabunganmodel->desk_prod_tabungan ( $kode );
-		if($rows){
-		foreach ( $rows as $row )
+		$kode 			= $this->input->post ( 'kd_tab', TRUE );
+		$queryDeskProdTab 			= $this->master_tabunganmodel->desk_prod_tabungan ( $kode );
+		$queryLastNoRek = $this->master_tabunganmodel->lastNoRek ( $kode );
+		if($queryDeskProdTab){
+		/* foreach ( $rows as $row )
 			$array = array (
 				'baris'=>1,
 				'SUKU_BUNGA_DEFAULT' => $row->SUKU_BUNGA_DEFAULT,
@@ -27,6 +26,16 @@ class Master_tabungan_c extends CI_Controller {
 				'PERIODE_ADM_DEFAULT' => $row->PERIODE_ADM_DEFAULT,
 				'SETORAN_MINIMUM_DEFAULT' => $row->SETORAN_MINIMUM_DEFAULT,
 				'MINIMUM_DEFAULT' => $row->MINIMUM_DEFAULT
+			); */
+			$array = array(
+					'baris'=>1,
+					'SUKU_BUNGA_DEFAULT' => $queryDeskProdTab[0]->SUKU_BUNGA_DEFAULT,
+					'PPH_DEFAULT' => $queryDeskProdTab[0]->PPH_DEFAULT,
+					'ADM_PER_BLN_DEFAULT' => $queryDeskProdTab[0]->ADM_PER_BLN_DEFAULT,
+					'PERIODE_ADM_DEFAULT' => $queryDeskProdTab[0]->PERIODE_ADM_DEFAULT,
+					'SETORAN_MINIMUM_DEFAULT' => $queryDeskProdTab[0]->SETORAN_MINIMUM_DEFAULT,
+					'MINIMUM_DEFAULT' => $queryDeskProdTab[0]->MINIMUM_DEFAULT,
+					'lastNoRek'	=> trim($queryLastNoRek[0]->no_rekening)
 			);
 		}else{
 			$array=array('baris'=>0);
@@ -177,105 +186,67 @@ class Master_tabungan_c extends CI_Controller {
 		$data['kode_gol_deb_tab'] = $this->master_tabunganmodel->get_kode_gol_deb_tab();
 		$data['kode_metoda'] = $this->master_tabunganmodel->get_kode_metoda();
 		$data['kode_hub_tab'] = $this->master_tabunganmodel->get_kode_hub_tab();
-		//$data['data_nasabah'] = $this->master_tabunganmodel->get_data_nasabah();
-		//$this->nasabah3();
-		/*
-		$cache = $this->cache->get('cache_data_nasabah');
-		if($cache){
-		  $data['data_nasabah'] = $this->cache->get('cache_data_nasabah');
-		  //$data['ada_memcached']="ada memcached!!!";
-		}
-		else{
-		   //$data = $this->sample_model->get_data();
-		   $dat=array();
-		   $dat = $this->master_tabunganmodel->get_data_nasabah();
-		   $this->cache->save('cache_data_nasabah', $dat, 3600);
-		   $data['data_nasabah']=$dat;
-		   //$data['ada_memcached']="ada memcached!!!";
-		}
 		
-		
-		//$data['data_nasabah'] = $this->master_tabunganmodel->get_data_nasabah();
-		/*
-		$this->load->library('memcached_library');
-		// Lets try to get the key
-		$results = $this->memcached_library->get('test');
-		
-		// If the key does not exist it could mean the key was never set or expired
-		if (!$results) 
-		{
-			// Modify this Query to your liking!
-			$query = $this->master_tabunganmodel->get_data_nasabah();
-			
-			// Lets store the results
-			$this->memcached_library->add('test', $query,36000);
-			
-			// Output a basic msg
-			echo "Alright! Stored some results from the Query... Refresh Your Browser";
-		}
-		else 
-		{
-			$data['data_nasabah']=$result;
-			// Output
-			//var_dump($results);
-			
-			// Now let us delete the key for demonstration sake!
-			//$this->memcached_library->delete('test');
-		}
-		*/
-		
-		
-		
-		/*
-		$cachetime = 10; // number of seconds to cache for
-		//$data = array();
-		$data['cachereset'] = 0;
-				
-		// cache calls
-		$startTime = microtime(true);
-		$this->load->driver('cache');
-		$cache = $this->cache->memcached->get('alluserscount');
-		if (!$cache){
-		  $data['cachereset'] = 1;
-		  //$this->load->model('Users','',TRUE);
-		  $cache = $this->master_tabunganmodel->get_data_nasabah();
-		  $this->cache->memcached->save('alluserscount',$cache, $cachetime);
-		}  
-		//$data['cache_result'] = $cache;
-		$data['data_nasabah'] = $cache;
-		$data['cache_time'] = microtime(true)-$startTime;
-		*/
-		//$data['ada_memcached']="ada memcached!!!";
-		/*
-		$memcache = new Memcache;
-		$memcache->connect('localhost', 11211) or die ("Could not connect");
-		$key = md5('kunci'); // Nama unique key yang akan disimpan (cache) di cluster memory
-		$cache_result = array();
-		$cache_result = $memcache->get($key); // nama object Memcached
-		
-		if($cache_result){
-			// Jika request kedua (sudah di cache di awal)
-			//$result=$cache_result;
-			$data['data_nasabah']=$cache_result;
-			$data['ada_memcached']="ada memcached!!!";
-		}else{
-			// Jika request pertama ambil data dari database lalu distribusikan di memory server
-			//include('connection.php'); // koneksi database
-			//$q=mysql_query("select nasabah_id, nama_nasabah, alamat from nasabah order by nasabah_id asc");
-			$q = $this->master_tabunganmodel->get_data_nasabah();
-			
-			//while($r=mysql_fetch_array($q))
-			//$result[]=$r; // penyimpanan hasil query didalam array
-			
-			$memcache->set($key, $q, MEMCACHE_COMPRESSED, 3600000); // disimpan 3600000 detik atau 1 jam dengan nama key $key
-			$data['data_nasabah']= $q;
-		}
-		*/
 		$this->template->set ( 'title', 'Master Tabungan' );
 		$this->template->load ( 'tempDataTable', 'admin/master_tabunganv', $data );
 		}
 	}
+	public function getRekTabAll(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$rows = $this->master_tabunganmodel->getRekTabAll();
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$saldoAkhir	= number_format($row->saldo_akhir,2);
+			$array = array(
+					'noRek' => trim($row->no_rekening),
+					'nasabahId' => trim($row->nasabah_id),
+					'namaNasabah' => trim($row->nama_nasabah),
+					'alamat' =>  trim($row->alamat),
+					'saldoAkhir'    => $saldoAkhir
 	
+			);
+	
+			array_push($data['data'],$array);
+		}
+		//echo json_encode($data['data']);
+		$this->output->set_output(json_encode($data));
+	}
+	function getDeskripsiRekTab(){
+		$this->CI =& get_instance();
+		$noRekTab	= $this->input->post ( 'noRekTab', TRUE );
+		$rows 		= $this->master_tabunganmodel->getDeskripsiRekTab( $noRekTab );
+		if($rows){
+				
+			$array = array (
+					'baris'=>1,
+					'jenisTab' => $rows[0]->jenis_tabungan,
+					'statusAktif' => $rows[0]->status_aktif,
+					'noAlternatif' => $rows[0]->no_alternatif,
+					'sukuBunga' => $rows[0]->suku_bunga,
+					'persenPph' => $rows[0]->persen_pph,
+					'tglBunga' => $rows[0]->tgl_bunga,
+					'kodeGroup1' => $rows[0]->kode_group1,
+					'kodeGroup2' => $rows[0]->kode_group2,
+					'kodeGroup3' => $rows[0]->kode_group3,
+					'kodeBiPemilik' => $rows[0]->kode_bi_pemilik,
+					'kodeBiMetoda' => $rows[0]->kode_bi_metoda,
+					'kodeBiHub' => $rows[0]->kode_bi_hubungan,
+					'flagRes' => $rows[0]->flag_restricted,
+					'abp' => $rows[0]->abp,
+					'saldoMin' => $rows[0]->minimum,
+					'admPerBln' => $rows[0]->adm_per_bln,
+					'periodeAdm' => $rows[0]->periode_adm,
+					'setorMin' => $rows[0]->setoran_minimum,
+					'setorWajib' => $rows[0]->setoran_per_bln,
+					'jkw' => $rows[0]->jkw,
+					'transNormal' => $rows[0]->transaksi_normal
+			);
+		}else{
+			$array=array('baris'=>0);
+		}
+	
+		$this->output->set_output(json_encode($array));
+	}
 	public function simpan_tabungan(){
 		$sk_bunga_koma = trim($this->input->post('txtBunga'));
 	 	$sk_bunga = str_replace(',', '', $sk_bunga_koma);
@@ -350,10 +321,10 @@ class Master_tabungan_c extends CI_Controller {
 		'JUMLAH_UNDIAN' => 0, 
 		'AWAL_UNDIAN' => 0, 
 		'AKHIR_UNDIAN' => 0, 
-		'KODE_GROUP4' => '', 
-		'KODE_GROUP5' => '', 
-		'KODE_HARI' => '', 
-		'NOMOR_SAE' => 0, 
+		//'KODE_GROUP4' => '', 
+		//'KODE_GROUP5' => '', 
+		//'KODE_HARI' => '', 
+		//'NOMOR_SAE' => 0, 
 		'POT_SIMP' => 0.00, 
 		'SHU_THN_INI' => 0.00, 
 		'SALDO_EFEKTIF_THN_INI' => 0.00, 
@@ -386,13 +357,59 @@ class Master_tabungan_c extends CI_Controller {
 		'QQ' => '', 
 		'OUTLET' => '', 
 		'TRANSAKSI_NORMAL' => $trans_normal ,
-		'jenis_bank' => '' , 
-		'sandi_bank' =>''
+		//'jenis_bank' => '' , 
+		//'sandi_bank' =>''
 		);
 		$query_tabung=$this->master_tabunganmodel->insert_tabungan($data);
-		//show_nasabah_id($nasabah_id_max);
-		$this->session->set_flashdata('success', 'Data master tabungan berhasil disimpan !');
-			redirect('master_tabungan_c/buat_baru');	
+		if($query_tabung){
+			$array = array(
+					'notif'=> 'Data master tabungan berhasil disimpan.'
+			);
+		}else{
+			$array = array(
+					'notif'=> 'Data master tabungan gagal disimpan.'.$query_tabung->error
+			);
+		}
+		$this->output->set_output(json_encode($array));
+	}
+	public function ajaxUbahRekTab(){	
+		$noRekTab	= trim($this->input->post('txtNoRekTab'));
+		$data = array (
+				'jenisTab' => trim($this->input->post('DL_jenis_tab')),
+				'noAlternatif' => trim($this->input->post('txtNoSeries')),
+				'sukuBunga' => str_replace(',', '', trim($this->input->post('txtBunga'))),
+				'persenPph' => str_replace(',', '', trim($this->input->post('txtPph'))),
+				'tglBunga' => date('Y-m-d', strtotime(trim($this->input->post('txtTerhitungBunga')))),
+				'kodeGroup1' => trim($this->input->post('DL_kodegroup1_tab')),
+				'kodeGroup2' => trim($this->input->post('DL_kodegroup2_tab')),
+				'kodeGroup3' => trim($this->input->post('DL_kodegroup3_tab')),
+				'kodeBiPemilik' => trim($this->input->post('DL_kodegoldeb_tab')),
+				'kodeBiMetoda' => trim($this->input->post('DL_kodemetoda')),
+				'kodeBiHub' => trim($this->input->post('DL_kodehub_tab')),
+				'flagRes' => trim($this->input->post('DL_restrict')),
+				'abp' => trim($this->input->post('DL_tipe_tab')),
+				'saldoMin' => str_replace(',', '', trim($this->input->post('txtSaldoMin'))),
+				'admPerBln' => str_replace(',', '', trim($this->input->post('txtBiayaAdm'))),
+				'periodeAdm' => trim($this->input->post('DL_frek_adm')),
+				'setorMin' => str_replace(',', '', trim($this->input->post('txtSetoranMin'))),
+				'setorWajib' => str_replace(',', '', trim($this->input->post('txtSetoranWajib'))),
+				'jkw' => trim($this->input->post('txtJangkaWaktu')),
+				'transNormal' => str_replace(',', '', trim($this->input->post('txtTransaksiNormal')))
+		);
+		$query = $this->master_tabunganmodel->ajaxUpdateRekTab($data,$noRekTab);
+		if($query){
+			$array = array(
+					'act'	=>1,
+					'notif' =>'Data berhasil diubah'
+			);
+		}else{
+			$array = array(
+					'act'	=>0,
+					'notif' =>'Data gagal diubah'
+			);
+		}
+		$this->output->set_output(json_encode($array));
+	
 	}
 	
 }

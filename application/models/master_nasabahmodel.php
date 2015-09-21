@@ -4,7 +4,27 @@ if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
 class Master_nasabahmodel extends CI_Model {
-	
+    public function getNasabahAll()
+    {
+        $sql="SELECT nasabah_id,nama_nasabah,alamat,no_id from nasabah order by nasabah_id asc";
+        $query=$this->db->query($sql);
+        return $query->result(); // returning rows, not row
+    }
+    
+    public function getDeskripsiNasabah($kode) {
+    	$this->db->select ( 'n.nasabah_id,n.nama_nasabah,n.nama_alias,n.alamat_domisili,n.tempatlahir,n.tgllahir,n.jenis_kelamin,n.nasabah_group1,n.gelar_id,
+    			n.KET_GELAR,n.jenis_id,n.no_id,n.tglid,n.KODE_AREA,n.telpon,n.NO_HP,n.alamat,n.kode_pos,n.kelurahan,n.kecamatan,n.kota_id,n.KODE_NEGARA,
+    			n.pekerjaan_id,n.pekerjaan,n.Tempat_Kerja,n.NO_NIP,n.NPWP,n.Kode_Bidang_Usaha,n.kode_golongan_debitur,n.Kode_Hubungan_Debitur,n.NASABAH_GROUP4,
+    			n.TUJUAN_PEMBUKAAN_KYC,n.SUMBER_DANA_KYC,n.PENGGUNAAN_DANA_KYC,n.nama_kuasa' );
+    	$this->db->from('nasabah n');
+    	$this->db->where ( 'n.nasabah_id', $kode );
+    	$query = $this->db->get ();
+    	if($query->num_rows()== '1'){
+    		return $query->result ();
+    	}else{
+    		return false;
+    	}
+    }
 	public function get_gelar() {
 		$rows = array(); //will hold all results
 		$sql="select * from jenis_gelar order by Gelar_ID asc ";
@@ -97,6 +117,29 @@ class Master_nasabahmodel extends CI_Model {
 	}
 	function insert_nasabah($data){
 	   $query=$this->db->insert('nasabah',$data);
+	   if($query){
+	   	return true;
+	   }else{
+	   	return false;
+	   }
+	}
+	function updateNasabah($data,$nasabahId){
+		$query1 = $this->db->where('nasabah_id', $nasabahId);
+		$query2 = $this->db->update('nasabah', $data);
+		if($query1 && $query2){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	function ajaxHapusNasabah($nasabahId){
+		$query1	=	$this->db->where('nasabah_id',$nasabahId); 
+		$query2	=   $this->db->delete('nasabah');
+		if($query1 && $query2){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	function get_counter_nasabah_id_length(){
 		$this->db->select('Value');

@@ -37,15 +37,39 @@
                         <div class="col-md-5">
                         	<h4>Info Rekening</h4>
                             <div class="form-body">
-                            	<div class="form-group">
+                            	<!--<div class="form-group">
                                     <label>No rekening :</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-tag"></i>
                                         </span>
-                                        <?php echo  form_input(array('name'=>'txtRekKre','class'=>'form-control bersih','id'=>'txtRekKre','required'=>'required','placeholder'=>'No rekening'));?>
-                                        <?php echo  form_input(array('name'=>'txtNasIDKre','type'=>'hidden','class'=>'hidden bersih','id'=>'txtNasIDKre','required'=>'required','style'=>'width:10px'));?>
+                                        <?php /*// echo  form_input(array('name'=>'txtRekKre','class'=>'form-control bersih','id'=>'txtRekKre','required'=>'required','placeholder'=>'No rekening'));*/?>
+                                        <?php /*// echo  form_input(array('name'=>'txtNasIDKre','type'=>'hidden','class'=>'hidden bersih','id'=>'txtNasIDKre','required'=>'required','style'=>'width:10px'));*/?>
                                     </div>
+                                </div>-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>No rekening :</label>
+
+                                            <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="fa fa-tag"></i>
+                                    </span>
+                                                <input id="txtRekKre" name="txtRekKre" type="text" placeholder="No rekening "
+                                                       class="form-control bersih input-medium" required="">
+                                                <?php echo  form_input(array('name'=>'txtNasIDKre','type'=>'hidden','class'=>'hidden bersih','id'=>'txtNasIDKre','required'=>'required'));?>
+                                    <span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekKre"
+                                                     data-toggle="modal">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Nama nasabah :</label>
@@ -337,6 +361,72 @@
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>
+<!-- /.modal -->
+<div id="idDivTabelRekKre" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Rekening </h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_Reload" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekKre">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            No Rekening
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Saldo Akhir
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -385,6 +475,7 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
     });
 </script>
 
@@ -392,6 +483,115 @@
 	// MENU OPEN
 	$(".menu_root").removeClass('start active open');
 	$("#menu_root_4").addClass('start active open');
+    var TableManaged = function () {
+
+        var initTable1 = function () {
+
+            var table = $('#idTabelRekKre');
+
+            // begin first table
+            table.dataTable({
+                "ajax": "<?php  echo base_url("/angsur_kredit/getRekKreAll"); ?>",
+                "columns": [
+                    { "data": "norekkre" },
+                    { "data": "namanasabah" },
+                    { "data": "alamat" },
+                    { "data": "jmlPinj" }
+
+                ],
+                // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+                "language": {
+                    "aria": {
+                        "sortAscending": ": activate to sort column ascending",
+                        "sortDescending": ": activate to sort column descending"
+                    },
+                    "emptyTable": "No data available in table",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "infoEmpty": "No entries found",
+                    "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                    "lengthMenu": "Show _MENU_ entries",
+                    "search": "Search:",
+                    "zeroRecords": "No matching records found"
+                },
+
+                "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+                "lengthMenu": [
+                    [5, 10,15, 20, -1],
+                    [5, 10,15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "pageLength": 5,
+                "pagingType": "bootstrap_full_number",
+                "language": {
+                    "search": "Cari: ",
+                    "lengthMenu": "  _MENU_ records",
+                    "paginate": {
+                        "previous":"Prev",
+                        "next": "Next",
+                        "last": "Last",
+                        "first": "First"
+                    }
+                },
+                "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+                "columnDefs": [{  // set default column settings
+                    'orderable': true,
+                    'targets': [0]
+                }, {
+                    "searchable": true,
+                    "targets": [0]
+                }],
+                "order": [
+                    [0, "asc"]
+                ] // set first column as a default sort by asc
+            });
+            $('#id_Reload').click(function () {
+                table.api().ajax.reload();
+            });
+
+            var tableWrapper = jQuery('#example_wrapper');
+
+            table.find('.group-checkable').change(function () {
+                var set = jQuery(this).attr("data-set");
+                var checked = jQuery(this).is(":checked");
+                jQuery(set).each(function () {
+                    if (checked) {
+                        $(this).attr("checked", true);
+                        $(this).parents('tr').addClass("active");
+                    } else {
+                        $(this).attr("checked", false);
+                        $(this).parents('tr').removeClass("active");
+                    }
+                });
+                jQuery.uniform.update(set);
+            });
+
+            table.on('change', 'tbody tr .checkboxes', function () {
+                $(this).parents('tr').toggleClass("active");
+            });
+            table.on('click', 'tbody tr', function () {
+                var noRekTab = $(this).find("td").eq(0).html();
+                $('#txtRekKre').val(noRekTab);
+                $('#id_button_close_modal').trigger('click');
+                $('#txtRekKre').focus();
+
+            });
+
+            tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+        }
+
+        return {
+            //main function to initiate the module
+            init: function () {
+                if (!jQuery().dataTable) {
+                    return;
+                }
+                initTable1();
+            }
+        };
+
+    }();
 	// END MENU OPEN
 		function pad2(number) {
      		return (number < 10 ? '0' : '') + number
@@ -657,6 +857,7 @@
 					var	out_bunga=number_format(data.BUNGA_SALDO_AKHIR,2);
 					var setor_pokok=number_format(data.POKOK_SALDO_SETORAN,2);
 					var	setor_bunga=number_format(data.BUNGA_SALDO_SETORAN,2);
+                    var jenisPinj   = data.JENIS_PINJ;
 					$('#txtNamaKre').val(data.NAMA_NASABAH);
 					$('#txtNasIDKre').val(data.NASABAH_ID);
 					$('#txtJmlKredit').val(jml_kredit);
@@ -667,8 +868,9 @@
 					$('#txtBDbunga_oper').val(out_bunga);
 					/*end penampung operan baki debet pokok dan bunga*/
 					var abp = (data.TYPE_ABP);
+                    var typeKre = "Pembiayaan-"+jenisPinj;
 					if(abp==1){
-						$('#txtTipeKredit').val('KREDIT');
+						$('#txtTipeKredit').val(typeKre);
 					}
 					else if(abp==2){
 						$('#txtTipeKredit').val('ABP');
@@ -822,11 +1024,11 @@
 				  }); //end  $contact form
 			
 		});/// end $func
-		$(document).ajaxStart(function() {
+		/*$(document).ajaxStart(function() {
 			$('.modal_json').fadeIn('fast');
 		  }).ajaxStop(function() {
 			$('.modal_json').fadeOut('fast');
-		});
+		});*/
 		$(document).ready(function(){
 			
 			$( "#DL_kodetrans_kre" ).focusout(function() {

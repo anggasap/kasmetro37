@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <form id="formtabungan" role="form" method="post"   action="<?php echo base_url('tutup_deposito_c/tutup_dep'); ?>">
+                <form id="formtabungan" role="form" method="post" >
 				<!-- START DIV CLASS ROW FOR SIZE 6 -->
                 	<div class="row">
                         <div class="col-md-6">
@@ -50,7 +50,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <select name="DL_status_tab" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" class="form-control">
+                                                 <select name="DL_status_tab" id="DL_status_tab" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" class="form-control" readonly>
                                                     <option value="1" selected="selected">Baru</option>
                                                     <option value="2">Aktif</option>
                                                     <option value="3">Tutup</option>
@@ -68,7 +68,13 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
+                                                <input type="text" id="idTmpAksiBtn" class="hidden">
                                                  <?php echo  form_input(array('name'=>'txtNoRekTab','class'=>'bersih form-control','id'=>'txtNoRekTab','required'=>'required'));?>
+                                            	<span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab" data-toggle="modal">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -93,7 +99,7 @@
                                                 </span>
                                                  <?php echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','placeholder'=>'Nasabah/Anggota ID'));?>
                                                  <span class="input-group-btn">
-                                                  <a href="#" class="btn green" data-target="#input_cari_nasabah" data-toggle="modal">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelNasabah" data-toggle="modal">
                                                       <span class="glyphicon glyphicon-search"></span>
                                                   </a>
                                                   </span> 
@@ -138,7 +144,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtBunga','class'=>'nomor form-control','id'=>'txtBunga'));?>
+                                                 <?php echo  form_input(array('name'=>'txtBunga','class'=>'nomor kanan form-control','id'=>'txtBunga'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -147,7 +153,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor form-control','id'=>'txtPph'));?>
+                                                 <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor kanan form-control','id'=>'txtPph'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -248,7 +254,7 @@
                                                  <?php
 												  $data = array();
 													  foreach($kode_metoda as $row) : 
-															  $data[$row['KODE_METODA']] = $row['DESKRIPSI_METODA'];
+															  $data[$row['kode_metoda']] = $row['deskripsi_metoda'];
 													  endforeach; 
 													  echo form_dropdown('DL_kodemetoda', $data,'','id="DL_kodemetoda" class="form-control"');
 												  ?>
@@ -306,7 +312,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtSaldoMin','class'=>'nomor form-control','id'=>'txtSaldoMin'));?>
+                                                 <?php echo  form_input(array('name'=>'txtSaldoMin','class'=>'nomor kanan form-control','id'=>'txtSaldoMin'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -315,7 +321,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-											<?php echo  form_input(array('name'=>'txtBiayaAdm','class'=>'nomor form-control','id'=>'txtBiayaAdm'));?>	
+											<?php echo  form_input(array('name'=>'txtBiayaAdm','class'=>'nomor kanan form-control','id'=>'txtBiayaAdm'));?>	
                                             </div>                                    
                                         </div>
                                         <div class="col-md-4">
@@ -350,7 +356,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtSetoranMin','class'=>'nomor form-control','id'=>'txtSetoranMin'));?>
+                                                 <?php echo  form_input(array('name'=>'txtSetoranMin','class'=>'nomor kanan form-control','id'=>'txtSetoranMin'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -359,7 +365,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-												<?php echo  form_input(array('name'=>'txtEstimasiBunga','class'=>'nomor form-control','id'=>'txtEstimasiBunga','readonly'=>'readonly'));?>
+												<?php echo  form_input(array('name'=>'txtEstimasiBunga','class'=>'nomor kanan form-control','id'=>'txtEstimasiBunga','readonly'=>'readonly'));?>
                                             </div>                                 
                                         </div>
                                     </div>
@@ -372,13 +378,13 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-                                                 <?php echo  form_input(array('name'=>'txtSetoranWajib','class'=>'nomor form-control','id'=>'txtSetoranWajib'));?>
+                                                 <?php echo  form_input(array('name'=>'txtSetoranWajib','class'=>'nomor kanan form-control','id'=>'txtSetoranWajib'));?>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Jkw :</label>
                                             
-												<?php echo  form_input(array('name'=>'txtJangkaWaktu','class'=>'nomor1 form-control','id'=>'txtJangkaWaktu'));?>
+												<?php echo  form_input(array('name'=>'txtJangkaWaktu','class'=>'nomor1 kanan form-control','id'=>'txtJangkaWaktu'));?>
                                             </div>
                                         <div class="col-md-5">
                                             <label>Transaksi normal :</label>
@@ -386,7 +392,7 @@
                                                 <span class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                                 </span>
-												<?php echo  form_input(array('name'=>'txtTransaksiNormal','class'=>'nomor form-control','id'=>'txtTransaksiNormal'));?>
+												<?php echo  form_input(array('name'=>'txtTransaksiNormal','class'=>'nomor kanan form-control','id'=>'txtTransaksiNormal'));?>
                                             </div>                                 
                                         </div>
                                     </div>
@@ -400,15 +406,15 @@
                     <!-- END DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-actions">
                         <button type="submit" class="btn blue" id="btnSimpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>               
-       					<a class="btn green" onclick="cetak_validasi();" id="btnUbah" name="btnUbah">
+       					<button class="btn green"  id="btnUbah" name="btnUbah">
                         	<span class="glyphicon glyphicon-edit"></span> Ubah
-                        </a>
+                        </button>
        					<a class="btn red" id="btnReset" name="btnReset" onclick="confirm_reset();">
        						<span class="glyphicon glyphicon-repeat"></span>  Reset
        					</a>
-       					<a class="btn yellow" id="btnHapus" name="btnHapus">
+       					<button class="btn yellow" id="btnHapus" name="btnHapus">
                         	<span class="glyphicon glyphicon-trash"></span> Hapus
-                        </a>
+                        </button>
                     </div>
             	</form>    
             </div>
@@ -417,52 +423,55 @@
     </div>
 </div>
 
-<div id="input_cari_nasabah"  class="modal fade" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog">
+<!-- /.modal -->
+<div id="idDivTabelNasabah" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Tabel Perkiraan</h4>
+                <h4 class="modal-title">Data Nasabah</h4>
             </div>
-           <!-- START MODAL BODY-->
+
             <div class="modal-body">
-                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                <div class="scroller" style="height:400px; ">
                     <div class="row">
                         <div class="col-md-12">
-                        	<div class="form-group">
-                                <div class="input-group">
-                                      <input type="text" class="form-control"  id="txtCariNasabah" placeholder="Cari...">
-                                      <span class="input-group-btn">
-                                        <button class="btn btn-primary"  id="CmdCariNasabah"><i class="fa fa-search"></i>&nbsp;</button> 
-                                      </span>  
-                                </div>
+                            <button id="id_Reload" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelNasabah">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Id Nasabah
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            No ID
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                      <input type="text" class="form-control" id="kwd_search" placeholder="Cari...">  
-                                </div>
-                            </div>
-                            
-                            <table class='table table-hover' style="" id="tabel_rek">
-                              <thead>
-                                  <tr>
-                                      <th width='15%' align='center'>
-                                          Nasabah Id
-                                      </th>
-                                      <th width='35%' align='center'>
-                                          Nama
-                                      </th>
-                                      <th width='40%' align='center'>
-                                          Alamat
-                                      </th>
-                                      <th width='10%' align='center'>
-                                          Btn
-                                      </th>
-                                  </tr>
-                              </thead>
-                              <tbody id="body"></tbody>				
-                          </table>
-                            
                         </div>
                         <!-- end col-12 -->
                     </div>
@@ -471,16 +480,84 @@
                 <!-- END SCROLLER-->
             </div>
             <!-- END MODAL BODY-->
-            
+
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn red" id="id_button_close_modal">Close</button>
-               
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
             </div>
-            
         </div>
     </div>
-    
 </div>
+<!--  END MODAL-->
+<!-- /.modal -->
+<div id="idDivTabelRekTab" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="idBtnCloseModalRekTab" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Rekening</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadRekTab" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekTab">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            No Rekening
+                                        </th>
+                                        <th>
+                                            Nasabah Id
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Saldo Akhir
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
 
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
@@ -520,8 +597,8 @@
 <script src="<?php echo base_url('metronic/admin/layout/scripts/layout.js'); ?>" type="text/javascript"></script>
 <script src="<?php echo base_url('metronic/admin/layout/scripts/demo.js'); ?>" type="text/javascript"></script>
 
-<script src="<?php echo base_url('bootstrap/js/pembantu.js') ?>"></script>
-<script src="<?php echo base_url('bootstrap/js/terbilang.js') ?>"></script>
+<script src="<?php // echo base_url('bootstrap/js/pembantu.js') ?>"></script>
+<script src="<?php //echo base_url('bootstrap/js/terbilang.js') ?>"></script>
 <script src="<?php echo base_url('bootstrap/js/php_number_format.js') ?>"></script>
 <script>
 
@@ -529,6 +606,7 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
     });
 </script>
 <script>
@@ -538,6 +616,227 @@
 	// END MENU OPEN
 </script>
 <script type="text/javascript">
+var TableManaged = function () {
+
+    var initTable1 = function () {
+
+        var table = $('#idTabelNasabah');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_nasabah_c/getNasabahAll"); ?>",
+            "columns": [
+                { "data": "nasabah_id" },
+                { "data": "nama_nasabah" },
+                { "data": "alamat" },
+                { "data": "no_id" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+            var nasabahId 		= $(this).find("td").eq(0).html();           
+            $('#txtNasabahId').val(nasabahId);
+            var namaNasabah		= $(this).find("td").eq(1).html();
+            $('#txtNama').val(namaNasabah);
+            var alamatNasabah	= $(this).find("td").eq(2).html();
+            $('#txtAlamat').val(alamatNasabah);
+            $('#id_button_close_modal').trigger('click');
+            $('#txtNasabahId').focus();
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+    
+    var initTable2 = function () {
+
+        var table = $('#idTabelRekTab');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_tabungan_c/getRekTabAll"); ?>",
+            "columns": [
+				{ "data": "noRek" },
+                { "data": "nasabahId" },
+                { "data": "namaNasabah" },
+                { "data": "alamat" },
+                { "data": "saldoAkhir" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_ReloadRekTab').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+        	var noRekTab 		= $(this).find("td").eq(0).html();           
+            $('#txtNoRekTab').val(noRekTab);
+            var nasabahId 		= $(this).find("td").eq(1).html();           
+            $('#txtNasabahId').val(nasabahId.trim());
+            var namaNasabah		= $(this).find("td").eq(2).html();
+            $('#txtNama').val(namaNasabah);
+            var alamatNasabah	= $(this).find("td").eq(3).html();
+            $('#txtAlamat').val(alamatNasabah);
+            $('#idBtnCloseModalRekTab').trigger('click');
+            $('#txtNoRekTab').focus();
+
+            $("#btnSimpan").attr("disabled", "disabled");
+            $("#btnUbah").removeAttr("disabled");
+			$("#btnHapus").removeAttr("disabled");
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            initTable1();
+            initTable2();
+        }
+    };
+
+}();
 		function confirm_reset(){
 			var r = confirm('Reset formulir ??');
 			if (r==true){
@@ -549,17 +848,26 @@
 				//check_load();
 			}
 		}
+		function ajaxModal(){
+		    $(document).ajaxStart(function() {
+		        $('.modal_json').fadeIn('fast');
+		    }).ajaxStop(function() {
+		        $('.modal_json').fadeOut('fast');
+		    });
+		}
 		$( "#DL_jenis_tab" ).change(function() {
+			 ajaxModal();
 			 var kd=$(this).val();
 			 kd=kd.trim();
 			 if (kd!=''){
 			   //  alert(kd);
 			  $.post("<?php echo site_url('/master_tabungan_c/desk_prod_tabungan'); ?>",
 					  {
-						  'kd_tab' : kd
+						  'kd_tab' 		: kd
 					  },
 					  function(data){
 						  if(data.baris==1){
+							  $('#txtNoRekTab').val(data.lastNoRek);
 							  $('#txtBunga').val(number_format(data.SUKU_BUNGA_DEFAULT,2));
 							  $('#txtPph').val(number_format(data.PPH_DEFAULT,2));
 							  $('#txtSaldoMin').val(number_format(data.MINIMUM_DEFAULT,2));
@@ -576,6 +884,46 @@
 			 }//if kd<>''
   
 		  });
+		function getDeskripsiRekTab(noRekTab){
+			$.post("<?php echo site_url('/master_tabungan_c/getDeskripsiRekTab'); ?>",
+					{
+						'noRekTab' : noRekTab
+					},
+					function(data){
+						if(data.baris==1){
+							$('#DL_jenis_tab').val(data.jenisTab);
+							$('#DL_status_tab').val(data.statusAktif);
+							$('#txtNoSeries').val(data.noAlternatif);
+							$('#txtBunga').val(data.sukuBunga);
+							$('#txtPph').val(data.persenPph);
+							$('#txtTerhitungBunga').val(data.tglBunga);
+							$('#DL_kodegroup1_tab').val(data.kodeGroup1);
+							$('#DL_kodegroup2_tab').val(data.kodeGroup2);
+							$('#DL_kodegroup3_tab').val(data.kodeGroup3);
+							$('#DL_kodegoldeb_tab').val(data.kodeBiPemilik);
+							$('#DL_kodemetoda').val(data.kodeBiMetoda);
+							$('#DL_kodehub_tab').val(data.kodeBiHub);
+							$('#DL_restrict').val(data.flagRes);
+							$('#DL_tipe_tab').val(data.abp);
+							$('#txtSaldoMin').val(data.saldoMin);
+							$('#txtBiayaAdm').val(data.admPerBln);
+							$('#DL_frek_adm').val(data.periodeAdm);
+							$('#txtSetoranMin').val(data.setorMin);
+							$('#txtSetoranWajib').val(data.setorWajib);
+							$('#txtJangkaWaktu').val(data.jkw);
+							$('#txtTransaksiNormal').val(data.transNormal);
+						}else{
+							 alert('Data tidak ditemukan!');
+							 /* $('#txtNasabahId').val('');
+							 $('#txtNama').val('');
+							 $('#txtAlamat').val(''); */
+						}
+					},"json");
+		}	
+		$( "#txtNoRekTab" ).focusout(function() {
+			var noRekTab	= $(this).val();
+			getDeskripsiRekTab(noRekTab);
+		});
 		$( "#txtNasabahId" ).focusout(function() {
 			   var kd=$('#txtNasabahId').val();
 			   kd=kd.trim();
@@ -595,96 +943,23 @@
 								 $('#txtNasabahId').val('');
 								 $('#txtNama').val('');
 								 $('#txtAlamat').val('');
-								  $('#idCmdBrowse').focus();
 							}
 						},"json");
 			   }//if kd<>''
 	
 			});
 		$(document).ready(function(){
-			$('#txtNoRekTab').focus();
-			//$('#input_cari_nasabah').window('close');
-			//$('#cari_nasabah').window('close');
-			
-			$("#CmdCariNasabah").click(function(){
-					cari_nasabah();	
-			});
-			$("#idCmdBrowse").click(function(){
-					$('#txtCariNasabah').val('');
-					$('#txtCariNasabah').focus();
-					
-			});
-			
-			
-			function cari_nasabah(){
-				var item = $("#txtCariNasabah").val();
-				item=item.trim();
-			  if (item!=''){
-				$.post("<?php echo site_url('/master_tabungan_c/process_cari_nasabah'); ?>",{'item':item},
-				function(data){
-					//$('#input_cari_nasabah').window('close');
-					//$('#cari_nasabah').window('open');
-					$('#kwd_search').val('');
-					$('#kwd_search').focus();
-					$('#body').empty();
-					var tr="";
-					for (var i = 0; i < data.norek.length; i++) {
-					
-						 a=(data.norek[i].nasabah_id).trim();
-						 b=(data.norek[i].nama_nasabah).trim();
-						 c=(data.norek[i].alamat).trim();
-						tr = '<tr>';
-						tr+='<td>'+a+'</td>'+'<td>'+b+'</td>'+'<td>'+c+'</td>'+'<td><button class"btn btn-success" id="'+a+'"><i class="icon-ok"></i></button></td>';
-						tr+= '</tr>';
-						$('#body').append(tr);
-						
-						$('#'+a).click(function(){
-								$('#txtCariNasabah').val('');
-								$('#txtNasabahId').val($(this).attr('id'));
-								//$('#cari_nasabah').window('close');
-								$( "#txtNasabahId" ).trigger( "focusout" );
-								$('#txtBunga').focus();
-						});
-					}
-				},"json");
-			  }//if kd<>''
-			}//function cari_nasabah(){
-			/*
-			function proses(){
-				var item = '';
-				
-				$.post("<?php // echo site_url('/master_tabungan_c/nasabah2'); ?>",{'item':item},
-				function(data){
-					alert(data.norek.length);
-					
-				},"json");
-			}
-			*/
-		
-			
-			
+			//$('#txtNoRekTab').focus();	
 			$("#btnUbah").attr("disabled", "disabled");
-			$('#txtNoRekTab').focusout(function(){
+			$("#btnHapus").attr("disabled", "disabled");
+			/* $('#txtNoRekTab').focusout(function(){
 				this.value = this.value.toUpperCase();
 				//proses();
-			});
+			}); */
 			$('#DL_jenis_tab').focus();
 			$('.nomor').val('0.00');
 			$('.nomor1').val(0);
 		
-			$("#kwd_search").keyup(function(){
-				var c = $("#kwd_search").val();
-					if(c==""){
-						//pager.showPage(1);
-						$("#tabel_rek tbody>tr").show();
-					}
-			  		if( c != ""){//if( (c != "") && ((c.length == 4) || (c.length == 7) || (c.length > 10)) ){
-			  			// Show only matching TR, hide rest of them
-			  			$("#tabel_rek tbody>tr").hide();
-			  			$("#tabel_rek td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-			  		}
-			});// end $("#kwd_search").keyup(function(){
-				
 			$(".nomor").focusout(function(){
 				if ($(this).val() == '') { 
 				   $(this).val('0.00');
@@ -700,130 +975,89 @@
 				 }
 					$(this).focus();
 			});
-			/*
-			$("#txtBunga").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtBunga").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtPph").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtPph").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtSaldoMin").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtSaldoMin").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtBiayaAdm").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtBiayaAdm").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtSetoranMin").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtSetoranMin").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtEstimasiBunga").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtEstimasiBunga").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtSetoranWajib").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtSetoranWajib").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});
-			$("#txtTransaksiNormal").focusout(function(){
-				if ($(this).val() == '') { 
-				   $(this).val('0.00');
-				 }else{
-					var angka = $(this).val(); 
-					var result = number_format(angka,2);
-					$(this).val(result);
-				 }
-			});
-			$("#txtTransaksiNormal").focus(function(){
-					$(this).val('');
-					$(this).focus();
-			});			
-			*/
+			
 		});//end ready document
-		
+		$('#btnSimpan').click(function(){
+			$('#idTmpAksiBtn').val('1');
+		});
+		$('#btnUbah').click(function(){
+			$('#idTmpAksiBtn').val('2');
+		});
+		$('#btnHapus').click(function(){
+			$('#idTmpAksiBtn').val('3');
+		});
 		function ajax_submit_tabungan(){
 			$.ajax({
 				type:"POST",
 				url:"<?php echo base_url(); ?>master_tabungan_c/simpan_tabungan",
 				data:dataString,
-		
+				dataType:"json",
 				success:function (data) {					
 					$('#btnSimpan').hide();
-					alert('Master tabungan telah tersimpan!');
+					alert(data.notif);
 					$("#btnSimpan").attr("disabled", "disabled");
 				}
 		
 			});
 			event.preventDefault();
 		}
-		$(function(){
+		function ajaxUbahRekTab(){
+			$.ajax({
+				type:"POST",
+				dataType: "json",
+				url:"<?php echo base_url(); ?>master_tabungan_c/ajaxUbahRekTab",
+				data:dataString,
+		
+				success:function (data) {
+					$('#id_Reload').trigger('click');
+					$('#btnUbah').attr("disabled","disabled");
+					alert(data.notif);				
+				}
+		
+			});
+			event.preventDefault();
+		}
+		function ajaxHapusRekTab(){
+			var nasabahId	= $('#txtNasabahId').val();
+			nasabahId		= nasabahId.trim();
+			$.post("<?php echo site_url('/master_nasabah_c/ajaxHapusRekTab'); ?>",
+					{
+						'nasabahId' 		: nasabahId,
+					},
+					function(data){
+						alert(data.notif);
+						
+					},"json");
+		}
+		$('#formtabungan').submit(function (event) {
+			ajaxModal();
+			dataString = $("#formtabungan").serialize();
+	        var aksiBtn       = $('#idTmpAksiBtn').val();
+	        if(aksiBtn == '1'){
+	        	var r = confirm('Anda yakin menyimpan data ini?');
+				 if (r== true){
+					ajax_submit_tabungan();
+				 }else{//if(r)
+					return false;
+				}
+	        }else if(aksiBtn == '2'){ 
+	        	var r = confirm('Anda yakin merubah data ini?');
+				 if (r== true){
+					 ajaxUbahRekTab();
+				 }else{//if(r)
+					return false;
+				}
+	        }else if(aksiBtn == '3'){
+	        	var r = confirm('Anda yakin menghapus data ini?');
+				 if (r== true){
+					 ajaxHapusRekTab();
+				 }else{//if(r)
+					return false;
+				}
+	        }
+	    });
+		
+		/* $(function(){
 			
 			$('#formtabungan').submit(function (event) {
 				  dataString = $("#formtabungan").serialize();
@@ -834,17 +1068,7 @@
 					return false;
 				  }		
 			}); //end  $contact form
-		});
-		// jQuery expression for case-insensitive filter
-		$.extend($.expr[":"],{
-				"contains-ci": function(elem, i, match, array){
-					return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
-					.toLowerCase()) >= 0;
-				}
-		});
-		$(document).ajaxStart(function() {
-			$('.modal_json').fadeIn('fast');
-		  }).ajaxStop(function() {
-			$('.modal_json').fadeOut('fast');
-		});
+		}); */
+		
+		
 	</script>
