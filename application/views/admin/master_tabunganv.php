@@ -6,16 +6,12 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-gift"></i> <?php echo $judul; ?>
+                    <i class="fa fa-th"></i> <?php echo $judul; ?>
                 </div>
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config">
-                    </a>
-                    <a href="" class="reload">
-                    </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
@@ -29,10 +25,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Jenis tabungan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
+                                            
                                                  <?php
                                                   $data = array(
                                                    $data['']=''
@@ -40,23 +33,17 @@
                                                       foreach($jenis_tab as $row) : 
                                                               $data[$row['KODE_JENIS_TABUNGAN']] = $row['DESKRIPSI_JENIS_TABUNGAN'];
                                                       endforeach; 
-                                                      echo form_dropdown('DL_jenis_tab', $data,'','id="DL_jenis_tab" class="form-control"');
+                                                      echo form_dropdown('DL_jenis_tab', $data,'','id="DL_jenis_tab" class="form-control bersih"');
                                                   ?>
-                                            </div>
+                                            
                                         </div>
                                         <div class="col-md-6">
                                             <label>Status :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <select name="DL_status_tab" id="DL_status_tab" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" class="form-control" readonly>
                                                     <option value="1" selected="selected">Baru</option>
                                                     <option value="2">Aktif</option>
                                                     <option value="3">Tutup</option>
-                                                </select>
-                                            </div>
-                                                                               
+                                                </select>                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -65,9 +52,6 @@
                                         <div class="col-md-6">
                                             <label>Nomor rekening :</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                 <input type="text" id="idTmpAksiBtn" class="hidden">
                                                  <?php echo  form_input(array('name'=>'txtNoRekTab','class'=>'bersih form-control','id'=>'txtNoRekTab','required'=>'required'));?>
                                             	<span class="input-group-btn">
@@ -79,13 +63,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label>Series :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtNoSeries','class'=>'bersih form-control','id'=>'txtNoSeries'));?>
-                                            </div>
-                                                                               
+                                                 <?php echo  form_input(array('name'=>'txtNoSeries','class'=>'bersih form-control','id'=>'txtNoSeries'));?>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -94,9 +72,6 @@
                                         <div class="col-md-6">
                                             <label>Nasabah id :</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','placeholder'=>'Nasabah/Anggota ID'));?>
                                                  <span class="input-group-btn">
                                                   <a href="#" class="btn green" data-target="#idDivTabelNasabah" data-toggle="modal">
@@ -105,19 +80,11 @@
                                                   </span> 
                                             </div>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                 
                                                  <?php echo  form_input(array('name'=>'txtNama','class'=>'bersih form-control','id'=>'txtNama','placeholder'=>'Nama Nasabah/Anggota','readonly'=>'readonly'));?>
                                             </div>
                                         </div> 
                                         <div class="col-md-6">
                                             <label>Alamat :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array(
 													  'name'        => 'txtAlamat',
@@ -130,9 +97,7 @@
 													  'readonly'    =>'readonly'
 													);
 												  echo form_textarea($data);
-												  ?>
-                                            </div>
-                                                                               
+												  ?>                               
                                         </div>
                                     </div>
                                 </div>
@@ -140,31 +105,16 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Bunga per tahun (%) :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
+                                            
                                                  <?php echo  form_input(array('name'=>'txtBunga','class'=>'nomor kanan form-control','id'=>'txtBunga'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>PPH per bulan (%) :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor kanan form-control','id'=>'txtPph'));?>
-                                            </div>
+                                            <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor kanan form-control','id'=>'txtPph'));?>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Tgl terhitung bunga :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtTerhitungBunga','class'=>' form-control','id'=>'txtTerhitungBunga','readonly'=>'readonly','value'=>$this->session->userdata('tglD')));?>
-                                            </div>
-                                                                               
+                                            <?php echo  form_input(array('name'=>'txtTerhitungBunga','class'=>' form-control','id'=>'txtTerhitungBunga','readonly'=>'readonly','value'=>$this->session->userdata('tglD')));?>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -172,33 +122,24 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode group 1 :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												$data = array();
 													foreach($kode_group1 as $row) : 
 															$data[$row['KODE_GROUP1']] = $row['DESKRIPSI_GROUP1'];
 													endforeach; 
-													echo form_dropdown('DL_kodegroup1_tab', $data,'','id="DL_kodegroup1_tab" class="form-control"');
+													echo form_dropdown('DL_kodegroup1_tab', $data,'','id="DL_kodegroup1_tab" class="form-control bersih"');
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Kode Group 2</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
                                             $data = array();
+                                            $data['']='';
                                                 foreach($kode_group2 as $row) : 
                                                         $data[$row['KODE_GROUP2']] = $row['DESKRIPSI_GROUP2'];
                                                 endforeach; 
-                                                echo form_dropdown('DL_kodegroup2_tab', $data,'','id="DL_kodegroup2_tab" class="form-control"');
-                                            ?>
-                                            </div>                                   
+                                                echo form_dropdown('DL_kodegroup2_tab', $data,'','id="DL_kodegroup2_tab" class="form-control bersih"');
+                                            ?>              
                                         </div>
                                     </div>
                                 </div>
@@ -213,33 +154,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode group 3 :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array();
+												  $data['']='';
 													  foreach($kode_group3 as $row) : 
 															  $data[$row['KODE_GROUP3']] = $row['DESKRIPSI_GROUP3'];
 													  endforeach; 
-													  echo form_dropdown('DL_kodegroup3_tab', $data,'','id="DL_kodegroup3_tab" class="form-control"');
+													  echo form_dropdown('DL_kodegroup3_tab', $data,'','id="DL_kodegroup3_tab" class="form-control bersih"');
 												  ?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Kode Pemilik</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
 											$data = array();
+											$data['']='';
 												foreach($kode_gol_deb_tab as $row) : 
 														$data[$row['KODE_GOL_DEBITUR']] = $row['DESKRIPSI_GOL_DEBITUR'];
 												endforeach; 
-												echo form_dropdown('DL_kodegoldeb_tab', $data,'','id="DL_kodegoldeb_tab" class="form-control"');
-											?>
-                                            </div>                                   
+												echo form_dropdown('DL_kodegoldeb_tab', $data,'','id="DL_kodegoldeb_tab" class="form-control bersih"');
+											?>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -247,33 +180,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode metoda :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array();
+												  $data['']='';
 													  foreach($kode_metoda as $row) : 
 															  $data[$row['kode_metoda']] = $row['deskripsi_metoda'];
 													  endforeach; 
-													  echo form_dropdown('DL_kodemetoda', $data,'','id="DL_kodemetoda" class="form-control"');
+													  echo form_dropdown('DL_kodemetoda', $data,'','id="DL_kodemetoda" class="form-control bersih"');
 												  ?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hubungan</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
 											$data = array();
+											$data['']='';
 												foreach($kode_hub_tab as $row) : 
 														$data[$row['KODE_HUBUNGAN']] = $row['DESKRIPSI_HUBUNGAN'];
 												endforeach; 
-												echo form_dropdown('DL_kodehub_tab', $data,'','id="DL_kodehub_tab" class="form-control"');
-											?>
-                                            </div>                                 
+												echo form_dropdown('DL_kodehub_tab', $data,'','id="DL_kodehub_tab" class="form-control bersih"');
+											?>                              
                                         </div>
                                     </div>
                                 </div>
@@ -281,15 +206,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Restricted :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <select name="DL_restrict" id="DL_restrict"  onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;" class="form-control">
                                                   <option value="UNRESTRICTED" selected="selected">UNRESTRICTED</option>
                                                   <option value="RESTRICTED">RESTRICTED</option>
                                                   </select>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Tipe tabungan :</label>
@@ -308,28 +228,14 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Saldo minimal :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtSaldoMin','class'=>'nomor kanan form-control','id'=>'txtSaldoMin'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Biaya adm :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php echo  form_input(array('name'=>'txtBiayaAdm','class'=>'nomor kanan form-control','id'=>'txtBiayaAdm'));?>	
-                                            </div>                                    
                                         </div>
                                         <div class="col-md-4">
                                             <label>Biaya adm :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 												<select name="DL_frek_adm" id="DL_frek_adm" class="form-control">
                                                 <option value="1"  selected="selected">Per Bulan</option>
                                                 <option value="2">Per 2 Bulan</option>
@@ -344,7 +250,6 @@
                                                 <option value="11">Per 11 Bulan</option>
                                                 <option value="12">Per 12 Bulan</option>
                                                 </select>	
-                                            </div>                                    
                                         </div>
                                     </div>
                                 </div>
@@ -352,21 +257,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Setoran minimal :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtSetoranMin','class'=>'nomor kanan form-control','id'=>'txtSetoranMin'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Estimasi bunga</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 												<?php echo  form_input(array('name'=>'txtEstimasiBunga','class'=>'nomor kanan form-control','id'=>'txtEstimasiBunga','readonly'=>'readonly'));?>
-                                            </div>                                 
                                         </div>
                                     </div>
                                 </div>
@@ -374,12 +269,7 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <label>Setoran wajib :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtSetoranWajib','class'=>'nomor kanan form-control','id'=>'txtSetoranWajib'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Jkw :</label>
@@ -388,12 +278,7 @@
                                             </div>
                                         <div class="col-md-5">
                                             <label>Transaksi normal :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 												<?php echo  form_input(array('name'=>'txtTransaksiNormal','class'=>'nomor kanan form-control','id'=>'txtTransaksiNormal'));?>
-                                            </div>                                 
                                         </div>
                                     </div>
                                 </div>
@@ -843,6 +728,10 @@ var TableManaged = function () {
 				
 				$('.bersih').val('');
 				$('.nomor').val('0.00');
+				$('#DL_status_tab').val('1');
+				$('#DL_jenis_tab').focus();
+				$('#DL_restrict').val('UNRESTRICTED');
+				$('#DL_tipe_tab').val('1');
 				$("#btnSimpan").removeAttr("disabled");
 				//$('#btnSimpan').show();
 				//check_load();
@@ -894,8 +783,8 @@ var TableManaged = function () {
 							$('#DL_jenis_tab').val(data.jenisTab);
 							$('#DL_status_tab').val(data.statusAktif);
 							$('#txtNoSeries').val(data.noAlternatif);
-							$('#txtBunga').val(data.sukuBunga);
-							$('#txtPph').val(data.persenPph);
+							$('#txtBunga').val(number_format(data.sukuBunga,2));
+							$('#txtPph').val(number_format(data.persenPph,2));
 							$('#txtTerhitungBunga').val(data.tglBunga);
 							$('#DL_kodegroup1_tab').val(data.kodeGroup1);
 							$('#DL_kodegroup2_tab').val(data.kodeGroup2);
@@ -905,13 +794,13 @@ var TableManaged = function () {
 							$('#DL_kodehub_tab').val(data.kodeBiHub);
 							$('#DL_restrict').val(data.flagRes);
 							$('#DL_tipe_tab').val(data.abp);
-							$('#txtSaldoMin').val(data.saldoMin);
-							$('#txtBiayaAdm').val(data.admPerBln);
+							$('#txtSaldoMin').val(number_format(data.saldoMin,2));
+							$('#txtBiayaAdm').val(number_format(data.admPerBln,2));
 							$('#DL_frek_adm').val(data.periodeAdm);
-							$('#txtSetoranMin').val(data.setorMin);
-							$('#txtSetoranWajib').val(data.setorWajib);
+							$('#txtSetoranMin').val(number_format(data.setorMin,2));
+							$('#txtSetoranWajib').val(number_format(data.setorWajib,2));
 							$('#txtJangkaWaktu').val(data.jkw);
-							$('#txtTransaksiNormal').val(data.transNormal);
+							$('#txtTransaksiNormal').val(number_format(data.transNormal,2));
 							$('#txtNasabahId').val(data.nasabahId);
 							$('#txtNama').val(data.namaNasabah);
 							$('#txtAlamat').val(data.alamat);

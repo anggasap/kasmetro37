@@ -216,7 +216,7 @@ class Master_tabungan_c extends CI_Controller {
 		$noRekTab	= $this->input->post ( 'noRekTab', TRUE );
 		$rows 		= $this->master_tabunganmodel->getDeskripsiRekTab( $noRekTab );
 		if($rows){
-				
+			$tglBunga = date('d-m-Y', strtotime($rows[0]->tgl_bunga));
 			$array = array (
 					'baris'=>1,
 					'jenisTab' => $rows[0]->jenis_tabungan,
@@ -224,7 +224,7 @@ class Master_tabungan_c extends CI_Controller {
 					'noAlternatif' => $rows[0]->no_alternatif,
 					'sukuBunga' => $rows[0]->suku_bunga,
 					'persenPph' => $rows[0]->persen_pph,
-					'tglBunga' => $rows[0]->tgl_bunga,
+					'tglBunga' => $tglBunga,
 					'kodeGroup1' => $rows[0]->kode_group1,
 					'kodeGroup2' => $rows[0]->kode_group2,
 					'kodeGroup3' => $rows[0]->kode_group3,

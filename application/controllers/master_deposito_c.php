@@ -67,7 +67,70 @@ class Master_deposito_c extends CI_Controller {
 		$this->template->load ( 'tempDataTable', 'admin/master_depositov', $data );
 		}
 	}
+	public function getRekDepAll(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$rows = $this->master_depositomodel->getRekDepAll();
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+			$saldoAkhir	= number_format($row->saldo_akhir,2);
+			$array = array(
+					'noRek' => trim($row->no_rekening),
+					'nasabahId' => trim($row->nasabah_id),
+					'namaNasabah' => trim($row->nama_nasabah),
+					'alamat' =>  trim($row->alamat),
+					'saldoAkhir'    => $saldoAkhir
 	
+			);
+	
+			array_push($data['data'],$array);
+		}
+		//echo json_encode($data['data']);
+		$this->output->set_output(json_encode($data));
+	}
+	function getDeskripsiRekDep(){
+		$this->CI =& get_instance();
+		$noRekDep	= $this->input->post ( 'noRekDep', TRUE );
+		$rows 		= $this->master_depositomodel->getDeskripsiRekDep( $noRekDep );
+		if($rows){
+			$tglReg = date('d-m-Y', strtotime($rows[0]->tgl_registrasi));
+			$tglJT = date('d-m-Y', strtotime($rows[0]->tgl_jt));
+			$tglMulai = date('d-m-Y', strtotime($rows[0]->tgl_mulai));
+			$tglValuta = date('d-m-Y', strtotime($rows[0]->tgl_valuta));
+			$array = array (
+					'baris'=>1,
+					'jenisDep' => $rows[0]->jenis_deposito,
+					'abp' => $rows[0]->abp,
+					'statusAktif' => $rows[0]->status_aktif,
+					'noAlternatif' => $rows[0]->no_alternatif,
+					'jmlDeposito' => $rows[0]->jml_deposito,
+					'sukuBunga' => $rows[0]->suku_bunga,
+					'persenPph' => $rows[0]->persen_pph,
+					'tglReg' => $tglReg,
+					'jkw' => $rows[0]->jkw,
+					'tglJT' => $tglJT,
+					'tglMulai' => $tglMulai,
+					'tglValuta' => $tglValuta,
+					'typeSB' => $rows[0]->type_suku_bunga,
+					'masukTitipan' => $rows[0]->masuk_titipan,
+					'bungaKePokok' => $rows[0]->bunga_berbunga,
+					'noRekTab' => $rows[0]->no_rek_tabungan,
+					'aro' => $rows[0]->aro,
+					'kodeGroup1' => $rows[0]->kode_group1,
+					'kodeGroup2' => $rows[0]->kode_group2,
+					'kodeGroup3' => $rows[0]->kode_group3,
+					'kodeBiPemilik' => $rows[0]->kode_bi_pemilik,
+					'kodeBiMetoda' => $rows[0]->kode_bi_metoda,
+					'kodeBiHub' => $rows[0]->kode_bi_hubungan,
+					'nasabahId'	=>$rows[0]->nasabah_id,
+					'namaNasabah'=>$rows[0]->nama_nasabah,
+					'alamat'=>$rows[0]->alamat
+			);
+		}else{
+			$array=array('baris'=>0);
+		}
+	
+		$this->output->set_output(json_encode($array));
+	}
 	public function simpan_deposito(){
 		
 		$tgl_reg = trim($this->input->post('txtTglReg'));
@@ -89,12 +152,17 @@ class Master_deposito_c extends CI_Controller {
 		}else{
 			$chkAro=1;
 		}
-		
 		$chkBungaTitipan=trim($this->input->post('chkBungaTitipan'));
 		if($chkBungaTitipan==""){
 			$chkBungaTitipan=0;
 		}else{
 			$chkBungaTitipan=1;
+		}
+		$chkBungaPokok=trim($this->input->post('chkBungaPokok'));
+		if($chkBungaPokok==""){
+			$chkBungaPokok=0;
+		}else{
+			$chkBungaPokok=1;
 		}
 		
 		$data = array(
@@ -130,7 +198,7 @@ class Master_deposito_c extends CI_Controller {
 		 'TITIPAN_TAMBAH' => 0.00,
 		 'TITIPAN_AMBIL' => 0.00,
 		 'TITIPAN_AKHIR' => 0.00,
-		 'BUNGA_BERBUNGA' => 0,
+		 'BUNGA_BERBUNGA' => $chkBungaPokok,
 		 'MASUK_TITIPAN' => $chkBungaTitipan,
 		 'SALDO_NOMINATIF' => 0.00,
 		 'BUNGA_YMH' => 0.00,
@@ -163,8 +231,8 @@ class Master_deposito_c extends CI_Controller {
 		
 		$query_deposito=$this->master_depositomodel->insert_deposito($data);
 		//show_nasabah_id($nasabah_id_max);
-		$this->session->set_flashdata('success', 'Data deposito berhasil masuk');
-			redirect('master_deposito_c/buat_baru');	
+		//$this->session->set_flashdata('success', 'Data deposito berhasil masuk');
+			//redirect('master_deposito_c/buat_baru');	
 	}
 	
 }

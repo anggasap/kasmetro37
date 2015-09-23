@@ -6,21 +6,17 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-gift"></i> <?php echo $judul; ?>
+                    <?php echo $judul; ?>
                 </div>
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config">
-                    </a>
-                    <a href="" class="reload">
-                    </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
             <div class="portlet-body">
-                <form id="formdeposito" role="form" method="post"   action="<?php echo base_url('master_deposito_c/buat_baru'); ?>">
+                <form id="formdeposito" role="form" method="post" action="<?php echo base_url('master_deposito_c/buat_baru'); ?>">
 				<!-- START DIV CLASS ROW FOR SIZE 6 -->
                 	<div class="row">
                         <div class="col-md-6">
@@ -29,10 +25,6 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Jenis :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
-                                                </span>
                                                 <?php
 												$data = array(
 												$data['']=''
@@ -42,34 +34,22 @@
 													endforeach; 
 													echo form_dropdown('DL_jenis_dep', $data,'','id="DL_jenis_dep" required="required" class="form-control"');
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Tipe deposito :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <select name="DL_tipe_dep" id="DL_tipe_dep" class="form-control">
                                                 <option value="1" selected="selected">DEPOSITO</option>
                                                 <option value="2">AB-PASIVA</option>
                                                 <option value="3">AB-AKTIVA</option>
                                                 </select>
-                                            </div>                                 
                                         </div>
                                         <div class="col-md-4">
-                                            <label>Status :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
-                                                <select name="DL_status_dep" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"   class="form-control">
+                                            <label>Status :</label>    
+                                                <select readonly="true" name="DL_status_dep" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;"   class="form-control">
                                                     <option value="1" selected="selected">Baru</option>
                                                     <option value="2">Aktif</option>
                                                     <option value="3">Tutup</option>
                                                 </select>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -78,21 +58,18 @@
                                         <div class="col-md-6">
                                             <label>No rekening :</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
-                                                </span>
+                                            	<input type="text" id="idTmpAksiBtn" class="hidden">
                                                 <?php echo  form_input(array('name'=>'txtNoRekDep','class'=>'bersih form-control','id'=>'txtNoRekDep','required'=>'required'));?>
-                                            </div>
+                                        		<span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekDep" data-toggle="modal">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
+                                        	</div>	
                                         </div>
                                         <div class="col-md-6">
                                             <label>No bilyet :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtNoBilyet','class'=>'bersih form-control','id'=>'txtNoBilyet'));?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -101,30 +78,19 @@
                                         <div class="col-md-6">
                                             <label>Nasabah id :</label>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','placeholder'=>'Nasabah/Anggota ID'));?>
                                                  <span class="input-group-btn">
-                                                  <a href="#" class="btn green" data-target="#input_cari_nasabah" data-toggle="modal">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelNasabah" data-toggle="modal">
                                                       <span class="glyphicon glyphicon-search"></span>
                                                   </a>
                                                   </span> 
                                             </div>
                                             <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
-                                                 
                                                  <?php echo  form_input(array('name'=>'txtNama','class'=>'bersih form-control','id'=>'txtNama','placeholder'=>'Nama Nasabah/Anggota','readonly'=>'readonly'));?>
                                             </div>
                                         </div> 
                                         <div class="col-md-6">
                                             <label>Alamat :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array(
 													  'name'        => 'txtAlamat',
@@ -137,9 +103,7 @@
 													  'readonly'    =>'readonly'
 													);
 												  echo form_textarea($data);
-												  ?>
-                                            </div>
-                                                                               
+												  ?>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -147,17 +111,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Jumlah deposito :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
-                                                </span>
-                                                <?php echo  form_input(array('name'=>'txtJmlDep','class'=>'nomor form-control','id'=>'txtJmlDep'));?>
-                                            </div>
+                                                <?php echo  form_input(array('name'=>'txtJmlDep','class'=>'nomor form-control kanan','id'=>'txtJmlDep'));?>
                                         </div>
                                         <div class="col-md-3">
                                             <label>Bunga /tahun :</label>
                                             <div class="input-group">
-                                                <?php echo  form_input(array('name'=>'txtBunga','class'=>'nomor form-control','id'=>'txtBunga'));?>
+                                                <?php echo  form_input(array('name'=>'txtBunga','class'=>'nomor form-control kanan','id'=>'txtBunga'));?>
                                             	<span class="input-group-addon">
                                                 <i class="">%</i>
                                                 </span>
@@ -166,7 +125,7 @@
                                         <div class="col-md-3">
                                             <label>PPH /bulan :</label>
                                             <div class="input-group">
-                                                <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor form-control','id'=>'txtPph'));?>	
+                                                <?php echo  form_input(array('name'=>'txtPph','class'=>'nomor form-control kanan','id'=>'txtPph'));?>	
                                             	<span class="input-group-addon">
                                                 <i class="">%</i>
                                                 </span>
@@ -181,25 +140,20 @@
                                             <label>Tanggal Registrasi :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
+                                                <i class="fa fa-calendar"></i>
                                                 </span>
                                                 <?php echo  form_input(array('name'=>'txtTglReg','class'=>'form-control','id'=>'txtTglReg','value'=>$this->session->userdata('tglD')));?>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Jkw /bulan :</label>
-                                            <div class="input-group">
-                                            	<span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
-                                                <?php echo  form_input(array('name'=>'txtJkWaktu','class'=>'teks-kanan form-control','id'=>'txtJkWaktu','readonly'=>'readonly'));?>
-                                            </div>                                 
-                                        </div>
+                                                <?php echo  form_input(array('name'=>'txtJkWaktu','class'=>'kanan form-control nomor1','id'=>'txtJkWaktu','readonly'=>'readonly'));?>
+	                                        </div>
                                         <div class="col-md-4">
                                             <label>Tanggal JT :</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
+                                                <i class="fa fa-calendar"></i>
                                                 </span>
 												<?php echo  form_input(array('name'=>'txtTglJT','class'=>'form-control','id'=>'txtTglJT','readonly'=>'readonly','value'=>$this->session->userdata('tglD')));?>	
                                             </div>
@@ -220,31 +174,18 @@
                                         </div>
                                         <div class="col-md-4">
                                             <label>Tanggal valuta :</label>
-                                            <div class="input-group">
-                                            	<span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
-                                                <?php echo  form_input(array('name'=>'txtTglValuta','class'=>'teks-kanan form-control','id'=>'txtTglValuta','readonly'=>'readonly'));?>
-                                            </div>                                 
+                                                <?php echo  form_input(array('name'=>'txtTglValuta','class'=>'teks-kanan form-control','id'=>'txtTglValuta','readonly'=>'readonly'));?>        
                                         </div>
                                         <div class="col-md-4">
                                             <label>Tipe bunga :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
 												<select name="DL_tipe_bunga" id="DL_tipe_bunga" class="form-control">
                                                 <option value="1" selected="selected">Reguler</option>
                                                 <option value="2">SBI</option>
                                                 </select>	
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
-                                
-                            	
-                                
+                    
                             </div>    
                         </div><!-- <div class="col-md-6"> -->
                         <div class="col-md-6">
@@ -295,44 +236,31 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Catatan :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
                                         <?php echo  form_input(array('name'=>'txtCatatan','class'=>'bersih form-control','id'=>'txtCatatan'));?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode group 1 :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array();
+												  $data['']='';
 													  foreach($kode_group1 as $row) : 
 															  $data[$row['KODE_GROUP1']] = $row['DESKRIPSI_GROUP1'];
 													  endforeach; 
 													  echo form_dropdown('DL_kodegroup1_dep', $data,'','id="DL_kodegroup1_dep" class="form-control"');
 												  ?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Kode Group 2</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
 											$data = array();
+											$data['']='';
 												foreach($kode_group2 as $row) : 
 														$data[$row['KODE_GROUP2']] = $row['DESKRIPSI_GROUP2'];
 												endforeach; 
 												echo form_dropdown('DL_kodegroup2_dep', $data,'','id="DL_kodegroup2_dep"  class="form-control"');
-											?>
-                                            </div>                                   
+											?>                                  
                                         </div>
                                     </div>
                                 </div>
@@ -340,33 +268,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode group 3 :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array();
+												  $data['']='';
 													  foreach($kode_group3 as $row) : 
 															  $data[$row['KODE_GROUP3']] = $row['DESKRIPSI_GROUP3'];
 													  endforeach; 
 													  echo form_dropdown('DL_kodegroup3_dep', $data,'','id="DL_kodegroup3_dep" class="form-control"');
 												  ?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Kode Pemilik</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
 											$data = array();
+											$data['']='';
 												foreach($kode_pemilik as $row) : 
 														$data[$row['KODE_GOL_DEBITUR']] = $row['DESKRIPSI_GOL_DEBITUR'];
 												endforeach; 
 												echo form_dropdown('DL_kodepemilik', $data,'','id="DL_kodepemilik" class="form-control"');
 											?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -374,33 +294,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kode Metoda :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
                                                  <?php
 												  $data = array();
+												  $data['']='';
 													  foreach($kode_metoda as $row) : 
-															  $data[$row['KODE_METODA']] = $row['DESKRIPSI_METODA'];
+															  $data[$row['kode_metoda']] = $row['deskripsi_metoda'];
 													  endforeach; 
 													  echo form_dropdown('DL_kodemetoda', $data,'','id="DL_kodemetoda" class="form-control"');
 												  ?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hubungan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                                </span>
 											<?php
 											$data = array();
+											$data['']='';
 												foreach($kode_hub_dep as $row) : 
 														$data[$row['KODE_HUBUNGAN']] = $row['DESKRIPSI_HUBUNGAN'];
 												endforeach; 
 												echo form_dropdown('DL_kodehub_dep', $data,'','id="DL_kodehub_dep" class="form-control"');
 											?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -413,15 +325,15 @@
                     <!-- END DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-actions">
                         <button type="submit" class="btn blue" id="btnSimpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>               
-       					<a class="btn green" onclick="cetak_validasi();" id="btnCetak_validasi" name="btnCetak_validasi">
-                        	<span class="glyphicon glyphicon-print"></span> Validasi
-                        </a>
+       					<button class="btn green"  id="btnUbah" name="btnUbah">
+                        	<span class="glyphicon glyphicon-edit"></span> Ubah
+                        </button>
        					<a class="btn red" id="btnReset" name="btnReset" onclick="confirm_reset();">
        						<span class="glyphicon glyphicon-repeat"></span>  Reset
        					</a>
-       					<a class="btn yellow" onclick="cetak_kuitansi();" id="btnCetak_kuitansi" name="btnCetak_kuitansi">
-                        	<span class="glyphicon glyphicon-print"></span> Kuitansi
-                        </a>
+       					<button class="btn yellow" id="btnHapus" name="btnHapus">
+                        	<span class="glyphicon glyphicon-trash"></span> Hapus
+                        </button>
                     </div>
             	</form>    
             </div>
@@ -429,53 +341,55 @@
         <!-- END SAMPLE FORM PORTLET-->
     </div>
 </div>
-
-<div id="input_cari_nasabah"  class="modal fade" tabindex="-1" aria-hidden="true">
-	<div class="modal-dialog">
+<!-- /.modal -->
+<div id="idDivTabelNasabah" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Tabel Perkiraan</h4>
+                <h4 class="modal-title">Data Nasabah</h4>
             </div>
-           <!-- START MODAL BODY-->
+
             <div class="modal-body">
-                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+                <div class="scroller" style="height:400px; ">
                     <div class="row">
                         <div class="col-md-12">
-                        	<div class="form-group">
-                                <div class="input-group">
-                                      <input type="text" class="form-control"  id="txtCariNasabah" placeholder="Cari...">
-                                      <span class="input-group-btn">
-                                        <button class="btn btn-primary"  id="CmdCariNasabah"><i class="fa fa-search"></i>&nbsp;</button> 
-                                      </span>  
-                                </div>
+                            <button id="id_Reload" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelNasabah">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            Id Nasabah
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            No ID
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                      <input type="text" class="form-control" id="kwd_search" placeholder="Cari...">  
-                                </div>
-                            </div>
-                            
-                            <table class='table table-hover' style="" id="tabel_rek">
-                              <thead>
-                                  <tr>
-                                      <th width='15%' align='center'>
-                                          Nasabah Id
-                                      </th>
-                                      <th width='35%' align='center'>
-                                          Nama
-                                      </th>
-                                      <th width='40%' align='center'>
-                                          Alamat
-                                      </th>
-                                      <th width='10%' align='center'>
-                                          Btn
-                                      </th>
-                                  </tr>
-                              </thead>
-                              <tbody id="body"></tbody>				
-                          </table>
-                            
                         </div>
                         <!-- end col-12 -->
                     </div>
@@ -484,16 +398,86 @@
                 <!-- END SCROLLER-->
             </div>
             <!-- END MODAL BODY-->
-            
+
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn red" id="id_button_close_modal">Close</button>
-               
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
             </div>
-            
         </div>
     </div>
-    
 </div>
+<!--  END MODAL-->
+<!-- /.modal -->
+<div id="idDivTabelRekDep" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="idBtnCloseModalRekDep" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Rekening</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadRekDep" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekDep">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            No Rekening
+                                        </th>
+                                        <th>
+                                            Nasabah Id
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Saldo Akhir
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
+
+
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -541,16 +525,238 @@
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
     });
 </script>
 <script>
 // MENU OPEN
 	$(".menu_root").removeClass('start active open');
-	$("#menu_root_6").addClass('start active open');
+	$("#menu_root_5").addClass('start active open');
 	// END MENU OPEN
 
 </script>
 <script type="text/javascript">
+var TableManaged = function () {
+
+    var initTable1 = function () {
+
+        var table = $('#idTabelNasabah');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_nasabah_c/getNasabahAll"); ?>",
+            "columns": [
+                { "data": "nasabah_id" },
+                { "data": "nama_nasabah" },
+                { "data": "alamat" },
+                { "data": "no_id" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+            var nasabahId 		= $(this).find("td").eq(0).html();           
+            $('#txtNasabahId').val(nasabahId);
+            var namaNasabah		= $(this).find("td").eq(1).html();
+            $('#txtNama').val(namaNasabah);
+            var alamatNasabah	= $(this).find("td").eq(2).html();
+            $('#txtAlamat').val(alamatNasabah);
+            $('#id_button_close_modal').trigger('click');
+            $('#txtNasabahId').focus();
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+    
+    var initTable2 = function () {
+
+        var table = $('#idTabelRekDep');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_deposito_c/getRekDepAll"); ?>",
+            "columns": [
+				{ "data": "noRek" },
+                { "data": "nasabahId" },
+                { "data": "namaNasabah" },
+                { "data": "alamat" },
+                { "data": "saldoAkhir" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_ReloadRekTab').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+        	var noRekDep 		= $(this).find("td").eq(0).html();           
+            $('#txtNoRekDep').val(noRekDep);
+            var nasabahId 		= $(this).find("td").eq(1).html();           
+            $('#txtNasabahId').val(nasabahId.trim());
+            var namaNasabah		= $(this).find("td").eq(2).html();
+            $('#txtNama').val(namaNasabah);
+            var alamatNasabah	= $(this).find("td").eq(3).html();
+            $('#txtAlamat').val(alamatNasabah);
+            $('#idBtnCloseModalRekDep').trigger('click');
+            $('#txtNoRekDep').focus();
+
+            $("#btnSimpan").attr("disabled", "disabled");
+            $("#btnUbah").removeAttr("disabled");
+			$("#btnHapus").removeAttr("disabled");
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            initTable1();
+            initTable2();
+        }
+    };
+
+}();
 		function confirm_reset(){
 			var r = confirm('Reset formulir ??');
 			if (r==true){
@@ -559,9 +765,6 @@
 				$('.nomor').val('0.00');
 				$("#btnSimpan").removeAttr("disabled");
 				//$('#btnSimpan').show();
-				
-				//check_load();
-				//location.reload();
 			}
 		}
 		function pad2(number) {
@@ -722,47 +925,6 @@
 			//$('#input_cari_nasabah').window('close');
 			//$('#cari_nasabah').window('close');
 			
-			$("#CmdCariNasabah").click(function(){
-					cari_nasabah();	
-			});
-			$("#idCmdBrowse").click(function(){
-					$('#txtCariNasabah').val('');
-					$('#txtCariNasabah').focus();
-			});
-			
-			function cari_nasabah(){
-				var item = $("#txtCariNasabah").val();
-				item=item.trim();
-			  if (item!=''){
-				$.post("<?php echo site_url('/master_tabungan_c/process_cari_nasabah'); ?>",{'item':item},
-				function(data){
-					//$('#input_cari_nasabah').window('close');
-					//$('#cari_nasabah').window('open');
-					$('#kwd_search').val('');
-					$('#kwd_search').focus();
-					$('#body').empty();
-					var tr="";
-					for (var i = 0; i < data.norek.length; i++) {
-					
-						 a=(data.norek[i].nasabah_id).trim();
-						 b=(data.norek[i].nama_nasabah).trim();
-						 c=(data.norek[i].alamat).trim();
-						tr = '<tr>';
-						tr+='<td>'+a+'</td>'+'<td>'+b+'</td>'+'<td>'+c+'</td>'+'<td><button class"btn btn-success" id="'+a+'"><i class="icon-ok"></i></button></td>';
-						tr+= '</tr>';
-						$('#body').append(tr);
-						
-						$('#'+a).click(function(){
-								$('#txtCariNasabah').val('');
-								$('#txtNasabahId').val($(this).attr('id'));
-								//$('#cari_nasabah').window('close');
-								$( "#txtNasabahId" ).trigger( "focusout" );
-								$('#txtJmlDep').focus();
-						});
-					}
-				},"json");
-			  }//if kd<>''
-			}//function cari_nasabah(){
 			
 			$("#btnUbah").attr("disabled", "disabled");
 			$('#txtNoRekTab').focusout(function(){
@@ -770,24 +932,74 @@
 				//proses();
 			});
 			$('#DL_jenis_tab').focus();
-			$('.nomor').val('0.00');
-			
-		
-			$("#kwd_search").keyup(function(){
-				var c = $("#kwd_search").val();
-					if(c==""){
-						//pager.showPage(1);
-						$("#tabel_rek tbody>tr").show();
-					}
-			  		if( c != ""){//if( (c != "") && ((c.length == 4) || (c.length == 7) || (c.length > 10)) ){
-			  			// Show only matching TR, hide rest of them
-			  			$("#tabel_rek tbody>tr").hide();
-			  			$("#tabel_rek td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-			  		}
-			});// end $("#kwd_search").keyup(function(){
-			
+			$('.nomor').val('0.00');	
 		});//end ready document
-		
+		function getDeskripsiRekDep(noRekDep){
+			$.post("<?php echo site_url('/master_deposito_c/getDeskripsiRekDep'); ?>",
+					{
+						'noRekDep' : noRekDep
+					},
+					function(data){
+						if(data.baris==1){
+							$('#DL_jenis_dep').val(data.jenisDep);
+							$('#DL_tipe_dep').val(data.abp);
+							$('#DL_status_dep').val(data.statusAktif);
+							$('#txtNoBilyet').val(data.noAlternatif);
+							$('#txtJmlDep').val(number_format(data.jmlDeposito,2));
+							$('#txtBunga').val(number_format(data.sukuBunga,2));
+							$('#txtPph').val(number_format(data.persenPph,2));
+							$('#txtTglReg').val(data.tglReg);
+							$('#txtJkWaktu').val(data.jkw);
+							$('#txtTglJT').val(data.tglJT);
+							$('#txtTglPenempatan').val(data.tglMulai);
+							$('#txtTglValuta').val(data.tglValuta);
+							$('#DL_tipe_bunga').val(data.typeSB);
+							if(data.masukTitipan == '1'){
+								$("#chkBungaTitipan").attr("checked", "checked");
+							}else{
+								$("#chkBungaTitipan").removeAttr("checked");
+							}
+							if(data.bungaKePokok == '1'){
+								$("#chkBungaPokok").attr("checked", "checked");
+							}else{
+								$("#chkBungaPokok").removeAttr("checked");
+							}
+							if(data.noRekTab != ''){
+								$("#chkBungaTabungan").attr("checked", "checked");
+								$("#txtRekTab").removeAttr("readonly");
+								$("#txtRekTab").val(data.noRekTab);
+							}else{
+								$("#chkBungaTabungan").removeAttr("checked");
+								$("#txtRekTab").attr("readonly",true);
+								$("#txtRekTab").val('');
+							}
+							if(data.aro == '1'){
+								$("#chkAro").attr("checked", "checked");
+							}else{
+								$("#chkAro").removeAttr("checked");
+							}
+							//$('#chkAro').val(data.aro);
+							$('#DL_kodegroup1_dep').val(data.kodeGroup1);
+							$('#DL_kodegroup2_dep').val(data.kodeGroup2);
+							$('#DL_kodegroup3_dep').val(data.kodeGroup3);
+							$('#DL_kodepemilik').val(data.kodeBiPemilik);
+							$('#DL_kodemetoda').val(data.kodeBiMetoda);
+							$('#DL_kodehub_dep').val(data.kodeBiHub);
+							$('#txtNasabahId').val(data.nasabahId);
+							$('#txtNama').val(data.namaNasabah);
+							$('#txtAlamat').val(data.alamat);
+						}else{
+							 //alert('Data tidak ditemukan!');
+							 /* $('#txtNasabahId').val('');
+							 $('#txtNama').val('');
+							 $('#txtAlamat').val(''); */
+						}
+					},"json");
+		}	
+		$( "#txtNoRekDep" ).focusout(function() {
+			var noRekDep	= $(this).val();
+			getDeskripsiRekDep(noRekDep);
+		});
 		function ajax_submit_deposito(){
 			$.ajax({
 				type:"POST",
@@ -803,8 +1015,7 @@
 			});
 			event.preventDefault();
 		}
-		$(function(){
-			
+		$(function(){		
 			$('#formdeposito').submit(function (event) {
 				  dataString = $("#formdeposito").serialize();
 				  var r = confirm('Anda yakin menyimpan data ini?');
@@ -815,16 +1026,5 @@
 				  }
 			}); //end  $contact form
 		});
-		// jQuery expression for case-insensitive filter
-		$.extend($.expr[":"],{
-				"contains-ci": function(elem, i, match, array){
-					return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
-					.toLowerCase()) >= 0;
-				}
-		});
-		$(document).ajaxStart(function() {
-			$('.modal_json').fadeIn('fast');
-		  }).ajaxStop(function() {
-			$('.modal_json').fadeOut('fast');
-		});
+		
 	</script>

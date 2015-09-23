@@ -10,16 +10,12 @@ foreach($counter_nasabah_id_length->result() as $row){
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-gift"></i> <?php echo $judul; ?>
+                    <i class="fa fa-th"></i> <?php echo $judul; ?>
                 </div>
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config">
-                    </a>
-                    <a href="" class="reload">
-                    </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
@@ -29,27 +25,15 @@ foreach($counter_nasabah_id_length->result() as $row){
                 	<div class="row">
                         <div class="col-md-6">
                         	<div class="form-body">
-                            	<!--<div class="form-group">
-                                    <label>Nasabah id :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
-                                         <?php /*echo  form_input(array('name'=>'txtNasabahId','class'=>'bersih form-control','id'=>'txtNasabahId','readonly'=>'readonly')); */?>
-                                    </div>
-                                </div>-->
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Nasabah id :</label>
-
                                             <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-tag"></i>
-                                    </span>
                                     			<input type="text" id="idTmpAksiBtn" class="hidden">
                                                 <input id="txtNasabahId" name="txtNasabahId" type="text" placeholder="Nasabah Id"
-                                                       class="form-control bersih input-medium" readonly>
+                                                       class="form-control bersih" readonly>
                                     <span class="input-group-btn">
                                                   <a href="#" class="btn green" data-target="#idDivTabelNasabah"
                                                      data-toggle="modal">
@@ -63,245 +47,159 @@ foreach($counter_nasabah_id_length->result() as $row){
 
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama nasabah :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
+                                	<div class="row">
+                                        <div class="col-md-6">
+                                        	<label>Nama nasabah :</label>
                                          <?php 
 							echo  form_input(array('name'=>'txtNamaNasabah','class'=>'bersih form-control','id'=>'txtNamaNasabah','required'=>'required','placeholder'=>'Nama nasabah'));
 							echo  form_input(array('type'=>'hidden','name'=>'txtCounterNasabahIdLength','class'=>'form-control','id'=>'txtCounterNasabahIdLength','required'=>'required','value'=>$counter_nasabah_id_length));
 							?>
-                                    </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<label>Nama alias :</label>
+                                    <?php echo  form_input(array('name'=>'txtNamaAlias','class'=>'bersih form-control','id'=>'txtNamaAlias','placeholder'=>'Nama Alias'));?>
+                                        </div>
+                                    </div>    
+                                    
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama alias :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtNamaAlias','class'=>'bersih form-control','id'=>'txtNamaAlias','placeholder'=>'Nama Alias'));?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Alamat :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-home"></i>
-                                        </span>
+                                	<div class="row">
+                                		<div class="col-md-6">
+                                			<label>Alamat :</label>
                                          <?php
 										  $data = array(
 											  'name'        => 'txtAlamatDom',
 											  'id'          => 'txtAlamatDom',
 											  'onkeyup'     => 'ToUpper(this)',
-											  'rows'        => '2',
+											  'rows'        => '3',
 											  //'style'       => 'width:430px',
-											  'class'		  =>'form-control',
+											  'class'		  =>'form-control bersih',
 											  'maxlength'	  =>'100',
 											  'placeholder' => 'Alamat Domisili'
 											);
 										  echo form_textarea($data);
 										  ?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Tempat lahir :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-home"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtTempatLahir','class'=>'bersih form-control','id'=>'txtTempatLahir','required'=>'required','placeholder'=>'Tempat Lahir'));?>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Tanggal lahir :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtTanggalLahir','class'=>'bersih form-control','id'=>'txtTanggalLahir','required'=>'required','placeholder'=>'Tanggal Lahir (dd-mm-yyyy)'));?>
-                                            </div>
-                                                                               
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Jenis kelamin :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dot-circle-o"></i>
-                                                </span>
-                                                 <?php
-                                                  $data = array(
-                                                      $data['']='Jenis Kelamin',
-                                                      $data['L']='L',
-                                                      $data['P']='P',
-                                                      );
-                                                      
-                                                      echo form_dropdown('DL_jenis_kelamin', $data,'','class="form-control" id="DL_jenis_kelamin"');
-                                                  ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Agama :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-bullseye"></i>
-                                                </span>
-                                                 <?php
-												  $data = array(
-													  $data['']='Agama'
-													  );
-													  foreach($kode_group1 as $row) : 
-															  $data[$row['NASABAH_GROUP1']] = $row['DESKRIPSI_GROUP1'];
-													  endforeach; 
-													  echo form_dropdown('DL_kode_group1', $data,'','class="form-control" id="DL_kode_group1"');
-												  ?>
-                                            </div>
-                                                                               
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Status gelar :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa  fa-mortar-board"></i>
-                                                </span>
-                                                 <?php
-												  $data = array(
-												  $data['']='Status / Gelar'
-												  );
-												  foreach($jenis_gelar as $row) : 
-														  $data[$row['Gelar_ID']] = $row['Deskripsi_Gelar'];
-												  endforeach; 
-												  echo form_dropdown('DL_jenis_gelar', $data,'','class="form-control" id="DL_jenis_gelar"');
-												  
-												  ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Deskripsi gelar :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tasks"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtDesGelar','class'=>'bersih form-control','id'=>'txtDesGelar','placeholder'=>'Keterangan Gelar'));?>
-                                            </div>
-                                                                               
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Jenis ID :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa  fa-tags"></i>
-                                                </span>
-                                                 <?php
-												  $data = array(
-												  $data['']='Jenis ID'
-												  );
-												  
-												  foreach($jenis_id as $row) : 
-														  $data[$row['jenis_id']] = $row['nama_identitas'];
-												  endforeach; 
-												  echo form_dropdown('DL_jenis_Id', $data,'','class="form-control" id="DL_jenis_Id"');
-												  ?>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>No ID :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-navicon"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtNoId','class'=>'bersih form-control','id'=>'txtNoId','required'=>'required','placeholder'=>'Nomor Identitas'));?>
-                                            </div>
-                                                                               
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Masa berlaku :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtIdMasaBerlaku','class'=>'bersih form-control input-medium','id'=>'txtIdMasaBerlaku','required'=>'required','placeholder'=>'Masa berlaku ID (dd-mm-yyyy)'));?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label>No telepon :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtKodeArea','class'=>'nomor bersih form-control','id'=>'txtKodeArea','placeholder'=>'Kd Area'));?>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>&nbsp;</label>
-                                                <?php echo  form_input(array('name'=>'txtNoTelp','class'=>'nomor bersih form-control','id'=>'txtNoTelp','placeholder'=>'No. Telp'));?>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>No HP :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-phone-square"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtNoHp','class'=>'nomor bersih form-control','id'=>'txtNoHp','placeholder'=>'No. Handphone'));?>
-                                            </div>
-                                                                               
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <label>Alamat :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-home"></i>
-                                                </span>
+                                		</div>
+                                		<div class="col-md-6">
+                                			<label>Alamat :</label>
                                                   <?php 
 												  // echo  form_input(array('name'=>'txtAlamatKtp','class'=>'bersih span11','id'=>'txtAlamatKtp','required'=>'required','placeholder'=>'Alamat KTP'));
 												   $data = array(
 															  'name'        => 'txtAlamatKtp',
 															  'id'          => 'txtAlamatKtp',
 															  'onkeyup'     => 'ToUpper(this)',
-															  'rows'        => '2',
+															  'rows'        => '3',
 															  //'style'       => 'width:430px',
-															  'class'		  =>'form-control',
+															  'class'		  =>'form-control bersih',
 															  'maxlength'	  =>'100',
 															  'placeholder' => 'Alamat KTP'
 															);
 														  echo form_textarea($data);
 												   ?>
-                                            </div>
+                                		</div>
+                                	</div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Tempat lahir :</label>
+                                                 <?php echo  form_input(array('name'=>'txtTempatLahir','class'=>'bersih form-control','id'=>'txtTempatLahir','required'=>'required','placeholder'=>'Tempat Lahir'));?>
                                         </div>
                                         <div class="col-md-4">
-                                            <label>Kode pos :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-bars"></i>
-                                                </span>
-                                                 <?php echo  form_input(array('name'=>'txtKodePos','class'=>'nomor bersih form-control','id'=>'txtKodePos','required'=>'required','placeholder'=>'Kode Pos','maxlength'=>'5'));?>
-                                            </div>
-                                                                               
+                                            <label>Tanggal lahir :</label>
+                                                 <?php echo  form_input(array('name'=>'txtTanggalLahir','class'=>'bersih form-control','id'=>'txtTanggalLahir','required'=>'required','placeholder'=>'dd-mm-yyyy'));?>                                   
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Jenis kelamin :</label>
+                                                 <?php
+                                                  $data = array(
+                                                      $data['']='',
+                                                      $data['L']='L',
+                                                      $data['P']='P',
+                                                      );
+                                                      
+                                                      echo form_dropdown('DL_jenis_kelamin', $data,'','class="form-control bersih" id="DL_jenis_kelamin"');
+                                                  ?>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Agama :</label>
+                                                 <?php
+												  $data = array(
+													  $data['']=''
+													  );
+													  foreach($kode_group1 as $row) : 
+															  $data[$row['NASABAH_GROUP1']] = $row['DESKRIPSI_GROUP1'];
+													  endforeach; 
+													  echo form_dropdown('DL_kode_group1', $data,'','class="form-control bersih" id="DL_kode_group1"');
+												  ?>                                                                               
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Status gelar :</label>
+                                                 <?php
+												  $data = array(
+												  $data['']=''
+												  );
+												  foreach($jenis_gelar as $row) : 
+														  $data[$row['Gelar_ID']] = $row['Deskripsi_Gelar'];
+												  endforeach; 
+												  echo form_dropdown('DL_jenis_gelar', $data,'','class="form-control bersih" id="DL_jenis_gelar"');
+												  
+												  ?>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Deskripsi gelar :</label>
+                                                 <?php echo  form_input(array('name'=>'txtDesGelar','class'=>'bersih form-control','id'=>'txtDesGelar','placeholder'=>'Keterangan Gelar'));?>                                   
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Jenis ID :</label>
+                                                 <?php
+												  $data = array(
+												  $data['']=''
+												  );
+												  
+												  foreach($jenis_id as $row) : 
+														  $data[$row['jenis_id']] = $row['nama_identitas'];
+												  endforeach; 
+												  echo form_dropdown('DL_jenis_Id', $data,'','class="form-control bersih" id="DL_jenis_Id"');
+												  ?>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>No ID :</label>
+                                                 <?php echo  form_input(array('name'=>'txtNoId','class'=>'bersih form-control','id'=>'txtNoId','required'=>'required','placeholder'=>'Nomor Identitas'));?>                                   
+                                        </div>
+                                        <div class="col-md-4">
+                                        	<label>Masa berlaku :</label>
+                                         <?php echo  form_input(array('name'=>'txtIdMasaBerlaku','class'=>'bersih form-control','id'=>'txtIdMasaBerlaku','required'=>'required','placeholder'=>'dd-mm-yyyy'));?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>No telepon :</label>
+                                                 <?php echo  form_input(array('name'=>'txtKodeArea','class'=>'nomor bersih form-control','id'=>'txtKodeArea','placeholder'=>'Kd Area'));?>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>&nbsp;</label>
+                                                <?php echo  form_input(array('name'=>'txtNoTelp','class'=>'nomor bersih form-control','id'=>'txtNoTelp','placeholder'=>'No. Telp'));?>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label>No HP :</label>
+                                                 <?php echo  form_input(array('name'=>'txtNoHp','class'=>'nomor bersih form-control','id'=>'txtNoHp','placeholder'=>'No. Handphone'));?>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 
                                 
                                 
@@ -312,24 +210,17 @@ foreach($counter_nasabah_id_length->result() as $row){
                             <div class="form-body">
                             	<div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <label>Kelurahan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-home"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtKelurahan','class'=>'bersih form-control','id'=>'txtKelurahan','required'=>'required','placeholder'=>'Kelurahan'));?>
-                                            </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <label>Kecamatan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-home"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtKecamatan','class'=>'bersih form-control','id'=>'txtKecamatan','required'=>'required','placeholder'=>'Kecamatan'));?>
-                                            </div>
-                                                                               
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Kd pos :</label>
+                                                 <?php echo  form_input(array('name'=>'txtKodePos','class'=>'nomor bersih form-control','id'=>'txtKodePos','required'=>'required','placeholder'=>'Kode Pos','maxlength'=>'5'));?>
                                         </div>
                                     </div>
                                 </div>
@@ -337,42 +228,31 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Kota :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-home"></i>
-                                                </span>
                                                  <?php
 												  $data = array(
-												  $data['0']='Kota'
+												  $data['']=''
 												  );
 												  
 												  foreach($jenis_kota as $row) : 
 														  $data[$row['Kota_id']] = $row['Deskripsi_Kota'];
 												  endforeach; 
-												  echo form_dropdown('DL_jenis_kota', $data,$data['0'],'id="DL_jenis_kota" class = "form-control"');
+												  echo form_dropdown('DL_jenis_kota', $data,'','id="DL_jenis_kota" class = "form-control"');
 												  
 												  ?>
 									  <?php echo  form_input(array('type'=>'hidden','name'=>'txtKota','class'=>'bersih','id'=>'txtKota','required'=>'required','placeholder'=>'kota'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Domisili negara :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-building"></i>
-                                                </span>
                                                  <?php
 												$data = array(
-												$data['0']='Domisili Negara'
+												$data['']=''
 												);
 												
 												foreach($jenis_negara as $row) : 
 														$data[$row['KODE_NEGARA']] = $row['DESKRIPSI_NEGARA'];
 												endforeach; 
-												echo form_dropdown('DL_jenis_negara', $data,$data['0'],'id="DL_jenis_negara" class = "form-control"');
+												echo form_dropdown('DL_jenis_negara', $data,'','id="DL_jenis_negara" class = "form-control"');
 												?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -380,63 +260,36 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Pekerjaan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tasks"></i>
-                                                </span>
                                                  <?php
 												$data = array(
-												$data['0']='Pekerjaan'
+												$data['']=''
 												);
 												foreach($jenis_kerja as $row) : 
 														$data[$row['Pekerjaan_id']] = $row['Desktripsi_Pekerjaan'];
 												endforeach; 
-												echo form_dropdown('DL_jenis_kerja', $data,$data['0'],'id="DL_jenis_kerja" class = "form-control"');
+												echo form_dropdown('DL_jenis_kerja', $data,'','id="DL_jenis_kerja" class = "form-control"');
 												
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Keterangan pekerjaan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-list-alt"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtKetKerja','class'=>'bersih form-control','id'=>'txtKetKerja','required'=>'required','placeholder'=>'Keterangan Pekerjaan'));?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama perusahaan :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-bank"></i>
-                                        </span>
                                          <?php echo form_input(array('name'=>'txtNamaPerush','class'=>'bersih form-control','id'=>'txtNamaPerush','placeholder'=>'Nama Perusahaan'));?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>NIP :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtNip','class'=>'bersih form-control','id'=>'txtNip','placeholder'=>'NIP'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>NPWP :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                  <?php echo  form_input(array('name'=>'txtNpwp','class'=>'bersih form-control','id'=>'txtNpwp','placeholder'=>'NPWP'));?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -444,40 +297,29 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Bidang usaha SID :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-list"></i>
-                                                </span>
                                                  <?php
 												$data = array(
-												$data['0']='Bidang Usaha SID'
+												$data['']=''
 												);
 												foreach($sid_bidang_usaha as $row) : 
 														$data[$row['KODE_BIDANG_USAHA']] = $row['DESKRIPSI_BIDANG_USAHA'];
 												endforeach; 
-												echo form_dropdown('DL_sid_bidang_usaha', $data,$data['0'],'id="DL_sid_bidang_usaha" class="form-control"');
+												echo form_dropdown('DL_sid_bidang_usaha', $data,'','id="DL_sid_bidang_usaha" class="form-control"');
 												
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Gol debitur :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-list"></i>
-                                                </span>
                                                  <?php
 												  $data = array(
-												  $data['0']='Golongan Debitur SID'
+												  $data['']=''
 												  );
 												  foreach($sid_gol_debitur as $row) : 
 														  $data[$row['KODE_GOL_DEBITUR']] = $row['DESKRIPSI_GOL_DEBITUR'];
 												  endforeach; 
-												  echo form_dropdown('DL_sid_gol_debitur', $data,$data['0'],'id="DL_sid_gol_debitur" class="form-control"');
+												  echo form_dropdown('DL_sid_gol_debitur', $data,'','id="DL_sid_gol_debitur" class="form-control"');
 												  
 												  ?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -485,81 +327,57 @@ foreach($counter_nasabah_id_length->result() as $row){
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Hubungan dengan bank SID :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-list"></i>
-                                                </span>
                                                 <?php
 												$data = array(
-												$data['0']='Hub dengan Bank SID'
+												$data['']=''
 												);
 												foreach($sid_hub_bank as $row) : 
 														$data[$row['KODE_HUBUNGAN']] = $row['DESKRIPSI_HUBUNGAN'];
 												endforeach; 
-												echo form_dropdown('DL_sid_hubungan', $data,$data['0'],'id="DL_sid_hubungan" class="form-control"');
+												echo form_dropdown('DL_sid_hubungan', $data,'','id="DL_sid_hubungan" class="form-control"');
 												
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label>AO :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-list"></i>
-                                                </span>
                                                  <?php
 												  $data = array(
-												  $data['0']='AO'
+												  $data['']=''
 												  );
 												  foreach($kode_group4 as $row) : 
 														  $data[$row['NASABAH_GROUP4']] = $row['DESKRIPSI_GROUP4'];
 												  endforeach; 
-												  echo form_dropdown('DL_kode_group4', $data,$data['0'],'id="DL_kode_group4" class="form-control"');
+												  echo form_dropdown('DL_kode_group4', $data,'','id="DL_kode_group4" class="form-control"');
 												  
 												  ?>
-                                            </div>
                                                                                
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tujuan pembukaan rekening :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtTujuanPembRek','class'=>'bersih form-control','id'=>'txtTujuanPembRek','placeholder'=>'Tujuan Pembukaan Rekening'));?>
-                                    </div>
+                                	<div class="row">
+                                        <div class="col-md-6">
+                                        	<label class="hidden">Tujuan pembukaan rekening :</label>
+                                         <?php echo  form_input(array('name'=>'txtTujuanPembRek','class'=>'bersih form-control hidden','id'=>'txtTujuanPembRek','placeholder'=>'Tujuan Pembukaan Rekening'));?>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<label class="hidden">Sumber dana :</label>
+                                         <?php echo  form_input(array('name'=>'txtSumberDana','class'=>'bersih form-control hidden','id'=>'txtSumberDana','placeholder'=>'Sumber Dana'));?>
+                                        </div>
+                                    </div>    
                                 </div>
                                 <div class="form-group">
-                                    <label>Sumber dana :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtSumberDana','class'=>'bersih form-control','id'=>'txtSumberDana','placeholder'=>'Sumber Dana'));?>
-                                    </div>
+                                	<div class="row">
+                                        <div class="col-md-6">
+                                        	<label class="hidden">Penggunaan dana :</label>
+                                         <?php echo  form_input(array('name'=>'txtPenggunaanDana','class'=>'bersih form-control hidden','id'=>'txtPenggunaanDana','placeholder'=>'Penggunaan Dana'));?>
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<label class="hidden">Nama ahli waris :</label>
+                                         <?php echo  form_input(array('name'=>'txtNamaWaris','class'=>'bersih form-control hidden','id'=>'txtNamaWaris','placeholder'=>'Nama Ahli Waris'));?>
+                                        </div>
+                                    </div>    
                                 </div>
-                                <div class="form-group">
-                                    <label>Penggunaan dana :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtPenggunaanDana','class'=>'bersih form-control','id'=>'txtPenggunaanDana','placeholder'=>'Penggunaan Dana'));?>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nama ahli waris :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
-                                         <?php echo  form_input(array('name'=>'txtNamaWaris','class'=>'bersih form-control','id'=>'txtNamaWaris','placeholder'=>'Nama Ahli Waris'));?>
-                                    </div>
-                                </div>
-                            	  
-                                
                             </div>
                             <!-- END FORM BODY-->
                         </div>    
@@ -704,7 +522,7 @@ foreach($counter_nasabah_id_length->result() as $row){
 <script>
 // MENU OPEN
 	$(".menu_root").removeClass('start active open');
-	$("#menu_root_6").addClass('start active open');
+	$("#menu_root_5").addClass('start active open');
 	// END MENU OPEN
 
 </script>
@@ -827,9 +645,7 @@ var TableManaged = function () {
 		function confirm_reset(){
 			var r = confirm('Reset formulir ??')
 			if (r==true){
-				
 				$('.bersih').val('');
-				$('.nomor').val('0.00');
 				$('#txtNamaNasabah').focus();
 				$("#btnSimpan").removeAttr("disabled");
 				$("#btnUbah").attr("disabled", "disabled");
@@ -849,60 +665,7 @@ var TableManaged = function () {
 		$(document).ready(function(){
 			$("#btnUbah").attr("disabled", "disabled");
 			$("#btnHapus").attr("disabled", "disabled");
-			function validatedate(inputText,vbl) {  
-				var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
-				// Match the date format through regular expression  
-				if(inputText.match(dateformat)){  
-				   // document.form1.text1.focus();  
-					//Test which seperator is used '/' or '-'  
-					var opera1 = inputText.split('/');  
-					var opera2 = inputText.split('-');  
-					lopera1 = opera1.length;  
-					lopera2 = opera2.length;  
-					// Extract the string into month, date and year  
-					if (lopera1>1) {  
-						//var pdate = inputText.split('/');  
-						alert('Format tanggal salah!');  
-						$( vbl ).focus();
-						return false;
-					}else if (lopera2>1){  
-						var pdate = inputText.split('-');  
-						var dd = parseInt(pdate[0]);  
-						var mm  = parseInt(pdate[1]);  
-						var yy = parseInt(pdate[2]);  
-						// Create list of days of a month [assume there is no leap year by default]  
-						var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];  
-						if (mm==1 || mm>2){  
-						  if (dd>ListofDays[mm-1]){  
-							  alert('Format tanggal salah!');  
-							  $( vbl ).focus();
-							  return false;  
-						  }  
-						}  
-						if (mm==2){  
-							var lyear = false;  
-							if ( (!(yy % 4) && yy % 100) || !(yy % 400)){  
-								lyear = true;  
-							}  
-							if ((lyear==false) && (dd>=29)){  
-								alert('Format tanggal salah!'); 
-								$( vbl ).focus();
-								return false;  
-							}  
-							if ((lyear==true) && (dd>29)){  
-								alert('Format tanggal salah!');  
-								$( vbl ).focus();
-								return false;  
-							}  
-					   }//if (mm==2){  
-					}  
-					
-				}else{  
-					alert("Format tanggal salah!");  
-					$( vbl ).focus();
-					return false;  
-				}  
-		  }  //function validatedate(inputText)
+			
 		  $("#txtNasabahId").focusout(function () {
 		        var kd = $(this).val();
 		        kd = kd.trim();
@@ -966,6 +729,7 @@ var TableManaged = function () {
 		function ajax_submit_nasabah(){
 			$.ajax({
 				type:"POST",
+				dataType: "json",
 				url:"<?php echo base_url(); ?>master_nasabah_c/simpan_nasabah",
 				data:dataString,
 		
@@ -1001,14 +765,19 @@ var TableManaged = function () {
 		function ajaxHapusNasabah(){
 			var nasabahId	= $('#txtNasabahId').val();
 			nasabahId		= nasabahId.trim();
-			$.post("<?php echo site_url('/master_nasabah_c/ajaxHapusNasabah'); ?>",
-					{
-						'nasabahId' 		: nasabahId,
-					},
-					function(data){
-						alert(data.notif);
-						
-					},"json");
+			$.ajax({
+				type:"POST",
+				dataType: "json",
+				url:"<?php echo base_url(); ?>master_nasabah_c/ajaxHapusNasabah",
+				data:{nasabahId : nasabahId},
+				success:function (data) {
+					$('#id_Reload').trigger('click');
+					$('#btnUbah').attr("disabled","disabled");
+					alert(data.notif);				
+				}
+		
+			});
+			event.preventDefault();
 		}
 		$('#btnSimpan').click(function(){
 			$('#idTmpAksiBtn').val('1');
@@ -1060,7 +829,7 @@ var TableManaged = function () {
 		});/// end $func   */
 		
 		function getDeskripsiNasabah(nasabahId){
-		    //ajaxModal();
+		    ajaxModal();
 		    var kd = nasabahId;
 		    if (kd != '') {
 		        //  alert(kd);
