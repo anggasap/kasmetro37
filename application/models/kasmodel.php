@@ -43,6 +43,12 @@ class Kasmodel extends CI_Model {
 		$this->db->where('modul', 'PC');
 		$this->db->update('controlno', $data);
 	}
+	public function getPerkAll()
+	{
+		$sql="SELECT kode_perk, kode_alt, nama_perk, type from perkiraan";
+		$query=$this->db->query($sql);
+		return $query->result(); // returning rows, not row
+	}
 }
 
 /* End of file kasmodel.php */

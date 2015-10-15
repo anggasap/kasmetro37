@@ -6,7 +6,7 @@ foreach($counter->result() as $row){
 }
 ?>
 <div class="row">
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-6">
         <!-- BEGIN PORTLET-->
         <!-- BEGIN SAMPLE FORM PORTLET-->
         <div class="portlet box blue">
@@ -17,7 +17,7 @@ foreach($counter->result() as $row){
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
@@ -25,7 +25,7 @@ foreach($counter->result() as $row){
                 <form id="id_form_kasumum" role="form" method="post">
                 	<!-- START FORM BODY-->
                     <div class="form-body">
-                        <div class="form-group">
+                        <div class="form-group hidden">
                             <label>Tanggal</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -38,93 +38,74 @@ foreach($counter->result() as $row){
                         </div>
                         <div class="form-group">
                         	<div class="row">
-                            	<div class="col-md-4">
+                            	<div class="col-md-3">
                                     <label>Kode Jurnal</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
                                         <?php
                                         $data = array();
                                         foreach ($kodetrans->result_array() as $row){
                                             $data[$row['kode_trans']] = $row['kode_trans']; 
                                         }  
                                         echo form_dropdown('DL_kodetrans', $data,'KM','id="DL_kodetrans" class="form-control input-xsmall"');
-                                         // echo "&nbsp;";
-                                        //  
-                                         ?>
-                                    </div>
+                                        ?>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-4">
                                     <label>&nbsp;</label>
-                                    <div class="input-group">
-                                        <?php echo form_input(array('name'=>'txtNamaJurnal','id'=>'txtNamaJurnal','readonly'=>'true','class'=>'form-control input-large')); ?>
-                                    </div>
+                                        <?php echo form_input(array('name'=>'txtNamaJurnal','id'=>'txtNamaJurnal','readonly'=>'true','class'=>'form-control')); ?>
+                                </div>
+                                <div class="col-md-5">
+                                	<label>Kuitansi</label>
+		                                <?php echo form_input(array('name'=>'txtKuitansi','onkeyup'=>'ToUpper(this)','id'=>'txtKuitansi','class'=>'form-control','value'=>set_value('txtKuitansi')));?>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>Kuitansi</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                <i class="fa fa-file-archive-o"></i>
-                                </span>
-                                <?php echo form_input(array('name'=>'txtKuitansi','readonly'=>'readonly','onkeyup'=>'ToUpper(this)','id'=>'txtKuitansi','class'=>'form-control','value'=>set_value('txtKuitansi')));?>
-                            </div>
+                        	<div class="row">
+                            	<div class="col-md-6">
+                            		<label>Uraian</label>
+	                                <?php
+									$data = array(
+										'name'        => 'txtUraian',
+										'id'          => 'txtUraian',
+										//'onkeyup'     => 'ToUpper(this)',
+										'rows'        => '2',
+										'class'       => 'form-control',
+									  );
+									echo form_textarea($data);
+									?>
+                            	</div>
+                            	<div class="col-md-6">
+                            		<label>Jumlah</label>
+                            		<?php 
+									$data = array(
+										'name'        => 'txtJml',
+										'id'          => 'txtJml',
+										//'onkeyup'     => 'AddAndRemoveSeparator(this)',
+										'style'       => 'text-align:right;',
+										'value'		  => set_value('txtJml'),
+										'class'		  =>'nomor form-control'
+									  );
+									echo form_input($data);
+									?>
+                            	</div>
+                            </div>	
                         </div>
-                        <div class="form-group">
-                            <label>Uraian</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                <i class="fa fa-list-alt"></i>
-                                </span>
-                                <?php
-								$data = array(
-									'name'        => 'txtUraian',
-									'id'          => 'txtUraian',
-									'onkeyup'     => 'ToUpper(this)',
-									'rows'        => '2',
-									'class'       => 'form-control',
-								  );
-								echo form_textarea($data);
-								?>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Jumlah</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                <i class="fa fa-dollar"></i>
-                                </span>
-                                <?php 
-								$data = array(
-									'name'        => 'txtJml',
-									'id'          => 'txtJml',
-									'onkeyup'     => 'AddAndRemoveSeparator(this)',
-									'style'       => 'text-align:right;',
-									'value'		  => set_value('txtJml'),
-									'class'		  =>'nomor form-control'
-								  );
-								echo form_input($data);
-								?>
-                            </div>
-                        </div>
+                        
                         <div class="form-group">
                             <span id="errmsg" style="color: red;" class="label label-error"></span>
         					<label id="terbilang" style="color: red"></label>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                         	<div class="row">
                             	<div class="col-md-8">
                                     <label>GL Balance</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                         <i class="fa fa-list"></i>
-                                        </span>
+                                        </span> -->
                                          <?php 
-								echo form_input(array('name'=>'txtKodeGL','id'=>'txtKodeGL','class'=>'form-control input-large','readonly'=>'true','value'=> set_value('txtKodeGL')));
+								//echo form_input(array('name'=>'txtKodeGL','id'=>'txtKodeGL','class'=>'form-control input-large','readonly'=>'true','value'=> set_value('txtKodeGL')));
 								?>
-                                    </div>
+                                    <!-- </div>
                                 </div>
                                 <div class="col-md-1">
                                 </div>
@@ -138,9 +119,34 @@ foreach($counter->result() as $row){
                                     </div>                                   
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
-                               <?php echo form_input(array('name'=>'txtNamaGl','id'=>'txtNamaGL','class'=>'form-control ','readonly'=>'true','value'=>set_value('txtNamaGL')));?>
+				            <div class="row">
+				                <div class="col-md-6">
+				                    <label>GL Balance :</label>
+				
+				                    <div class="input-group">
+				                        <input id="txtKodeGL" name="txtKodeGL" type="text" placeholder="Kd Perkiraan"
+				                               class="form-control bersih " readonly>
+				                                    <span class="input-group-btn">
+				                                                  <a href="#" class="btn green" data-target="#idDivTabelPerk"
+				                                                     data-toggle="modal" id="idBtnDivTabelPerk"
+				                                                     >
+				                                                      <span class="glyphicon glyphicon-search"></span>
+				                                                  </a>
+				                                                  </span>
+				
+				                    </div>
+				                </div>
+				                <div class="col-md-6">
+				                	<a class="btn default hidden" data-toggle="modal" href="#idDivApprovalLimitKas" 
+				                	id="idBtnApprovalLimitKas"></a>
+				                </div>
+				            </div>
+				
+				        </div>
+                        <div class="form-group">
+                               <?php echo form_input(array('name'=>'txtNamaGl','id'=>'txtNamaGL','class'=>'form-control ','placeholder'=>'Nama Perkiraan','readonly'=>'true','value'=>set_value('txtNamaGL')));?>
 	                        </div>									
                     </div>
                     <!-- END FORM BODY-->
@@ -162,69 +168,113 @@ foreach($counter->result() as $row){
         <!-- END SAMPLE FORM PORTLET-->
         <!-- END PORTLET-->
     </div>
-    <div class="col-md-6 col-sm-6">
+    <div class="col-md-4">
         <!-- BEGIN PORTLET-->
         <!-- END PORTLET-->
     </div>
 </div>
 <div class="clearfix">
 </div>
+
 <!-- /.modal -->
-<div id="GL" class="modal fade" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
+<div id="idDivTabelPerk" class="modal fade draggable-modal" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button id="id_button_close_modal" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Tabel Perkiraan</h4>
+                <h4 class="modal-title">Data Perkiraan</h4>
             </div>
-           <!-- START MODAL BODY-->
-            <div class="modal-body">
-                <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control input-medium " id="kwd_search" placeholder="Cari...">
-                            <table class='table table-hover' id="tabel_perk">
-                              <thead >
-                                <tr>
-                                   <th width='10%' align='left'>Kd Perk</th>
-                                   <th width='10%' align='left'>Kd Alt</th>
-                                   <th width='60%' align='left'>Nama Perk</th>
-                                   <th width='20%' align='center'>Type</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <?php
-                                 foreach($perkiraan->result() as $row){
-                                    ?>
-                                    <tr>
-                                       <td><?php echo $row->kode_perk;?></td>
-                                       <td><?php echo $row->kode_alt;?></td>
-                                       <td><?php echo $row->nama_perk;?></td>
-                                       <td><?php echo $row->type;?></td>
-                                    </tr>
-                                    <?php
-                                 }
-                                ?>
-                             </tbody>
-                           </table>
+
+                <div class="modal-body">
+                    <div class="scroller" style="height:400px; ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button id="id_Reload" style="display: none;"></button>
+                            </div>
                         </div>
-                        <!-- end col-12 -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-body" id="idDivBodyTabelPerk">
+                                    <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelPerk">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Kd Perk
+                                            </th>
+                                            
+                                            <th>
+                                                Nama Perk
+                                            </th>
+                                            <th>
+                                                Type
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                        <tfoot>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end col-12 -->
+                        </div>
+                        <!-- END ROW-->
                     </div>
-                    <!-- END ROW-->
+                    <!-- END SCROLLER-->
                 </div>
-                <!-- END SCROLLER-->
-            </div>
-            <!-- END MODAL BODY-->
-            
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn red" id="id_button_close_modal">Close</button>
-               
-            </div>
-            
+                <!-- END MODAL BODY-->
+
+                <div class="modal-footer">
+
+                    <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+                </div>
         </div>
     </div>
 </div>
 <!--  END MODAL-->
+<!--  MODAL APPROVAL -->
+<div class="modal fade draggable-modal" id="idDivApprovalLimitKas" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Approval</h4>
+			</div>
+			<div class="modal-body">
+				<div class="Metronic-alerts alert alert-danger fade in">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					Maaf, nominal anda melebihi batas yang diinzinkan.
+				</div>	
+				 <form role="form" id="idFormApprovalLimitKas" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label>User name</label>
+								<input type="text" name="approvalUserName" id="idApprovalUserName" class="form-control" placeholder="User name">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+								<input type="password" name="approvalPassword" class="form-control" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn blue">Approve</button>
+						<button type="button" class="btn default">Batal</button>
+					</div>
+				</form>
+					
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalApproval">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!--  END MODAL APPROVAL -->
+
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -272,6 +322,10 @@ foreach($counter->result() as $row){
         Metronic.init(); // init metronic core componets
         Layout.init(); // init layout
         Demo.init(); // init demo features
+        TableManaged.init();
+        $("#idDivTabelPerk").draggable({
+            handle: ".modal-header"
+        });
     });
 </script>
 <script type="text/javascript">
@@ -279,6 +333,118 @@ foreach($counter->result() as $row){
 	$(".menu_root").removeClass('start active open');
 	$("#menu_root_2").addClass('start active open');
 	// END MENU OPEN
+	var TableManaged = function () {
+
+    var initTable1 = function () {
+
+        var table = $('#idTabelPerk');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/kasumum/getPerkAll"); ?>",
+            "columns": [
+                { "data": "kodePerk" },
+                //{ "data": "kodeAlt" },
+                { "data": "namaPerk" },
+                { "data": "typePerk" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+           // "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'type'      :'string',
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_Reload').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+            var kdPerk = $(this).find("td").eq(0).html();
+            var nmPerk = $(this).find("td").eq(1).html();
+            $('#txtKodeGL').val(kdPerk);
+            $('#txtNamaGL').val(nmPerk);
+            $('#id_button_close_modal').trigger('click');
+            $('#txtKodeGL').focus();
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            if (!jQuery().dataTable) {
+                return;
+            }
+            initTable1();
+        }
+    };
+
+}();
 	$('.nomor').val('0.00');
 	$('#DL_kodetrans').focus();
 	var kd=$('#DL_kodetrans').val();
@@ -328,6 +494,10 @@ foreach($counter->result() as $row){
 			$("#txtKuitansi").focus();
 		},"json");
 	});
+	/* $('#idBtnDivTabelPerk').click(function(){
+		$('div.idTabelPerk_filter label input').attr('id', 'your-id-value');
+		//$('div.idTabelPerk_filter input').focus();
+	}); */
 	$('#txtJml').keyup(function(){
 	  var val = $(this).val();
 	  
@@ -350,51 +520,103 @@ foreach($counter->result() as $row){
 		}
 	});
 	$("#txtJml").focus(function(){
-		$('#txtJml').val('');
-		$('#txtJml').focus();
-	});
-	/*
-	$(this).find("#kwd_search").focus();
+		if( $(this).val()=='0' || $(this).val()=='0.00' ){
+			$(this).val('');
+		}		
+	}); 
 	
-	$("#idCmdBrowse").click(function()
-		$("#kwd_search").focus();
-		$("#kwd_search").val('');
-	});
-	*/
-	$("#kwd_search").keyup(function()
-	  {
-		  // When value of the input is not blank
-		  if( $(this).val() != "")
-		  {
-			  // Show only matching TR, hide rest of them
-			  $("#tabel_perk tbody>tr").hide();
-			  $("#tabel_perk td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+	
+	function confirm_reset(){
+		var r = confirm('Reset formulir ?');
+			if (r){
+				$("#txtKuitansi").val("");
+				$("#txtUraian").val("");
+				$("#txtJml").val("");
+				$("#txtKodeGL").val("");
+				$("#txtNamaGL").val("");
+				$("#txtcounter").val("");
+				var k= "<?php echo $f; ?>";
+				var c="<?php echo $count+1; ?>";
+				$("#txtcounter").val(c);
+				$("#txtKuitansi").val(k);
+				$('#terbilang').text("");
+				$("#btnSimpan").show();
+				$('.nomor').val('0.00');
+				$("#btnSimpan").removeAttr("disabled");
+			}else{
+				//return false();
+			}
+		
+	}
+	function ajaxSimpanKasUmum(){
+		ajaxModal();
+		dataString = $("#id_form_kasumum").serialize();
+		$.ajax({
+			  type:"POST",
+			  url:"<?php echo base_url(); ?>kasumum/insert_teller",
+			  data:dataString,
+			  success:function (data) {
+				  alert('Transaksi kas umum tersimpan!');
+				  $("#btnSimpan").attr("disabled", "disabled");
+			  }	  
+		  });
+		  event.preventDefault();
+	}
+	$('#id_form_kasumum').submit(function (event) {
+		var jml_bayar=parseFloat(CleanNumber($("#txtJml").val()));
+		var sessionLimitKasUmum = parseFloat(CleanNumber($("#idSessionLimitKasUmum").val()));
+		  if (jml_bayar==0){
+			  alert('Nominal transaksi tidak boleh 0!');
+			  return false;
+		  }else if(jml_bayar > sessionLimitKasUmum){
+			  //$('idApprovalUserName').focus();
+			  $('#idBtnApprovalLimitKas').trigger('click');
+			  //alert('Nominal transaksi melebihi batasan! \nHubungi supervisor anda.');
+			  return false;
+		  }else{
+			  var r = confirm("Apakan anda yakin menyimpan data ini?");
+			  if(r){
+				  ajaxSimpanKasUmum();
+			  }else{
+				  return false;
+			  }
 		  }
-		  
-	  });
-	function pad2(number) {
-			return (number < 10 ? '0' : '') + number
+  }); //end  $contact form
+  function ajaxApprovalLimitKas(){
+		dataString = $("#idFormApprovalLimitKas").serialize();
+		$.ajax({
+			  type:"POST",
+			  url:"<?php echo base_url(); ?>kasumum/approvalLimitKas",
+			  data:dataString,
+			  dataType: 'json',
+			  success:function (data) {
+				  if(data.bool == true){
+					  var jml_bayar=parseFloat(CleanNumber($("#txtJml").val()));
+					  if(jml_bayar < data.limitKas){
+						  ajaxSimpanKasUmum();
+						  $('#btnCloseModalApproval').trigger('click');
+					  }else{
+						  alert("Maksimal nominal transaksi anda "+ number_format(data.limitKas,2) +"\nSilahkan appoval dengan user yang lain.");
+					  }
+				  }else{
+					  alert("User name atau password anda salah.");
+					  return false;
+				  }	  
+			  }
+	  
+		  });
+		  event.preventDefault();
 	}
-	function capitalizeEachWord(str){
-	   var words = str.split(" ");
-	   var arr = Array();
-	   for (i in words){
-		  temp = words[i].toLowerCase();
-		  temp = temp.charAt(0).toUpperCase() + temp.substring(1);
-		  arr.push(temp);
-	   }
-	   return arr.join(" ");
-	}
-	//fungsi cetak
+  $('#idFormApprovalLimitKas').submit(function (event) {
+	  ajaxApprovalLimitKas();
+  });
+//fungsi cetak
 	function cetak_validasi(){
-
 	  var newWindow = window.open('Validasi', '_blank');
 	  var d = new Date();
 	  var jam =pad2(d.getHours()); // => 9
 	  var mnt =pad2(d.getMinutes()); // =>  30
 	  var dtk =pad2(d.getSeconds()); // => 51
-	 
-	
 	 var kode_trans = $('#DL_kodetrans').val();//kode trans
 	 var kuitansi= $("#txtKuitansi").val();
 	 var kode_gl=$("#txtKodeGL").val();
@@ -449,107 +671,5 @@ foreach($counter->result() as $row){
 		newWindow .print();
 		newWindow .document.close();
 	}
-	function confirm_reset(){
-		var r = confirm('Reset formulir ?');
-			if (r){
-				$("#txtKuitansi").val("");
-				$("#txtUraian").val("");
-				$("#txtJml").val("");
-				$("#txtKodeGL").val("");
-				$("#txtNamaGL").val("");
-				$("#txtcounter").val("");
-				var k= "<?php echo $f; ?>";
-				var c="<?php echo $count+1; ?>";
-				$("#txtcounter").val(c);
-				$("#txtKuitansi").val(k);
-				$('#terbilang').text("");
-				$("#btnSimpan").show();
-				$('.nomor').val('0.00');
-				$("#btnSimpan").removeAttr("disabled");
-			}else{
-				//return false();
-			}
-		
-	}
-	$('#id_form_kasumum').submit(function (event) {
-		dataString = $("#id_form_kasumum").serialize();
-		var jml_bayar=$('#txtJml').val();
-		var gl=$('#txtKodeGL').val();
-		
-		  if (jml_bayar==0){
-			  //alert("Jumlah setoran tidak boleh 0 !");
-			  alert('Jumlah setoran tidak boleh 0!');
-			  return false;
-		  }/*else if(gl.trim()==''){
-			  var x =$.messager.alert('Perhatian','GL Balance harus diisi!');
-			  if (x){
-				$('#GL').window('open');
-			  }
-			  return false;
-		  }*/else{
-			  var r = confirm("Apakan anda yakin menyimpan data ini?");
-			  if(r){
-				  $.ajax({
-					  type:"POST",
-					  url:"<?php echo base_url(); ?>kasumum/insert_teller",
-					  data:dataString,
-			  
-					  success:function (data) {
-						  //alert('Data tersimpan');
-						  alert('Transaksi kas umum tersimpan!');
-						  $("#btnSimpan").attr("disabled", "disabled");
-						 // $("#btnSimpan").hide();
-					  }
-			  
-				  });
-				  event.preventDefault();
-			  }else{
-				  return false;
-			  }
-		  }
-  }); //end  $contact form
   
-  var tr = $('#tabel_perk').find('tr');
-  tr.bind('click', function(event){
-	  var values = '';
-	  var values3 = '';
-	  var tipe = '';
-	  tr.removeClass('row-highlight');
-	  var td1 = $(this).addClass('row-highlight').find('td:nth-child(1)');
-	  var td3 = $(this).addClass('row-highlight').find('td:nth-child(3)');
-	  var td4 = $(this).addClass('row-highlight').find('td:nth-child(4)');
-  
-  
-	  $.each(td1, function(index, item){
-			  values = values + item.innerHTML;
-		  });
-	  $.each(td3, function(index, item){
-			  values3 = values3 + item.innerHTML;
-		  });
-	  $.each(td4, function(index, item){
-			  tipe = tipe + item.innerHTML;
-		  });
-  
-	  if(tipe=='G'){
-		  alert('Tipe Induk tidak dapat diplih');
-	  }
-	  else{
-		  $('#txtKodeGL').val(values);
-		  $('#txtNamaGL').val(values3);
-		  $('#id_button_close_modal').trigger('click');
-		 // $('#GL').window('close');
-	  }
-  });
-  $.extend($.expr[":"],
-	  {
-	  "contains-ci": function(elem, i, match, array)
-	  {
-	  	return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-	  }
-	  });
-	  $(document).ajaxStart(function() {
-			$('.modal_json').fadeIn('fast');
-		  }).ajaxStop(function() {
-			$('.modal_json').fadeOut('fast');
-		});
 </script>

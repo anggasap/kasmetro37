@@ -96,6 +96,8 @@ class Master_deposito_c extends CI_Controller {
 			$tglJT = date('d-m-Y', strtotime($rows[0]->tgl_jt));
 			$tglMulai = date('d-m-Y', strtotime($rows[0]->tgl_mulai));
 			$tglValuta = date('d-m-Y', strtotime($rows[0]->tgl_valuta));
+			$namaRekTab =$this->master_depositomodel->getNamaRekTab(trim($rows[0]->no_rek_tabungan));
+			 
 			$array = array (
 					'baris'=>1,
 					'jenisDep' => $rows[0]->jenis_deposito,
@@ -114,6 +116,7 @@ class Master_deposito_c extends CI_Controller {
 					'masukTitipan' => $rows[0]->masuk_titipan,
 					'bungaKePokok' => $rows[0]->bunga_berbunga,
 					'noRekTab' => $rows[0]->no_rek_tabungan,
+					'namaRekTab'=> $namaRekTab[0]->nama_nasabah,
 					'aro' => $rows[0]->aro,
 					'kodeGroup1' => $rows[0]->kode_group1,
 					'kodeGroup2' => $rows[0]->kode_group2,

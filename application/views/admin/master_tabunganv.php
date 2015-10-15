@@ -732,6 +732,7 @@ var TableManaged = function () {
 				$('#DL_jenis_tab').focus();
 				$('#DL_restrict').val('UNRESTRICTED');
 				$('#DL_tipe_tab').val('1');
+				$('#txtTerhitungBunga').val($('#id_session_tgl_D').val());
 				$("#btnSimpan").removeAttr("disabled");
 				//$('#btnSimpan').show();
 				//check_load();

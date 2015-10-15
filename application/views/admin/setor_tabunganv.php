@@ -25,11 +25,7 @@ foreach ($counter->result() as $row) {
     <div class="tools">
         <a href="" class="collapse">
         </a>
-        <a href="#portlet-config" data-toggle="modal" class="config">
-        </a>
-        <a href="" class="reload">
-        </a>
-        <a href="" class="remove">
+        <a href="" class="fullscreen">
         </a>
     </div>
 </div>
@@ -97,13 +93,9 @@ if ($judul == 'Setoran Tabungan') {
             <div class="row">
                 <div class="col-md-6">
                     <label>No rekening tabungan :</label>
-
                     <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-tag"></i>
-                                    </span>
                         <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rek Tabungan"
-                               class="form-control bersih input-medium" required="">
+                               class="form-control bersih " required="">
                                     <span class="input-group-btn">
                                                   <a href="#" class="btn green" data-target="#idDivTabelRekTab"
                                                      data-toggle="modal">
@@ -118,21 +110,10 @@ if ($judul == 'Setoran Tabungan') {
         </div>
         <div class="form-group">
             <label>Nama nasabah :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-user"></i>
-                                    </span>
                 <?php echo form_input(array('name' => 'txtNama', 'id' => 'txtNama', 'class' => 'bersih form-control input-large', 'required' => 'required', 'placeholder' => 'Nama nasabah', 'readonly' => 'true')); ?>
-            </div>
         </div>
         <div class="form-group">
             <label>Alamat</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-home"></i>
-                                    </span>
                 <?php
                 $data = array(
                     'name' => 'txtAlamat',
@@ -144,28 +125,15 @@ if ($judul == 'Setoran Tabungan') {
                 );
                 echo form_textarea($data);
                 ?>
-            </div>
         </div>
         <div class="form-group">
             <label>Jenis simpanan :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-suitcase"></i>
-                                    </span>
                 <input id="txtJenisSimp" name="txtJenisSimp" type="text" placeholder="Jenis Simpanan"
                        class="form-control bersih input-large" readonly="readonly">
-            </div>
         </div>
         <div class="form-group">
             <label>Saldo saat ini :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
                 <?php echo form_input(array('name' => 'txtSaldoBTrans', 'id' => 'txtSaldoBTrans', 'class' => 'form-control nomor input-large', 'readonly' => 'true', 'style' => 'text-align:right')); ?>
-            </div>
         </div>
     </div>
 </div>
@@ -176,71 +144,34 @@ if ($judul == 'Setoran Tabungan') {
             ?>
             <div class="form-group">
                 <label>Setoran minimum :</label>
-
-                <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
                     <?php echo form_input(array('name' => 'txtSaldoATrans', 'id' => 'txtSaldoATrans', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>
-                </div>
             </div>
         <?php
         } elseif ($judul == 'Penarikan Tabungan') {
             ?>
             <div class="form-group">
-                <label>Saldo minimum :</label>
-
-                <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
-                    <?php echo form_input(array('name' => 'txtSaldoMin', 'id' => 'txtSaldoMin', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Saldo dapat ditarik :</label>
-
-                <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
-                    <?php echo form_input(array('name' => 'txtSaldoDptTarik', 'id' => 'txtSaldoDptTarik', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>
-                </div>
-            </div>
+	            <div class="row">
+	                <div class="col-md-6">
+	            		<label>Saldo minimum :</label>
+                    	<?php echo form_input(array('name' => 'txtSaldoMin', 'id' => 'txtSaldoMin', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>                            
+	                </div>
+	                <div class="col-md-6">
+	            		<label>Saldo dapat ditarik :</label>
+                    <?php echo form_input(array('name' => 'txtSaldoDptTarik', 'id' => 'txtSaldoDptTarik', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>                            
+	                </div>
+	            </div>	
+	        </div>
         <?php
         }
         ?>
         <div class="form-group">
             <label>Saldo setelah :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
                 <?php echo form_input(array('name' => 'txtSaldoStlh', 'id' => 'txtSaldoStlh', 'class' => 'form-control nomor input-medium', 'readonly' => 'true', 'style' => 'text-align:right')); ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Kuintansi :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-list"></i>
-                                    </span>
-                <input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="No kuitansi"
-                       class="form-control bersih input-medium" required="" onkeyup="ToUpper(this);"
-                       readonly="readonly">
-            </div>
         </div>
         <div class="form-group">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <label>Kode transaksi :</label>
-
-                    <div class="input-group">
-                                            <span class="input-group-addon">
-                                            <i class="fa fa-gears"></i>
-                                            </span>
                         <?php
                         $data = array();
                         if ($judul == 'Setoran Tabungan') {
@@ -259,33 +190,29 @@ if ($judul == 'Setoran Tabungan') {
 
                         ?>
                         <?php
-                        echo form_dropdown('DL_kodetrans', $data, $def_kode, 'id="DL_kodetrans" class="form-control input-medium"');
+                        echo form_dropdown('DL_kodetrans', $data, $def_kode, 'id="DL_kodetrans" class="form-control"');
                         //echo form_input(array('name'=>'txtDekripTrans','style'=>'width:175px;','id'=>'txtDekripTrans','readonly'=>'true'));
                         echo form_input(array('name' => 'txtTypeTrans', 'id' => 'txtTypeTrans', 'class' => 'input-small hidden', 'readonly' => 'true', 'value' => $type_dk_trans));
                         ?>
-                    </div>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <label>&nbsp;</label>
 
-                    <div class="input-group">
-                        <input id="txtJenisTrans" name="txtJenisTrans" type="text" style="width:96px;" required=""
+                        <input id="txtJenisTrans" name="txtJenisTrans" type="text" required=""
                                readonly="readonly" class="form-control" value="<?php echo $tob_def; ?>">
-                    </div>
+                </div>
+                <div class="col-md-4">
+                	<label>Kuintansi :</label>
+                	<input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="No kuitansi"
+                       class="form-control bersih" required="" onkeyup="ToUpper(this);">
                 </div>
             </div>
         </div>
         <div class="form-group">
             <label>Jumlah :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-dollar"></i>
-                                    </span>
                 <input id="txtJml" name="txtJml" type="text" class="form-control nomor input-medium" required=""
                        onkeyup="" style="text-align:right;">
-            </div>
         </div>
         <div class="form-group">
             <label id="terbilang" style="color: red"></label>
@@ -296,11 +223,6 @@ if ($judul == 'Setoran Tabungan') {
             <input type="hidden" id="txtsaldosetor" name="txtsaldosetor"/>
             <input type="hidden" id="txtsaldotarik" name="txtsaldotarik"/>
             <label>Keterangan :</label>
-
-            <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-list"></i>
-                                    </span>
                 <?php
                 $data = array(
                     'name' => 'txtKet',
@@ -313,7 +235,9 @@ if ($judul == 'Setoran Tabungan') {
                 ?>
                 <?php echo form_input(array('name' => 'txtcounter', 'class' => 'hidden', 'id' => 'txtcounter', 'value' => '')); ?>
                 <input id="txtNasabahID" name="txtNasabahID" type="hidden" class="input-mini bersih ">
-            </div>
+                <a class="btn default hidden" data-toggle="modal" href="#idDivApprovalLimit" 
+				                	id="idBtnApprovalLimit"></a>
+                
         </div>
 
     </div>
@@ -413,9 +337,45 @@ if ($judul == 'Setoran Tabungan') {
     </div>
 </div>
 <!--  END MODAL-->
-
-
-
+<!--  MODAL APPROVAL -->
+<div class="modal fade draggable-modal" id="idDivApprovalLimit" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Approval</h4>
+			</div>
+			<div class="modal-body">
+				<div class="Metronic-alerts alert alert-danger fade in">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					Maaf, nominal anda melebihi batas yang diinzinkan.
+				</div>	
+				 <form role="form" id="idFormApprovalLimit" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label>User name</label>
+								<input type="text" name="approvalUserName" id="idApprovalUserName" class="form-control bersih" placeholder="User name">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+								<input type="password" name="approvalPassword" class="form-control bersih" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn blue">Approve</button>
+						<button type="button" class="btn default">Batal</button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalApproval">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!--  END MODAL APPROVAL -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -580,12 +540,8 @@ var TableManaged = function () {
             initTable1();
         }
     };
-
 }();
-function CleanNumber(value) {
-    newValue = value.replace(/\,/g, '');
-    return newValue;
-}
+
 function saldo_setelah() {
     var jml_trans = parseFloat(CleanNumber($("#txtJml").val()));
     if (isNaN(jml_trans)) jml_trans = 0;
@@ -602,163 +558,20 @@ function saldo_setelah() {
     $("#txtSaldoStlh").val(number_format(saldo_setelah, 2));
 }
 
-$("#txtJml").focusout(function () {
-    if ($(this).val() == '') {
-        $(this).val('0.00');
-    } else {
-        var angka = $('#txtJml').val();
-        var result = number_format(angka, 2);
-        $('#txtJml').val(result);
-        //var words = toWords(angka);
-        //$('#terbilang').text(words);
-    }
-});
-$('#txtJml').focusout(function () {
-    if (this.value == 0) {
-        $('#txtJml').val(0);
-        $('#terbilang').text("nol");
 
+$('#txtJml').focusout(function () {
+    if (this.value == 0 || this.value == '') {
+        $('#txtJml').val('0.00');
+        $('#terbilang').text("nol");
     } else {
         var angka = $('#txtJml').val();
         var words = toWords(angka);
+        var result = number_format(angka, 2);
+        $('#txtJml').val(result);
         $('#terbilang').text(words);
     }
     saldo_setelah();
 });
-
-function pad2(number) {
-    return (number < 10 ? '0' : '') + number
-}
-//fungsi cetak
-function cetak_validasi() {
-
-    var newWindow = window.open('Validasi', '_blank');
-    var d = new Date();
-    var jam = pad2(d.getHours()); // => 9
-    var mnt = pad2(d.getMinutes()); // =>  30
-    var dtk = pad2(d.getSeconds()); // => 51
-
-
-    var kode_trans = $('#DL_kodetrans').val();//kode trans
-    var desk_trans = $('#DL_kodetrans option:selected').text();
-    var kuitansi = $("#txtKuitansi").val();
-    var kode_gl = $("#txtKodeGL").val();
-    var jml_trans = $("#txtJml").val();
-    var tgl_trans = $('#txtTGlTrans').val();
-    var no_rek = $('#txtRekTab').val();
-    var nama = $('#txtNama').val();
-    var saldo_stlh = $('#txtSaldoStlh').val();
-    var html1 = '<span style="font-size: 11px;">' + tgl_trans + " " + jam + ":" + mnt + ":" + dtk + " " + kode_trans + "-" + desk_trans + '</span><br>';
-    var html2 = '<span style="font-size: 11px;">' + no_rek + " " + nama + "</span><br>";
-    var html3 = '<span style="font-size: 11px;">' + kuitansi + " CR " + jml_trans + "/ Saldo : " + saldo_stlh + '</span>';
-    newWindow.document.open();
-    newWindow.document.write(html1);
-    newWindow.document.write(html2);
-    newWindow.document.write(html3);
-    newWindow.print();
-    newWindow.document.close();
-}
-function capitalizeEachWord(str) {
-    var words = str.split(" ");
-    var arr = Array();
-    for (i in words) {
-        temp = words[i].toLowerCase();
-        temp = temp.charAt(0).toUpperCase() + temp.substring(1);
-        arr.push(temp);
-    }
-    return arr.join(" ");
-}
-function cetak_kuitansi() {
-    var newWindow = window.open('Kuitansi', '_blank');
-    var desk_trans = $('#DL_kodetrans option:selected').text();
-    var kuitansi = $("#txtKuitansi").val();
-    var jml_trans = $("#txtJml").val();
-    var tgl_trans = $('#txtTGlTrans').val();
-    var no_rek = $('#txtRekTab').val();
-    var nama = $('#txtNama').val();
-    var terbilang = $('#terbilang').text();
-    terbilang = terbilang.replace(" koma nol nol", "");
-    var ket = $('#txtKet').val();
-    var lokasi = $('#id_session_lokasi').val();
-    var user = $('#id_session_user').val();
-    var nama_lkm = $('#id_session_nama_lkm').val();
-
-    var htm1 = '<table style="width:700px; font-size: 11px;">';
-    var htm2 = '<tr>';
-    var htm3 = '';
-    var htm4 = '<td colspan="3">TANDA TERIMA TRANSAKSI TABUNGAN</br>' + nama_lkm + '</td>';
-    var htm5 = '';
-    var htm6 = '<td colspan="4">';
-
-    var htm7 = '<table style="border:1px solid black; border-collapse:collapse; font-size: 11px; width:300px;"><tr><td style="border:1px solid black;">Adm</td><td style="border:1px solid black;">Akunting</td><td style="border:1px solid black;">SPI</td></tr><tr height="20"><td style="border:1px solid black;"></td><td style="border:1px solid black;"></td><td style="border:1px solid black;"></td></tr></table>';//
-    //  var htm7 =desk_trans; <font face="Courier New, Courier, monospace">
-    var htm8 = '</td>';
-    var htm9 = '</tr>';
-    var htm10 = ' <tr><td align="right"></td><td></td><td colspan="4" align="right">' + desk_trans + '</td></tr>';
-    var htm11 = ' <tr><td align="right">No. Bukti </font></td><td>:</td><td>' + kuitansi + '</td><td colspan="4"></td></tr>';
-    var htm12 = ' <tr><td align="right">Nama Nasabah</td><td>:</td><td>' + nama + '</td><td colspan="4"></td></tr>';
-    var htm13 = ' <tr><td align="right">No Rekening</td><td>:</td><td>' + no_rek + '</td><td colspan="4"></td></tr>';
-    var htm14 = ' <tr><td align="right">Keterangan</td><td>:</td><td>' + ket + '</td><td colspan="2"></td></tr>';
-    var htm15 = ' <tr><td align="right">Nominal</td><td>:</td><td>Rp ' + jml_trans + '</td><td colspan="2"></td></tr>';
-    var htm16 = ' <tr><td align="right">Terbilang</td><td>:</td><td>' + capitalizeEachWord(terbilang) + ' Rupiah</td><td colspan="5"></td></tr>';
-    var htm19 = '<tr><td></td><td></td><td></td><td></td><td colspan="3" align="right">' + lokasi + ', ' + tgl_trans + '</tr>';
-    var htm18 = '<tr><td></td><td></td><td></td><td></td><td style="border-bottom: 1px solid black; width:100px; height:100px;"></td><td>&nbsp;</td><td style="border-bottom: 1px solid black; width:100px; height:100px;"></td></tr>';
-    var htm20 = '<tr><td></td><td></td><td></td><td></td><td>' + user + '</td><td>&nbsp;</td><td style=""></td></tr>';
-    var htm17 = ' </table>';
-
-
-    // var html4 =tbsa+trsa+tdsa+"TANDA TERIMA "+tdso+trso+tbso;
-    newWindow.document.open();
-    newWindow.document.write(htm1);
-    newWindow.document.write(htm2);
-    newWindow.document.write(htm3);
-    newWindow.document.write(htm4);
-    newWindow.document.write(htm5);
-    newWindow.document.write(htm6);
-    newWindow.document.write(htm7);
-    newWindow.document.write(htm8);
-    newWindow.document.write(htm9);
-    newWindow.document.write(htm10);
-    newWindow.document.write(htm11);
-    newWindow.document.write(htm12);
-    newWindow.document.write(htm13);
-    newWindow.document.write(htm14);
-    newWindow.document.write(htm15);
-    newWindow.document.write(htm16);
-    newWindow.document.write(htm19);
-    newWindow.document.write(htm18);
-    newWindow.document.write(htm20);
-    newWindow.document.write(htm17);
-    newWindow.print();
-    newWindow.document.close();
-}
-//end fungsi cetak
-function DateDiff(date1, date2) {
-    return (date2 - date1) / (1000 * 30 * 60 * 60 * 24);
-    //mengembalikan jumlah hari
-}
-function proses() {
-    var item = $("#txtNasabahID").val();
-
-    $.post("<?php echo site_url('/setor_tarik_tabungan/process'); ?>", {'item': item},
-        function (data) {
-            //alert(data.norek.length);
-            $('#body').empty();
-            var tr;
-            for (var i = 0; i < data.norek.length; i++) {
-
-                a = data.norek[i].NO_REKENING;
-                b = data.norek[i].DESKRIPSI_JENIS_KREDIT;
-                c = data.norek[i].SALDO_AKHIR;
-
-                tr = $('<tr/>');
-                tr.append("<td>" + a + "</td>");
-                tr.append("<td>" + b + "</td>");
-                tr.append("<td>" + number_format(c, 2) + "</td>");
-                $('#body').append(tr);
-            }
-        }, "json");
-}
 
 function confirm_reset() {
     var r = confirm('Reset formulir ?');
@@ -770,19 +583,17 @@ function confirm_reset() {
         $('#txtcounter').val('');
         $('#txtRekTab').focus();
         $("#btnSimpan").removeAttr("disabled");
-        //$('#btnSimpan').show();
-        //	location.reload();
     }
 }
 function ajax_submit_setor() {
     ajaxModal();
+    dataString = $("#formtabung_s").serialize();
     $.ajax({
         type: "POST",
         url: "<?php echo base_url(); ?>setor_tarik_tabungan/setor_tabungan",
         data: dataString,
 
         success: function (data) {
-            //$('#btnSimpan').hide();
             alert('Transaksi setoran telah tersimpan!');
             $( "#id_Reload" ).trigger( "click" );
             $("#btnSimpan").attr("disabled", "disabled");
@@ -793,6 +604,7 @@ function ajax_submit_setor() {
 }
 function ajax_submit_tarik() {
     ajaxModal();
+    dataString = $("#formtabung_t").serialize();
     $.ajax({
         type: "POST",
         url: "<?php echo base_url(); ?>setor_tarik_tabungan/tarik_tabungan",
@@ -801,7 +613,6 @@ function ajax_submit_tarik() {
         success: function (data) {
             alert('Transaksi penarikan tersimpan!');
             $( "#id_Reload" ).trigger( "click" );
-            //$('#btnSimpan').hide();
             $("#btnSimpan").attr("disabled", "disabled");
         }
 
@@ -810,9 +621,9 @@ function ajax_submit_tarik() {
 }
 $(function () {
     $('#formtabung_s').submit(function (event) {
-        dataString = $("#formtabung_s").serialize();
         var jml_bayar = parseFloat(CleanNumber($("#txtJml").val()));
         var set_min = parseFloat(CleanNumber($("#txtSaldoATrans").val()));
+        var sessionLimitSetor = parseFloat(CleanNumber($("#idSessionLimitSetor").val()));
 
         if (jml_bayar == 0) {
             alert('Jumlah setoran tidak boleh 0 !');
@@ -820,6 +631,10 @@ $(function () {
         } else if (jml_bayar < set_min) {
             alert('Jumlah setoran harus lebih besar dari setoran minimum!');
             return false;
+        } else if (jml_bayar > sessionLimitSetor) {
+        	//alert('Nominal transaksi melebihi batasan! \nHubungi supervisor anda.');
+			$('#idBtnApprovalLimit').trigger('click');
+			return false;
         } else {
             var kode_trans = $("#txtTypeTrans").val();
             if (kode_trans == 'K') {
@@ -837,15 +652,19 @@ $(function () {
     }); //end  $contact form
 
     $('#formtabung_t').submit(function (event) {
-        dataString = $("#formtabung_t").serialize();
         var jml_tarik = parseFloat(CleanNumber($("#txtJml").val()));
         var saldo_dpt_tarik = parseFloat(CleanNumber($("#txtSaldoDptTarik").val()));
+        var sessionLimitTarik = parseFloat(CleanNumber($("#idSessionLimitTarik").val()));
         if (jml_tarik == 0) {
             alert('Jumlah tarikan tidak boleh 0 !');
             return false;
         } else if (jml_tarik > saldo_dpt_tarik) {
             alert('Jumlah penarikan tidak boleh lebih besar dari saldo yang dapat ditarik!');
             return false;
+        } else if (jml_tarik > sessionLimitTarik) {
+        	//alert('Nominal transaksi melebihi batasan! \nHubungi supervisor anda.');
+        	$('#idBtnApprovalLimit').trigger('click');
+			return false;
         } else {
             var kode_trans = $("#txtTypeTrans").val();
             if (kode_trans == 'D') {
@@ -863,13 +682,7 @@ $(function () {
 
 
 });/// end $func
-function ajaxModal(){
-    $(document).ajaxStart(function() {
-        $('.modal_json').fadeIn('fast');
-    }).ajaxStop(function() {
-        $('.modal_json').fadeOut('fast');
-    });
-}
+
 $(document).ready(function () {
     $('#txtRekTab').focus();
     $('#lblStatus').text('');
@@ -928,12 +741,13 @@ $(document).ready(function () {
             }, "json");
     });
 
-    $("#txtJml").focus(function () {
-        $('#txtJml').val('');
-        //$('#txtJml').focus();
-    });
+    $("#txtJml").focus(function(){
+		if( $(this).val()=='0' || $(this).val()=='0.00' ){
+			$(this).val('');
+		}		
+	});
     $("#txtRekTab").focusout(function () {
-        this.value = this.value.toUpperCase();
+        //this.value = this.value.toUpperCase();
         var kd = $('#txtRekTab').val();
         kd = kd.trim();
         getDeskripsiRekTab(kd);
@@ -1007,12 +821,171 @@ function getDeskripsiRekTab(noRekTab){
     }//if kd<>''
 
 }
-// jQuery expression for case-insensitive filter
-/*$.extend($.expr[":"],
-    {
-        "contains-ci": function (elem, i, match, array) {
-            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
-                .toLowerCase()) >= 0;
-        }
-    });*/
+function ajaxApprovalLimit(){
+	dataString = $("#idFormApprovalLimit").serialize();
+	$.ajax({
+		  type:"POST",
+		  url:"<?php echo base_url(); ?>setor_tarik_tabungan/approvalLimit",
+		  data:dataString,
+		  dataType: 'json',
+		  success:function (data) {
+			  if(data.bool == true){
+				  var jml_bayar=parseFloat(CleanNumber($("#txtJml").val()));
+					  <?php 
+					  if ($judul == 'Setoran Tabungan') {
+					  ?>
+						  if(jml_bayar < data.limitSetor){
+						  	ajax_submit_setor();
+						  	$('#btnCloseModalApproval').trigger('click');
+						  }else{
+							  alert("Maksimal nominal transaksi anda "+ number_format(data.limitSetor,2) +"\nSilahkan appoval dengan user yang lain.");
+						  }	
+					  <?php 
+					  }else{
+					  ?>
+					  	  if(jml_bayar < data.limitTarik){
+						  	ajax_submit_tarik();
+						  	$('#btnCloseModalApproval').trigger('click');
+						  }else{
+							  alert("Maksimal nominal transaksi anda "+ number_format(data.limitTarik,2) +"\nSilahkan appoval dengan user yang lain.");
+						  }
+					  <?php
+					  }
+					  ?>
+							  
+					  
+			  }else{
+				  alert("User name atau password anda salah.");
+				  return false;
+			  }	  
+		  }
+  
+	  });
+	  event.preventDefault();
+}
+$('#idFormApprovalLimit').submit(function (event) {
+  ajaxApprovalLimit();
+});
+
+
+//fungsi cetak
+function cetak_validasi() {
+
+    var newWindow = window.open('Validasi', '_blank');
+    var d = new Date();
+    var jam = pad2(d.getHours()); // => 9
+    var mnt = pad2(d.getMinutes()); // =>  30
+    var dtk = pad2(d.getSeconds()); // => 51
+
+
+    var kode_trans = $('#DL_kodetrans').val();//kode trans
+    var desk_trans = $('#DL_kodetrans option:selected').text();
+    var kuitansi = $("#txtKuitansi").val();
+    var kode_gl = $("#txtKodeGL").val();
+    var jml_trans = $("#txtJml").val();
+    var tgl_trans = $('#txtTGlTrans').val();
+    var no_rek = $('#txtRekTab').val();
+    var nama = $('#txtNama').val();
+    var saldo_stlh = $('#txtSaldoStlh').val();
+    var html1 = '<span style="font-size: 11px;">' + tgl_trans + " " + jam + ":" + mnt + ":" + dtk + " " + kode_trans + "-" + desk_trans + '</span><br>';
+    var html2 = '<span style="font-size: 11px;">' + no_rek + " " + nama + "</span><br>";
+    var html3 = '<span style="font-size: 11px;">' + kuitansi + " CR " + jml_trans + "/ Saldo : " + saldo_stlh + '</span>';
+    newWindow.document.open();
+    newWindow.document.write(html1);
+    newWindow.document.write(html2);
+    newWindow.document.write(html3);
+    newWindow.print();
+    newWindow.document.close();
+}
+
+function cetak_kuitansi() {
+    var newWindow = window.open('Kuitansi', '_blank');
+    var desk_trans = $('#DL_kodetrans option:selected').text();
+    var kuitansi = $("#txtKuitansi").val();
+    var jml_trans = $("#txtJml").val();
+    var tgl_trans = $('#txtTGlTrans').val();
+    var no_rek = $('#txtRekTab').val();
+    var nama = $('#txtNama').val();
+    var terbilang = $('#terbilang').text();
+    terbilang = terbilang.replace(" koma nol nol", "");
+    var ket = $('#txtKet').val();
+    var lokasi = $('#id_session_lokasi').val();
+    var user = $('#id_session_user').val();
+    var nama_lkm = $('#id_session_nama_lkm').val();
+
+    var htm1 = '<table style="width:700px; font-size: 11px;">';
+    var htm2 = '<tr>';
+    var htm3 = '';
+    var htm4 = '<td colspan="3">TANDA TERIMA TRANSAKSI TABUNGAN</br>' + nama_lkm + '</td>';
+    var htm5 = '';
+    var htm6 = '<td colspan="4">';
+    var htm7 = '<table style="border:1px solid black; border-collapse:collapse; font-size: 11px; width:300px;"><tr><td style="border:1px solid black;">Adm</td><td style="border:1px solid black;">Akunting</td><td style="border:1px solid black;">SPI</td></tr><tr height="20"><td style="border:1px solid black;"></td><td style="border:1px solid black;"></td><td style="border:1px solid black;"></td></tr></table>';//
+    //  var htm7 =desk_trans; <font face="Courier New, Courier, monospace">
+    var htm8 = '</td>';
+    var htm9 = '</tr>';
+    var htm10 = ' <tr><td align="right"></td><td></td><td colspan="4" align="right">' + desk_trans + '</td></tr>';
+    var htm11 = ' <tr><td align="right">No. Bukti </font></td><td>:</td><td>' + kuitansi + '</td><td colspan="4"></td></tr>';
+    var htm12 = ' <tr><td align="right">Nama Nasabah</td><td>:</td><td>' + nama + '</td><td colspan="4"></td></tr>';
+    var htm13 = ' <tr><td align="right">No Rekening</td><td>:</td><td>' + no_rek + '</td><td colspan="4"></td></tr>';
+    var htm14 = ' <tr><td align="right">Keterangan</td><td>:</td><td>' + ket + '</td><td colspan="2"></td></tr>';
+    var htm15 = ' <tr><td align="right">Nominal</td><td>:</td><td>Rp ' + jml_trans + '</td><td colspan="2"></td></tr>';
+    var htm16 = ' <tr><td align="right">Terbilang</td><td>:</td><td>' + capitalizeEachWord(terbilang) + ' Rupiah</td><td colspan="5"></td></tr>';
+    var htm19 = '<tr><td></td><td></td><td></td><td></td><td colspan="3" align="right">' + lokasi + ', ' + tgl_trans + '</tr>';
+    var htm18 = '<tr><td></td><td></td><td></td><td></td><td style="border-bottom: 1px solid black; width:100px; height:100px;"></td><td>&nbsp;</td><td style="border-bottom: 1px solid black; width:100px; height:100px;"></td></tr>';
+    var htm20 = '<tr><td></td><td></td><td></td><td></td><td>' + user + '</td><td>&nbsp;</td><td style=""></td></tr>';
+    var htm17 = ' </table>';
+
+
+    // var html4 =tbsa+trsa+tdsa+"TANDA TERIMA "+tdso+trso+tbso;
+    newWindow.document.open();
+    newWindow.document.write(htm1);
+    newWindow.document.write(htm2);
+    newWindow.document.write(htm3);
+    newWindow.document.write(htm4);
+    newWindow.document.write(htm5);
+    newWindow.document.write(htm6);
+    newWindow.document.write(htm7);
+    newWindow.document.write(htm8);
+    newWindow.document.write(htm9);
+    newWindow.document.write(htm10);
+    newWindow.document.write(htm11);
+    newWindow.document.write(htm12);
+    newWindow.document.write(htm13);
+    newWindow.document.write(htm14);
+    newWindow.document.write(htm15);
+    newWindow.document.write(htm16);
+    newWindow.document.write(htm19);
+    newWindow.document.write(htm18);
+    newWindow.document.write(htm20);
+    newWindow.document.write(htm17);
+    newWindow.print();
+    newWindow.document.close();
+}
+//end fungsi cetak
+function DateDiff(date1, date2) {
+    return (date2 - date1) / (1000 * 30 * 60 * 60 * 24);
+    //mengembalikan jumlah hari
+}
+function proses() {
+    var item = $("#txtNasabahID").val();
+
+    $.post("<?php echo site_url('/setor_tarik_tabungan/process'); ?>", {'item': item},
+        function (data) {
+            //alert(data.norek.length);
+            $('#body').empty();
+            var tr;
+            for (var i = 0; i < data.norek.length; i++) {
+
+                a = data.norek[i].NO_REKENING;
+                b = data.norek[i].DESKRIPSI_JENIS_KREDIT;
+                c = data.norek[i].SALDO_AKHIR;
+
+                tr = $('<tr/>');
+                tr.append("<td>" + a + "</td>");
+                tr.append("<td>" + b + "</td>");
+                tr.append("<td>" + number_format(c, 2) + "</td>");
+                $('#body').append(tr);
+            }
+        }, "json");
+}
 </script>

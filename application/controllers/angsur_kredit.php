@@ -318,7 +318,7 @@ class Angsur_kredit extends CI_Controller {
 		 	'tabungan_trans'        		=>$jml_tab_wajib,//51
 		 	'DISC_ADMIN'     				=>0,
 		 	'JML_HARI_TUNGGAKAN'   			=>0,
-		 	'ABP'   						=>$abp,
+		 	//'ABP'   						=>$abp,
 		 	'ADMINLAIN_TRANS'       		=>0,
 			'CAB_ONLINE'					=>'',
 		 	'POKOK_FLAT'					=>0,
@@ -512,7 +512,23 @@ class Angsur_kredit extends CI_Controller {
 		  redirect('angsur_kredit/setor_pinjaman');	
 
 	}// end function simpan_setor
-		
+	function approvalLimit(){
+		$approvalUserName = $this->input->post('approvalUserName');
+		$approvalPassword = $this->input->post('approvalPassword');
+		$approvalLimit = $this->auth->approvalLimit ( $approvalUserName,$approvalPassword );
+		if($approvalLimit['bool']==true){
+			$dataReturn=array(
+					'bool'	=>true,
+					'limitSetor' =>$approvalLimit['limitSetor']
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}else{
+			$dataReturn=array(
+					'bool' =>false
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}
+	}	
 }
 
 /* End of file angsur_kredit.php */

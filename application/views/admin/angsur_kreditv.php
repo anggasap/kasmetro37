@@ -17,16 +17,12 @@
         <div class="portlet box blue">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="fa fa-gift"></i> <?php echo $judul; ?>
+                    <i class="fa fa-list"></i> <?php echo $judul; ?>
                 </div>
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config">
-                    </a>
-                    <a href="" class="reload">
-                    </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
@@ -34,38 +30,23 @@
                 <form id="formangsur" role="form" method="post">
 				<!-- START DIV CLASS ROW FOR SIZE 6 -->
                 	<div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                         	<h4>Info Rekening</h4>
                             <div class="form-body">
-                            	<!--<div class="form-group">
-                                    <label>No rekening :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-tag"></i>
-                                        </span>
-                                        <?php /*// echo  form_input(array('name'=>'txtRekKre','class'=>'form-control bersih','id'=>'txtRekKre','required'=>'required','placeholder'=>'No rekening'));*/?>
-                                        <?php /*// echo  form_input(array('name'=>'txtNasIDKre','type'=>'hidden','class'=>'hidden bersih','id'=>'txtNasIDKre','required'=>'required','style'=>'width:10px'));*/?>
-                                    </div>
-                                </div>-->
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>No rekening :</label>
-
                                             <div class="input-group">
-                                    <span class="input-group-addon">
-                                    <i class="fa fa-tag"></i>
-                                    </span>
                                                 <input id="txtRekKre" name="txtRekKre" type="text" placeholder="No rekening "
-                                                       class="form-control bersih input-medium" required="">
+                                                       class="form-control bersih" required="">
                                                 <?php echo  form_input(array('name'=>'txtNasIDKre','type'=>'hidden','class'=>'hidden bersih','id'=>'txtNasIDKre','required'=>'required'));?>
-                                    <span class="input-group-btn">
+                                    			<span class="input-group-btn">
                                                   <a href="#" class="btn green" data-target="#idDivTabelRekKre"
                                                      data-toggle="modal">
                                                       <span class="glyphicon glyphicon-search"></span>
                                                   </a>
                                                   </span>
-
                                             </div>
                                         </div>
                                     </div>
@@ -73,33 +54,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Nama nasabah :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                        </span>
                                         <?php echo  form_input(array('name'=>'txtNamaKre','class'=>'form-control bersih','id'=>'txtNamaKre','placeholder'=>'Nama nasabah','readonly'=>'true','required'=>'required'));?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Tipe pinjaman :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-suitcase"></i>
-                                                </span>
+                                            <label>Tipe pembiayaan :</label>
                                                 <?php echo  form_input(array('name'=>'txtTipeKredit','class'=>'form-control bersih','id'=>'txtTipeKredit','required'=>'required','placeholder'=>'Tipe kredit','readonly'=>'true'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Jumlah pinjaman :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
+                                            <label>Jumlah pembiayaan :</label>
                                                 <?php echo  form_input(array('name'=>'txtJmlKredit','class'=>'form-control nomor','id'=>'txtJmlKredit','required'=>'required','placeholder'=>'Jml kredit','readonly'=>'true','style'=>'text-align:right'));?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -107,24 +72,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Baki debet pokok :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtBDpokok','class'=>'form-control nomor','id'=>'txtBDpokok','required'=>'required','readonly'=>'true','style'=>'text-align:right;'));?>
                             <?php echo  form_input(array('type'=>'hidden','name'=>'txtBDpokok_oper','class'=>'nomor','id'=>'txtBDpokok_oper'));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Baki debet bunga :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
+                                            <label>Baki debet margin :</label>
                                                 <?php echo  form_input(array('name'=>'txtBDbunga','class'=>'form-control nomor','id'=>'txtBDbunga','required'=>'required','readonly'=>'true','style'=>'text-align:right;'));?>
                             <?php echo  form_input(array('type'=>'hidden','name'=>'txtBDbunga_oper','class'=>'nomor','id'=>'txtBDbunga_oper'));?>
-                                            </div>
-                                                                               
                                         </div>
                                     </div>
                                 </div>
@@ -132,10 +86,6 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Kode transaksi :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-gears"></i>
-                                                </span>
                                                 <?php
 												$data = array();
 												foreach($kodetrans_kre as $row) : 
@@ -143,89 +93,53 @@
 												endforeach; 
 												echo form_dropdown('DL_kodetrans_kre', $data,$kd_kre,'id="DL_kodetrans_kre" class="form-control"');
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-1">
                                         </div>
                                         <div class="col-md-3">
                                             <label>&nbsp;</label>
-                                            <div class="input-group">
                                                 <?php // echo form_input(array('name'=>'txtDeskripTransKre','type'=>'hidden','id'=>'txtDeskripTransKre','readonly'=>'true','class'=>'input-medium')); ?>
 												<?php echo form_input(array('name'=>'txtJenisTransKre','id'=>'txtJenisTransKre','readonly'=>'true','class'=>'form-control')); ?>
 												<?php echo form_input(array('name'=>'txtGlKre','type'=>'hidden','id'=>'txtGlKre','readonly'=>'true','class'=>'bersih hidden')); ?>
 												<?php echo  form_input(array('name'=>'txtcounter','type'=>'hidden','class'=>'hidden bersih','id'=>'txtcounter'));?> 
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-3">
                                             <label>Cicilan ke :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-bars"></i>
-                                                </span>
-                                                <?php echo form_input(array('name'=>'txtCicilan','class'=>'form-control','id'=>'txtCicilan','required'=>'required')); ?>
-                                            </div>
+                                                <?php echo form_input(array('name'=>'txtCicilan','class'=>'form-control kanan','id'=>'txtCicilan','required'=>'required')); ?>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-4">
+                                            <label>Tanggal tagihan :</label>
+                                                <?php echo form_input(array('name'=>'txtTglTagihan','class'=>'form-control bersih','id'=>'txtTglTagihan','readonly'=>'true')); ?>
+                                        </div>
+                                        <div class="col-md-5">
+                                        	<label>Kuitansi :</label>
+                                        	<?php echo form_input(array('name'=>'txtKuitansi','id'=>'txtKuitansi','class'=>'form-control bersih','placeholder'=>'No kuitansi'));?>
                                         	<?php echo form_input(array('name'=>'txtTglTrans','id'=>'txtTglTrans','readonly'=>'true','class'=>'hidden','value'=>$this->session->userdata('tglD'))); ?>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>Tanggal tagihan :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                                </span>
-                                                <?php echo form_input(array('name'=>'txtTglTagihan','class'=>'form-control bersih','id'=>'txtTglTagihan','readonly'=>'true')); ?>
-                                            </div>                                   
-                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Kuitansi :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
-                                        <?php echo form_input(array('name'=>'txtKuitansi','id'=>'txtKuitansi','readonly'=>'readonly','class'=>'form-control bersih','placeholder'=>'No kuitansi'));?>
-                                    </div>
-                                </div>
-                                
                             </div>    
                         </div><!-- <div class="col-md-6"> -->
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <h4>Jumlah Setoran</h4>
                             <div class="form-body">
                             	<div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Pokok :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtAngsPokok','class'=>'form-control nomor byr','id'=>'txtAngsPokok','required'=>'required','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
-                                        	<label>Bunga :</label>
-                                        	<div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
+                                        	<label>margin :</label>
                                                 <?php echo  form_input(array('name'=>'txtAngsBunga','class'=>'form-control nomor byr','id'=>'txtAngsBunga','required'=>'required','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Denda :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtAngsDenda','class'=>'form-control nomor byr','id'=>'txtAngsDenda','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -235,22 +149,12 @@
                                             
                                         </div>
                                         <div class="col-md-4">
-                                        <label>Disc bunga:</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
+                                        <label>Disc margin:</label>
                                                 <?php echo  form_input(array('name'=>'txtDiscBunga','class'=>'form-control nomor','id'=>'txtDiscBunga','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Disc denda :</label>
-                                        	<div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtDiscDenda','class'=>'form-control nomor','id'=>'txtDiscDenda','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
@@ -261,55 +165,32 @@
                                         </div>
                                         <div class="col-md-4">
                                         <label>Adm :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtAdm','class'=>'form-control nomor byr','id'=>'txtAdm','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Pend lain :</label>
-                                        	<div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
                                                 <?php echo  form_input(array('name'=>'txtPendLain','class'=>'form-control nomor byr','id'=>'txtPendLain','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
                                 <?php echo form_input(array('name'=>'txtJmlTabWajib','id'=>'txtJmlTabWajib','class'=>'nomor byr','style'=>'text-align:right','type'=>'hidden','readonly'=>'readonly'));?>
                                 <?php  echo  form_input(array('name'=>'txtRekTab','type'=>'hidden','class'=>'bersih','id'=>'txtRekTab'));?>
                                 <?php  echo  form_input(array('name'=>'txtNamaTab','type'=>'hidden','class'=>'bersih','id'=>'txtNamaTab','readonly'=>'readonly'));?>
+                                <a class="btn default hidden" data-toggle="modal" href="#idDivApprovalLimit" 
+				                	id="idBtnApprovalLimit"></a>
                             	<div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Jumlah angsuran :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
-                                                <?php echo form_input(array('name'=>'txtTotalTrans','id'=>'txtTotalTrans','class'=>'form-control nomor','readonly'=>'true','style'=>'text-align:right'));?>
-                                            </div>
+                                                <?php echo form_input(array('name'=>'txtTotalTrans','id'=>'txtTotalTrans','class'=>'form-control nomor kanan'));?>
                                         </div>
                                         <div class="col-md-4">
                                         	<label>Jumlah uang :</label>
-                                        	<div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
-                                                <?php echo  form_input(array('name'=>'txtJmlByr','class'=>'form-control nomor','id'=>'txtJmlByr','style'=>'text-align:right','onkeyup'=>''));?>
-                                            </div>
+                                                <?php echo  form_input(array('name'=>'txtJmlByr','class'=>'form-control nomor kanan','id'=>'txtJmlByr','onkeyup'=>''));?>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Uang kembali :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-dollar"></i>
-                                                </span>
-                                                <?php echo  form_input(array('name'=>'txtJmlKembali','class'=>'form-control nomor','id'=>'txtJmlKembali','style'=>'text-align:right','readonly'=>'true'));?>
-                                            </div>                                   
+                                                <?php echo  form_input(array('name'=>'txtJmlKembali','class'=>'form-control nomor kanan','id'=>'txtJmlKembali','readonly'=>'true'));?>
                                         </div>
                                     </div>
                                 </div> 
@@ -321,10 +202,6 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
                                         <?php
                                         $data = array(
                                             'name'        => 'txtKet',
@@ -335,9 +212,7 @@
                                           );
                                         echo form_textarea($data);
                                         ?>
-                                    </div>
                                 </div> 
-                                
                             </div>
                             <!-- END FORM BODY-->
                         </div>    
@@ -427,6 +302,47 @@
     </div>
 </div>
 <!--  END MODAL-->
+<!--  MODAL APPROVAL -->
+<div class="modal fade draggable-modal" id="idDivApprovalLimit" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Approval</h4>
+			</div>
+			<div class="modal-body">
+				<div class="Metronic-alerts alert alert-danger fade in">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					Maaf, nominal anda melebihi batas yang diinzinkan.
+				</div>	
+				 <form role="form" id="idFormApprovalLimit" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label>User name</label>
+								<input type="text" name="approvalUserName" id="idApprovalUserName" class="form-control" placeholder="User name">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+								<input type="password" name="approvalPassword" class="form-control" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn blue">Approve</button>
+						<button type="button" class="btn default">Batal</button>
+					</div>
+				</form>
+					
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalApproval">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!--  END MODAL APPROVAL -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -593,9 +509,6 @@
 
     }();
 	// END MENU OPEN
-		function pad2(number) {
-     		return (number < 10 ? '0' : '') + number
-		}
 		//angga print
 		function cetak_validasi(){
 		 // var newWindow = window.open("","Cetak","width=300,height=300,scrollbars=0,resizable=1")
@@ -616,7 +529,7 @@
 		 var denda = $('#txtAngsDenda').val();
 		 var destranskre=$('#DL_kodetrans_kre option:selected').text();
 		 var saldo = $('#txtBDpokok').val();//baki debet
-	  	 var html1=tgl_trans+" "+jam+":"+mnt+":"+dtk+" "+user+" "+kuitansi+"<br>";
+	  	 var html1="<br><br>"+tgl_trans+" "+jam+":"+mnt+":"+dtk+" "+user+" "+kuitansi+"<br>";
 		 var html2=destranskre+" "+no_rek+" "+nama+" "+"<br>";
 
 	  	 var html3="Pokok: "+pokok+" Bng/Mrg: "+bunga+" Denda: "+denda+"<br>";
@@ -629,17 +542,7 @@
 		  newWindow .print();
 		  newWindow .document.close();
 		}
-		function capitalizeEachWord(str){
-		   var words = str.split(" ");
-		   var arr = Array();
-		   for (i in words){
-			  temp = words[i].toLowerCase();
-			  temp = temp.charAt(0).toUpperCase() + temp.substring(1);
-			  arr.push(temp);
-		   }
-		   return arr.join(" ");
-		}
-
+		
 		function cetak_kuitansi(){
 		   var newWindow = window.open('Kuitansi', '_blank');
 		   var desk_trans = $('#DL_kodetrans_kre option:selected').text();
@@ -678,13 +581,13 @@
 		   var htm10_1='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Nama</td><td>:</td><td>'+nama+'</td></tr>';
 		   var htm10_2='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">No. Rek</td><td>:</td><td>'+no_rek+'</td></tr>';
 		   var htm10_3='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Sisa Pokok Awal</td><td>:</td><td>'+pokok_awal+'</td></tr>';
-		   var htm10_4='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Sisa Pinjaman</td><td>:</td><td>'+pokok_akhir+'</td></tr>';
+		   var htm10_4='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Sisa pembiayaan</td><td>:</td><td>'+pokok_akhir+'</td></tr>';
 		   var htm10_5='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Angsuran ke</td><td>:</td><td>'+cicilan+'</td></tr>';
 		   var htm10_6='<tr><td style="font-family:Courier New, Courier, monospace; width:100px;">Transaksi</td><td>:</td><td>'+desk_trans+'</td></tr>';
 		   var htm10e='</table></td>';
 		   var htm11 = '<td></td><td>';
 		   var htm11_1='<table style="font-size: 10px;"><tr><td style="font-family:Courier New, Courier, monospace; width:200px;">Angsuran Pokok</td><td>:</td><td>'+angs_pkk+'</td></tr>';
-		   var htm11_2='<tr><td style="font-family:Courier New, Courier, monospace; width:200px;">Angsuran Bunga</td><td>:</td><td>'+angs_bgn+'</td></tr>';
+		   var htm11_2='<tr><td style="font-family:Courier New, Courier, monospace; width:200px;">Angsuran margin</td><td>:</td><td>'+angs_bgn+'</td></tr>';
 		   var htm11_3='<tr><td style="font-family:Courier New, Courier, monospace; width:200px;">Denda</td><td>:</td><td>'+angs_denda+'</td></tr>';
 		   var htm11_4='<tr><td style="font-family:Courier New, Courier, monospace; width:200px;">Administrasi</td><td>:</td><td>'+angs_adm+'</td></tr>';
 		   var htm11_5='<tr><td style="font-family:Courier New, Courier, monospace; width:200px;"><hr></td><td>:</td><td><hr></td></tr>';
@@ -896,34 +799,8 @@
 			},"json");
 		}
 		
-		//fungsi untuk kalkulasi pembayaran textbox
-		function CleanNumber(value) {     
-		    newValue = value.replace(/\,/g, '');
-		    return newValue;
-		}
-/*
-		function CommaFormatted(amount) {
-		    var delimiter = ",";
-		    var i = parseFloat(amount);
+		
 
-		    if (isNaN(i)) { return ''; }
-		    i = Math.abs(i);
-		    var minus = '';
-		    if (i < 0) { minus = '-'; }
-
-		    var n = new String(i);
-		    var a = [];
-		    while (n.length > 3) {
-		        var nn = n.substr(n.length - 3);
-		        a.unshift(nn);
-		        n = n.substr(0, n.length - 3);
-		    }
-		    if (n.length > 0) { a.unshift(n); }
-		    n = a.join(delimiter);
-		    amount = minus + n;
-		    return amount;
-		}
-*/
 		function calculateSum() {
 			var AngsPokok = parseFloat(CleanNumber($("#txtAngsPokok").val()));
 		    if (isNaN(AngsPokok)) AngsPokok = 0;
@@ -985,6 +862,8 @@
 			  },"json");
 		  }
 		  function ajax_submit_angsur(){
+			  ajaxModal();
+			  dataString = $("#formangsur").serialize();
 			  $.ajax({
 				type:"POST",
 				url:"<?php echo base_url(); ?>angsur_kredit/simpan_angsur",
@@ -994,7 +873,6 @@
 					
 					alert('Transaksi setoran angsuran tersimpan.');
 					 $("#btnSimpan").attr("disabled", "disabled");
-					// $('#btnSimpan').hide();
 				}
 		
 			});
@@ -1003,16 +881,20 @@
 		$(function() {
 			
 				$('#formangsur').submit(function (event) {
-					  dataString = $("#formangsur").serialize();
 					  var jml_bayar = parseFloat(CleanNumber($("#txtTotalTrans").val()));
 					  var jmltabwajib = parseFloat(CleanNumber($("#txtJmlTabWajib").val()));//parseFloat(CleanNumber($(this).val())) 
+					  var sessionLimitSetor = parseFloat(CleanNumber($("#idSessionLimitSetor").val()));
 					  if (jml_bayar==0){
 						  alert('Jumlah setoran tidak boleh 0 !');
 						  return false;
 					  }else if((jmltabwajib>0) && ($('#txtRekTab').val()=='')){
 						  alert('Isi no rek tabungan.');
 						  return false;
-					  }else{
+					  } else if (jml_bayar > sessionLimitSetor) {
+				        	//alert('Nominal transaksi melebihi batasan! \nHubungi supervisor anda.');
+							$('#idBtnApprovalLimit').trigger('click');
+							return false;
+				      }else{
 						  var r = confirm('Anda yakin menyimpan data ini?');
 						  if (r== true){
 							ajax_submit_angsur();
@@ -1024,11 +906,7 @@
 				  }); //end  $contact form
 			
 		});/// end $func
-		/*$(document).ajaxStart(function() {
-			$('.modal_json').fadeIn('fast');
-		  }).ajaxStop(function() {
-			$('.modal_json').fadeOut('fast');
-		});*/
+		
 		$(document).ready(function(){
 			
 			$( "#DL_kodetrans_kre" ).focusout(function() {
@@ -1282,13 +1160,33 @@
 
 			
 		});//end ready document
-		// jQuery expression for case-insensitive filter
-		$.extend($.expr[":"],
-			{
-				"contains-ci": function(elem, i, match, array)
-				{
-					return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "")
-					.toLowerCase()) >= 0;
-				}
-		});
+		function ajaxApprovalLimit(){
+			dataString = $("#idFormApprovalLimit").serialize();
+			$.ajax({
+				  type:"POST",
+				  url:"<?php echo base_url(); ?>angsur_kredit/approvalLimit",
+				  data:dataString,
+				  dataType: 'json',
+				  success:function (data) {
+					  if(data.bool == true){
+						  var jml_bayar=parseFloat(CleanNumber($("#txtTotalTrans").val()));
+						  if(jml_bayar < data.limitSetor){
+							  ajax_submit_angsur();
+							  $('#btnCloseModalApproval').trigger('click');
+						  }else{
+							  alert("Maksimal nominal transaksi anda "+ number_format(data.limitSetor,2) +"\nSilahkan appoval dengan user yang lain.");
+						  }
+					  }else{
+						  alert("User name atau password anda salah.");
+						  return false;
+					  }	  
+				  }
+		  
+			  });
+			  event.preventDefault();
+		}
+	  $('#idFormApprovalLimit').submit(function (event) {
+		  ajaxApprovalLimit();
+	  });
+		
 	</script>

@@ -25,6 +25,12 @@ class Master_depositomodel extends CI_Model {
 		$query	= $this->db->query($sql);
 		return $query->result();
 	}
+	public function getNamaRekTab($noRekTab) {
+		$sql= "select n.nama_nasabah from nasabah n, tabung t where
+				t.nasabah_id = n.nasabah_id and t.no_rekening='$noRekTab'";
+		$query=$this->db->query($sql);
+		return $query->result();
+	}
 	public function get_jenis_dep() {
 		$rows = array(); //will hold all results
 		$sql="select * from kodejenisdeposito order by KODE_JENIS_DEPOSITO asc ";

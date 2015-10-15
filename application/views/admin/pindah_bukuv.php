@@ -33,11 +33,7 @@
                 <div class="tools">
                     <a href="" class="collapse">
                     </a>
-                    <a href="#portlet-config" data-toggle="modal" class="config">
-                    </a>
-                    <a href="" class="reload">
-                    </a>
-                    <a href="" class="remove">
+                    <a href="" class="fullscreen">
                     </a>
                 </div>
             </div>
@@ -48,48 +44,38 @@
                         <div class="col-md-6">
                         	<h4>Rekening Asal</h4>
                             <div class="form-body">
-                            	<div class="form-group" style="display: none;">
+                            	<div class="form-group hidden">
                                     <label>Tanggal :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
                                         <?php echo form_input(array('name'=>'txtTGlTrans','class'=>'form-control input-small','id'=>'txtTglTrans','value'=>$this->session->userdata('tglD'),'readonly'=>'true'));?>
                                         <?php echo  form_input(array('name'=>'txtcounter','class'=>'span1 bersih hidden','type'=>'hidden','id'=>'txtcounter'));?>
                                         <input type="text" id="idFlagRekTab">
-                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>No rekening :</label>
-
-                                    <div class="input-group input-medium">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-tag"></i>
-                                        </span>
-                                        <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rekening" class="form-control  input-medium bersih" required="">
-                                        <span class="input-group-btn">
-                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
-                                                     data-toggle="modal" id="idButtonModalRekTab">
-                                                      <span class="glyphicon glyphicon-search"></span>
-                                                  </a>
-                                                  </span>
-                                    </div>
+                                	<div class="row">
+                        				<div class="col-md-6">
+                        					<label>No rekening :</label>
+		                                    <div class="input-group">
+		                                        <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rekening" class="form-control bersih" required="">
+		                                        <span class="input-group-btn">
+		                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
+		                                                     data-toggle="modal" id="idButtonModalRekTab">
+		                                                      <span class="glyphicon glyphicon-search"></span>
+		                                                  </a>
+		                                                  </span>
+		                                    </div>
+                        				</div>
+                        			</div>	
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama nasabah :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <?php echo form_input(array('name'=>'txtNama','id'=>'txtNama','class'=>'bersih form-control  input-large','placeholder'=>'Nama nasabah','readonly'=>'true'));?>
-                                    </div>
+                                <div class="row">
+                        			<div class="col-md-7">
+                        				<label>Nama nasabah :</label>
+                                        <?php echo form_input(array('name'=>'txtNama','id'=>'txtNama','class'=>'bersih form-control','placeholder'=>'Nama nasabah','readonly'=>'true'));?>
+                        			</div>
+                        		</div>		 
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-home"></i>
-                                        </span>
                                         <?php
                                         $data = array(
                                             'name'        => 'txtAlamat',
@@ -101,35 +87,24 @@
                                           );
                                         echo form_textarea($data);
                                         ?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Saldo saat ini :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <?php echo form_input(array('name'=>'txtSaldoSaatIni','id'=>'txtSaldoSaatIni','class'=>'form-control nomor  input-large','readonly'=>'true','style'=>'text-align:right'));?>
-                                    </div>
+                                	<div class="row">
+                        				<div class="col-md-6">
+                        					<label>Saldo saat ini :</label>
+                                        	<?php echo form_input(array('name'=>'txtSaldoSaatIni','id'=>'txtSaldoSaatIni','class'=>'form-control nomor kanan','readonly'=>'true'));?>
+                        				</div>
+                        				<div class="col-md-6">
+                        					<label>Saldo minimum :</label>
+                                        	<?php echo form_input(array('name'=>'txtSaldoMin','id'=>'txtSaldoMin','class'=>'form-control nomor kanan','readonly'=>'true'));?>
+                        				</div>
+                        			</div>	
+                                    
                                 </div>
-                                <div class="form-group">
-                                    <label>Saldo minimum :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <?php echo form_input(array('name'=>'txtSaldoMin','id'=>'txtSaldoMin','class'=>'form-control nomor  input-large','readonly'=>'true','style'=>'text-align:right'));?>
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <label>Kode transaksi :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-gears"></i>
-                                                </span>
                                                 <?php
 												$data = array();
 												foreach($kode_debet as $row){
@@ -139,13 +114,14 @@
 												echo form_dropdown('DL_kodetrans1', $data,$kd1,'id="DL_kodetrans1" class="form-control"');
 												
 												?>
-                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <label>&nbsp;</label>
-                                            <div class="input-group">
-                                                <input id="txtJenisTrans" name="txtJenisTrans" type="text" class="form-control" readonly="readonly" value="<?php echo $tob1; ?>">
-                                            </div>                                   
+                                                <input id="txtJenisTrans" name="txtJenisTrans" type="text" class="form-control" readonly="readonly" value="<?php echo $tob1; ?>">                    
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Kuitansi</label>
+                                                <input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="No kuitansi" class="form-control bersih" required="">
                                         </div>
                                     </div>
                                 </div>
@@ -153,67 +129,45 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Jumlah :</label>
-
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
                                                 <?php echo form_input(array('name' => 'txtJml', 'style' => 'text-align:right;', 'id' => 'txtJml', 'required' => 'required', 'class' => 'form-control nomor')); ?>
-                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label>Kuitansi</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </span>
-                                                <input id="txtKuitansi" name="txtKuitansi" type="text" placeholder="no kuitansi" readonly="readonly" class="form-control bersih" required="" onkeyup="ToUpper(this);">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label id="terbilang" style="color: red"></label>
-                                </div>
-
-
-                                
+                                </div>                           
                             </div>    
                         </div><!-- <div class="col-md-6"> -->
                         <div class="col-md-6">
                             <div class="form-body">
                             	<h4>Rekening Tujuan</h4>
                             	<div class="form-group">
-                                    <label>No rekening tujuan :</label>
-                                    <div class="input-group input-medium">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input id="txtRekTujuan" name="txtRekTujuan" type="text" placeholder="No rek tabungan" class="form-control bersih input-medium" required="">
-                                        <span class="input-group-btn">
-                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
-                                                     data-toggle="modal" id="idButtonModalRekTabTjn">
-                                                      <span class="glyphicon glyphicon-search"></span>
-                                                  </a>
-                                                  </span>
-                                    </div>
+                            		<div class="row">
+                            			<div class="col-md-6">
+	                            			<label>No rekening tujuan :</label>
+		                                    <div class="input-group">
+		                                        <input id="txtRekTujuan" name="txtRekTujuan" type="text" placeholder="No rek tabungan" class="form-control bersih" required="">
+		                                        <span class="input-group-btn">
+		                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab"
+		                                                     data-toggle="modal" id="idButtonModalRekTabTjn">
+		                                                      <span class="glyphicon glyphicon-search"></span>
+		                                                  </a>
+		                                                  </span>
+		                                    </div>
+                            			</div>
+                            		</div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input id="txtNamaTujuan" name="txtNamaTujuan" type="text" placeholder="nama nasabah" required="" disabled="" class="form-control bersih input-large">
-                                    </div>
+                                	<div class="row">
+                            			<div class="col-md-7">
+                            				<label>Nama :</label>
+                                    		<input id="txtNamaTujuan" name="txtNamaTujuan" type="text" placeholder="nama nasabah" required="" disabled="" class="form-control bersih">
+                            			</div>
+                            		</div>	
                                 </div>
                                 <div class="form-group">
                                     <label>Alamat :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-home"></i>
-                                        </span>
                                         <?php
                                         $data = array(
                                             'name'        => 'txtAlamat2',
@@ -225,34 +179,23 @@
                                         );
                                         echo form_textarea($data);
                                         ?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Saldo tabungan :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input id="txtSaldoTabTujuan" name="txtSaldoTabTujuan" type="text" class="form-control nomor  input-large" required="" style="text-align:right;" disabled="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Saldo minimum :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                        </span>
-                                        <input id="txtSaldoMinTujuan" name="txtSaldoMinTujuan" type="text" class="form-control nomor  input-large" required="" style="text-align:right;" disabled="">
-                                    </div>
+                                	<div class="row">
+                                        <div class="col-md-6">
+                                        	<label>Saldo tabungan :</label>
+                                    		<input id="txtSaldoTabTujuan" name="txtSaldoTabTujuan" type="text" class="form-control nomor kanan" disabled="">
+                                        </div>
+                                        <div class="col-md-6">
+                                        	<label>Saldo minimum :</label>
+                                    		<input id="txtSaldoMinTujuan" name="txtSaldoMinTujuan" type="text" class="form-control nomor kanan" disabled="">
+                                        </div>
+                                    </div>     
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Kode transaksi :</label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                <i class="fa fa-gears"></i>
-                                                </span>
                                                 <?php
 												$data = array();
 												foreach($kode_kredit as $row)
@@ -262,23 +205,15 @@
 												echo form_dropdown('DL_kodetrans2', $data,$kd2,'id="DL_kodetrans2" class="form-control"');
 												//echo form_input(array('name'=>'txtDeskripTrans2','style'=>'width:165px;','id'=>'txtDeskripTrans2','readonly'=>'true'));
 												?>
-                                            </div>
                                         </div>
-
                                         <div class="col-md-2">
                                             <label>&nbsp;</label>
-                                            <div class="input-group">
                                                 <?php echo form_input(array('name'=>'txtJenisTrans2','id'=>'txtJenisTrans2', 'value'=>$tob2,'readonly'=>'true','class'=>'form-control')); ?>
-                                            </div>                                   
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Keterangan :</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                        <i class="fa fa-list"></i>
-                                        </span>
                                         <?php
                                         $data = array(
                                             'name'        => 'txtKet',
@@ -289,7 +224,6 @@
                                           );
                                         echo form_textarea($data);
                                         ?>
-                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input id="txtModal" name="txtModal" type="hidden" class="input-mini bersih hidden" >
@@ -302,6 +236,8 @@
                                     <input type="hidden" id="txtsaldosetor2" name="txtsaldosetor2" class="input-mini bersih " />
                                     <input type="hidden" id="txtsaldotarik2" name="txtsaldotarik2" class="input-mini bersih " />
                                     <input type="hidden" id="txtTransID" name="txtTransID" class="input-mini bersih " value="" />
+                                    <a class="btn default hidden" data-toggle="modal" href="#idDivApprovalLimit" 
+				                	id="idBtnApprovalLimit"></a>
                                 </div>   
                                 
                             </div>
@@ -310,6 +246,7 @@
                     </div>
                     <!-- END DIV CLASS ROW FOR SIZE 6 -->
                     <div class="form-actions">
+                    
                         <button type="submit" class="btn blue" id="btnSimpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>               
        					<a class="btn green" onclick="cetak_validasi();" id="btnCetak_validasi" name="btnCetak_validasi">
                         	<span class="glyphicon glyphicon-print"></span> Validasi
@@ -393,6 +330,47 @@
     </div>
 </div>
 <!--  END MODAL-->
+<!--  MODAL APPROVAL -->
+<div class="modal fade draggable-modal" id="idDivApprovalLimit" tabindex="-1" role="basic" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">Approval</h4>
+			</div>
+			<div class="modal-body">
+				<div class="Metronic-alerts alert alert-danger fade in">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+					Maaf, nominal anda melebihi batas yang diinzinkan.
+				</div>	
+				 <form role="form" id="idFormApprovalLimit" method="post">
+					<div class="form-body">
+						<div class="form-group">
+							<label>User name</label>
+								<input type="text" name="approvalUserName" id="idApprovalUserName" class="form-control" placeholder="User name">
+						</div>
+						<div class="form-group">
+							<label>Password</label>
+								<input type="password" name="approvalPassword" class="form-control" placeholder="Password">
+						</div>
+					</div>
+					<div class="form-actions">
+						<button type="submit" class="btn blue">Approve</button>
+						<button type="button" class="btn default">Batal</button>
+					</div>
+				</form>
+					
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn default" data-dismiss="modal" id="btnCloseModalApproval">Close</button>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!--  END MODAL APPROVAL -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="<?php //echo base_url('metronic/global/plugins/respond.min.js'); ?>"></script>
@@ -692,6 +670,7 @@ var TableManaged = function () {
 	}
 	function ajax_submit_pindahbuku(){
             ajaxModal();
+            dataString = $("#id_form_pindahbuku").serialize();
 			$.ajax({
 				type:"POST",
 				url:"<?php echo base_url(); ?>pindah_buku/simpan_pindah_buku",
@@ -707,17 +686,50 @@ var TableManaged = function () {
 			});
 			event.preventDefault();
 		}
+	function ajaxApprovalLimit(){
+		dataString = $("#idFormApprovalLimit").serialize();
+		$.ajax({
+			  type:"POST",
+			  url:"<?php echo base_url(); ?>pindah_buku/approvalLimit",
+			  data:dataString,
+			  dataType: 'json',
+			  success:function (data) {
+				  if(data.bool == true){
+					  alert(data.limitTarik);
+					  var jml_bayar=parseFloat(CleanNumber($("#txtJml").val()));
+					  if(jml_bayar < data.limitTarik){
+						  ajax_submit_pindahbuku();
+						  $('#btnCloseModalApproval').trigger('click');
+					  }else{
+						  alert("Maksimal nominal transaksi anda "+ number_format(data.limitTarik,2) +"\nSilahkan appoval dengan user yang lain.");
+					  }
+				  }else{
+					  alert("User name atau password anda salah.");
+					  return false;
+				  }	  
+			  }
+	  
+		  });
+		  event.preventDefault();
+	}
+ 	 $('#idFormApprovalLimit').submit(function (event) {
+	 	ajaxApprovalLimit();
+  	});
 	$(function() {
 		$('#id_form_pindahbuku').submit(function (event) {
-			  dataString = $("#id_form_pindahbuku").serialize();
 			  var jml_bayar = parseFloat(CleanNumber($("#txtJml").val()));
 			  var saldo_saat_ini = parseFloat(CleanNumber($("#txtSaldoSaatIni").val()));
+			  var sessionLimitTarik = parseFloat(CleanNumber($("#idSessionLimitTarik").val()));
 			 
 			  if (jml_bayar==0){
 				  alert('Jumlah setoran tidak boleh 0 !');
 				  return false;
 			  }else if(jml_bayar>saldo_saat_ini){
 				  alert('Jumlah penarikan lebih besar dari saldo!');
+				  return false;
+			  }else if(jml_bayar > sessionLimitTarik){
+				  $('#idBtnApprovalLimit').trigger('click');
+				  //alert('Nominal transaksi melebihi batasan! \nHubungi supervisor anda.');
 				  return false;
 			  }else{
 					  var r = confirm('Anda yakin menyimpan data ini?');
@@ -842,6 +854,7 @@ var TableManaged = function () {
 					$('.bersih').val('');
 					$('.nomor').val('0.00');
 					$('#txtRekTab').focus();
+					$("#btnSimpan").removeAttr("disabled");
 				}
 	}
 	/**/

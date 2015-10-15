@@ -27,7 +27,7 @@ class Kasumum extends CI_Controller
 		}
 	}
 
-	function kodejurnal()
+	 function kodejurnal()
 	{
 		$this->CI =& get_instance();
 		$this->CI->load->model('kasmodel');
@@ -42,7 +42,25 @@ class Kasumum extends CI_Controller
 		);
 
 		$this->output->set_output(json_encode($array));
-	}
+	} 
+	public function getPerkAll(){
+		$this->CI =& get_instance();//and a.kcab_id<>'1100'
+		$rows = $this->kasmodel->getPerkAll();
+		$data['data'] = array();
+		foreach( $rows as $row ) {
+	
+			$array = array(
+					'kodePerk' => trim($row->kode_perk),
+					'namaPerk' =>  trim($row->nama_perk),
+					'typePerk'    => trim($row->type)
+	
+			);
+	
+			array_push($data['data'],$array);
+		}
+		//echo json_encode($data['data']);
+		$this->output->set_output(json_encode($data));
+	}	
 
 	public function kas_umum()
 	{
@@ -141,7 +159,23 @@ class Kasumum extends CI_Controller
 			
 		 }
 	}
-	
+	function approvalLimitKas(){
+		$approvalUserName = $this->input->post('approvalUserName');
+		$approvalPassword = $this->input->post('approvalPassword');
+		$approvalLimitKas = $this->auth->approvalLimit ( $approvalUserName,$approvalPassword );
+		if($approvalLimitKas['bool']==true){
+			$dataReturn=array(
+					'bool'	=>true,
+					'limitKas' =>$approvalLimitKas['limitKas']
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}else{
+			$dataReturn=array(
+					'bool' =>false
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}
+	}
 	function testpdf()
 	{
 		$this->load->library('fpdf');

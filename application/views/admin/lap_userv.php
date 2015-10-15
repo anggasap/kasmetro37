@@ -213,7 +213,7 @@ $so300=0;
 <script>
 // MENU OPEN
 	$(".menu_root").removeClass('start active open');
-	$("#menu_root_7").addClass('start active open');
+	$("#menu_root_6").addClass('start active open');
 	// END MENU OPEN
 
 var TableManaged = function () {

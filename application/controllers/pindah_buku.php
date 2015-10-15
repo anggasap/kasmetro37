@@ -53,6 +53,23 @@ class Pindah_buku extends CI_Controller {
 		$this->tarik_tabungan();
 		$this->setor_tabungan();
 	}
+	function approvalLimit(){
+		$approvalUserName = $this->input->post('approvalUserName');
+		$approvalPassword = $this->input->post('approvalPassword');
+		$approvalLimit = $this->auth->approvalLimit ( $approvalUserName,$approvalPassword );
+		if($approvalLimit['bool']==true){
+			$dataReturn=array(
+					'bool'	=>true,
+					'limitTarik' =>$approvalLimit['limitTarik']
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}else{
+			$dataReturn=array(
+					'bool' =>false
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}
+	}
 	function setor_tabungan(){  
 	 	$tgl = trim($this->input->post('txtTGlTrans'));
 	 	$timestamp = strtotime($tgl);

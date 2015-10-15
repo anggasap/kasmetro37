@@ -161,6 +161,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                            </div>    
+                        </div><!-- <div class="col-md-6"> -->
+                        <div class="col-md-6">
+                            <div class="form-body">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -185,17 +190,12 @@
                                         </div>
                                     </div>
                                 </div>
-                    
-                            </div>    
-                        </div><!-- <div class="col-md-6"> -->
-                        <div class="col-md-6">
-                            <div class="form-body">
                             	<div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-5">
                                         	<div class="checkbox-list">
                                              <label class="checkbox-inline">
-                                                <input type="checkbox" value="1" name="chkBungaTitipan" id="chkBungaTitipan"> Masuk ke titipan
+                                                <input type="checkbox" value="1" name="chkBungaTitipan" id="chkBungaTitipan"> Bunga ke titipan
                                               </label>
                                              </div> 
                                              <div class="checkbox-list">
@@ -209,20 +209,21 @@
                                               </label>
                                               </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
                                             <label>No rekening :</label>
                                             <div class="input-group">
-                                            	<span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                 <input id="txtRekTab" name="txtRekTab" type="text" placeholder="No Rek Tabungan" class="form-control">
+                                                <span class="input-group-btn">
+                                                  <a href="#" class="btn green" data-target="#idDivTabelRekTab" data-toggle="modal">
+                                                      <span class="glyphicon glyphicon-search"></span>
+                                                  </a>
+                                                  </span>
                                             </div>
                                             <div class="input-group">
-                                            	<span class="input-group-addon">
-                                                <i class="fa fa-tag"></i>
-                                                </span>
                                                 <?php echo form_input(array('name'=>'txtNamaRekTab','id'=>'txtNamaRekTab','class'=>'bersih form-control','placeholder'=>'Nama Nasabah','readonly'=>'true'));?>
                                             </div>                                 
+                                        </div>
+                                        <div class="col-md-1">
                                         </div>
                                         
                                     </div>
@@ -234,13 +235,10 @@
                                       </label>
                                      </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Catatan :</label>
-                                        <?php echo  form_input(array('name'=>'txtCatatan','class'=>'bersih form-control','id'=>'txtCatatan'));?>
-                                </div>
+                                
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Kode group 1 :</label>
                                                  <?php
 												  $data = array();
@@ -251,7 +249,7 @@
 													  echo form_dropdown('DL_kodegroup1_dep', $data,'','id="DL_kodegroup1_dep" class="form-control"');
 												  ?>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Kode Group 2</label>
 											<?php
 											$data = array();
@@ -262,11 +260,7 @@
 												echo form_dropdown('DL_kodegroup2_dep', $data,'','id="DL_kodegroup2_dep"  class="form-control"');
 											?>                                  
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Kode group 3 :</label>
                                                  <?php
 												  $data = array();
@@ -277,22 +271,12 @@
 													  echo form_dropdown('DL_kodegroup3_dep', $data,'','id="DL_kodegroup3_dep" class="form-control"');
 												  ?>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label>Kode Pemilik</label>
-											<?php
-											$data = array();
-											$data['']='';
-												foreach($kode_pemilik as $row) : 
-														$data[$row['KODE_GOL_DEBITUR']] = $row['DESKRIPSI_GOL_DEBITUR'];
-												endforeach; 
-												echo form_dropdown('DL_kodepemilik', $data,'','id="DL_kodepemilik" class="form-control"');
-											?>
-                                        </div>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Kode Metoda :</label>
                                                  <?php
 												  $data = array();
@@ -303,7 +287,7 @@
 													  echo form_dropdown('DL_kodemetoda', $data,'','id="DL_kodemetoda" class="form-control"');
 												  ?>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label>Hubungan :</label>
 											<?php
 											$data = array();
@@ -312,6 +296,17 @@
 														$data[$row['KODE_HUBUNGAN']] = $row['DESKRIPSI_HUBUNGAN'];
 												endforeach; 
 												echo form_dropdown('DL_kodehub_dep', $data,'','id="DL_kodehub_dep" class="form-control"');
+											?>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Kode Pemilik</label>
+											<?php
+											$data = array();
+											$data['']='';
+												foreach($kode_pemilik as $row) : 
+														$data[$row['KODE_GOL_DEBITUR']] = $row['DESKRIPSI_GOL_DEBITUR'];
+												endforeach; 
+												echo form_dropdown('DL_kodepemilik', $data,'','id="DL_kodepemilik" class="form-control"');
 											?>
                                         </div>
                                     </div>
@@ -476,7 +471,75 @@
     </div>
 </div>
 <!--  END MODAL-->
+<!-- /.modal -->
+<div id="idDivTabelRekTab" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button id="idBtnCloseModalRekTab" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Data Rekening</h4>
+            </div>
 
+            <div class="modal-body">
+                <div class="scroller" style="height:400px; ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button id="id_ReloadRekTab" style="display: none;"></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-body">
+                                <table class="table table-striped table-bordered table-hover text_kanan" id="idTabelRekTab">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            No Rekening
+                                        </th>
+                                        <th>
+                                            Nasabah Id
+                                        </th>
+                                        <th>
+                                            Nama Nasabah
+                                        </th>
+                                        <th>
+                                            Alamat
+                                        </th>
+                                        <th>
+                                            Saldo Akhir
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                    <tfoot>
+
+
+                                    </tfoot>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <!-- end col-12 -->
+                    </div>
+                    <!-- END ROW-->
+                </div>
+                <!-- END SCROLLER-->
+            </div>
+            <!-- END MODAL BODY-->
+
+            <div class="modal-footer">
+
+                <button type="button" data-dismiss="modal" class="btn default">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  END MODAL-->
 
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
@@ -700,7 +763,7 @@ var TableManaged = function () {
                 [0, "asc"]
             ] // set first column as a default sort by asc
         });
-        $('#id_ReloadRekTab').click(function () {
+        $('#id_ReloadRekDep').click(function () {
             table.api().ajax.reload();
         });
 
@@ -744,6 +807,104 @@ var TableManaged = function () {
 
         tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
     }
+    var initTable3 = function () {
+
+        var table = $('#idTabelRekTab');
+
+        // begin first table
+        table.dataTable({
+            "ajax": "<?php  echo base_url("/master_tabungan_c/getRekTabAll"); ?>",
+            "columns": [
+				{ "data": "noRek" },
+                { "data": "nasabahId" },
+                { "data": "namaNasabah" },
+                { "data": "alamat" },
+                { "data": "saldoAkhir" }
+
+            ],
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [5, 10,15, 20, -1],
+                [5, 10,15, 20, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 5,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "Cari: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous":"Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "aaSorting": [[0,'asc']/*, [5,'desc']*/],
+            "columnDefs": [{  // set default column settings
+                'orderable': true,
+                'targets': [0]
+            }, {
+                "searchable": true,
+                "targets": [0]
+            }],
+            "order": [
+                [0, "asc"]
+            ] // set first column as a default sort by asc
+        });
+        $('#id_ReloadRekTab').click(function () {
+            table.api().ajax.reload();
+        });
+
+        var tableWrapper = jQuery('#example_wrapper');
+
+        table.find('.group-checkable').change(function () {
+            var set = jQuery(this).attr("data-set");
+            var checked = jQuery(this).is(":checked");
+            jQuery(set).each(function () {
+                if (checked) {
+                    $(this).attr("checked", true);
+                    $(this).parents('tr').addClass("active");
+                } else {
+                    $(this).attr("checked", false);
+                    $(this).parents('tr').removeClass("active");
+                }
+            });
+            jQuery.uniform.update(set);
+        });
+
+        table.on('change', 'tbody tr .checkboxes', function () {
+            $(this).parents('tr').toggleClass("active");
+        });
+        table.on('click', 'tbody tr', function () {
+        	var noRekTab 		= $(this).find("td").eq(0).html();           
+            $('#txtRekTab').val(noRekTab);
+            var namaNasabah		= $(this).find("td").eq(2).html();
+            $('#txtNamaRekTab').val(namaNasabah);
+            $('#idBtnCloseModalRekTab').trigger('click');
+            $('#txtRekTab').focus();
+
+        });
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    }
 
     return {
         //main function to initiate the module
@@ -753,6 +914,7 @@ var TableManaged = function () {
             }
             initTable1();
             initTable2();
+            initTable3();
         }
     };
 
@@ -955,30 +1117,30 @@ var TableManaged = function () {
 							$('#txtTglValuta').val(data.tglValuta);
 							$('#DL_tipe_bunga').val(data.typeSB);
 							if(data.masukTitipan == '1'){
-								$("#chkBungaTitipan").attr("checked", "checked");
+								$("#uniform-chkBungaTitipan span").addClass("checked");
 							}else{
-								$("#chkBungaTitipan").removeAttr("checked");
+								$("#uniform-chkBungaTitipan span").removeClass("checked");
 							}
 							if(data.bungaKePokok == '1'){
-								$("#chkBungaPokok").attr("checked", "checked");
+								$("#uniform-chkBungaPokok span").addClass("checked");
 							}else{
-								$("#chkBungaPokok").removeAttr("checked");
+								$("#uniform-chkBungaPokok span").removeClass("checked");;
 							}
 							if(data.noRekTab != ''){
-								$("#chkBungaTabungan").attr("checked", "checked");
+								$("#uniform-chkBungaTabungan span").addClass("checked");
 								$("#txtRekTab").removeAttr("readonly");
 								$("#txtRekTab").val(data.noRekTab);
 							}else{
-								$("#chkBungaTabungan").removeAttr("checked");
+								$("#uniform-chkBungaTabungan span").removeClass("checked");;
 								$("#txtRekTab").attr("readonly",true);
 								$("#txtRekTab").val('');
 							}
 							if(data.aro == '1'){
-								$("#chkAro").attr("checked", "checked");
+								$("#chkAro").addClass("checked");
 							}else{
-								$("#chkAro").removeAttr("checked");
+								$("#chkAro").removeClass("checked");
 							}
-							//$('#chkAro').val(data.aro);
+							$('#txtNamaRekTab').val(data.namaRekTab);
 							$('#DL_kodegroup1_dep').val(data.kodeGroup1);
 							$('#DL_kodegroup2_dep').val(data.kodeGroup2);
 							$('#DL_kodegroup3_dep').val(data.kodeGroup3);

@@ -405,6 +405,24 @@ class Setor_tarik_tabungan extends CI_Controller {
 	//	}
 		
 	}
+	function approvalLimit(){
+		$approvalUserName = $this->input->post('approvalUserName');
+		$approvalPassword = $this->input->post('approvalPassword');
+		$approvalLimit = $this->auth->approvalLimit ( $approvalUserName,$approvalPassword );
+		if($approvalLimit['bool']==true){
+			$dataReturn=array(
+					'bool'	=>true,
+					'limitSetor' =>$approvalLimit['limitSetor'],
+					'limitTarik' =>$approvalLimit['limitTarik']
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}else{
+			$dataReturn=array(
+					'bool' =>false
+			);
+			$this->output->set_output(json_encode($dataReturn));
+		}
+	}
 	
 
 }

@@ -1,5 +1,5 @@
 // JavaScript Document
-function numbersonly(e, decimal) {
+/*function numbersonly(e, decimal) {
 	var key;
 	var keychar;
 	
@@ -27,10 +27,7 @@ function numbersonly(e, decimal) {
 	   return false;
 }
 
- function ToUpper(ctrl) {
-	var t = ctrl.value;
-	ctrl.value = t.toUpperCase();
-}
+ 
 
 function strrev(str) {
     if (!str) return '';
@@ -73,6 +70,18 @@ function AddAndRemoveSeparator(txtbox) {
     //                result = result.substr(2, result.length-1)
     //            }
     txtbox.value = result;
+}*/
+/*ANG*/
+function ToUpper(ctrl) {
+	var t = ctrl.value;
+	ctrl.value = t.toUpperCase();
+}
+function ajaxModal(){
+    $(document).ajaxStart(function() {
+        $('.modal_json').fadeIn('fast');
+    }).ajaxStop(function() {
+        $('.modal_json').fadeOut('fast');
+    });
 }
 function validatedate(inputText,vbl) {  
 	var dateformat = /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;  
@@ -128,3 +137,20 @@ function validatedate(inputText,vbl) {
 		return false;  
 	}  
 }  //function validatedate(inputText)
+function CleanNumber(value) {
+    newValue = value.replace(/\,/g, '');
+    return newValue;
+}
+function capitalizeEachWord(str){
+	   var words = str.split(" ");
+	   var arr = Array();
+	   for (i in words){
+		  temp = words[i].toLowerCase();
+		  temp = temp.charAt(0).toUpperCase() + temp.substring(1);
+		  arr.push(temp);
+	   }
+	   return arr.join(" ");
+	}
+function pad2(number) {
+	return (number < 10 ? '0' : '') + number
+}

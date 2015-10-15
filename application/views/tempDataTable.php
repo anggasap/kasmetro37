@@ -95,6 +95,9 @@
             <input type="hidden" id="id_session_tgl_D" value="<?php echo $this->session->userdata('tglD');?>" />
             <input type="hidden" id="id_session_lokasi" value="<?php echo $this->session->userdata('lokasi');?>" />
             <input type="hidden" id="id_session_nama_lkm" value="<?php echo $this->session->userdata('nama_lkm');?>" />
+            <input type="hidden" id="idSessionLimitTarik" value="<?php echo $this->session->userdata('limitTarik');?>" />
+            <input type="hidden" id="idSessionLimitKasUmum" value="<?php echo $this->session->userdata('limitKasumum');?>" />
+            <input type="hidden" id="idSessionLimitSetor" value="<?php echo $this->session->userdata('limitSetor');?>" />
             <div class="menu-toggler sidebar-toggler hide">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
 			</div>
@@ -232,12 +235,12 @@
 						<a href="javascript:;" class="remove">
 						<i class="icon-close"></i>
 						</a>
-						<div class="input-group">
+						<!-- <div class="input-group">
 							<input type="text" class="form-control" placeholder="Cari...">
 							<span class="input-group-btn">
 							<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
 							</span>
-						</div>
+						</div> -->
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>

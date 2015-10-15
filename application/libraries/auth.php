@@ -28,7 +28,10 @@ class Auth{
 					//$split_password = $row->PASSWORD;
 					$arr = array (
 					'usr' => $row->USERNAME,
-					'pwd' => $row->PASSWORD
+					'pwd' => $row->PASSWORD,
+					'limitTarik' => $row->LIMIT_TARIK,
+					'limitKasumum'	=> $row->LIMIT_KASUMUM,
+					'limitSetor'	=> $row->LIMIT_SETOR
 				);
 			  }
 			  $m='';
@@ -67,11 +70,14 @@ class Auth{
 					  'nama'      => $userdata->USERNAME,
 					  'level'     => 2,// 2 $userdata->STATUS_USER
 					  'kantor'     => $kantor,
-					  'kodekantor'     => $jenis_kantor,
+					  'kodekantor' => $jenis_kantor,
 					  'lokasi'     => $lokasi,
 					  'tglD'     => $tgl,
 					  'tglY'     => $dt,
-					  'nama_lkm' => $nama_lkm
+					  'nama_lkm' => $nama_lkm ,
+				   	  'limitTarik' => $arr['limitTarik'],
+				   	  'limitKasumum'	=> $arr['limitKasumum'],
+				   	  'limitSetor'	=> $arr['limitSetor']
 				   );
 				   // buat session
 				   $this->CI->session->set_userdata($session_data);
@@ -114,6 +120,50 @@ class Auth{
 				   $this->CI->session->set_userdata($session_data);
 				   return true;
    }
+	function approvalLimit($aUserName,$aPassword){
+		
+		$username=strtoupper($aUserName);
+		$password=strtoupper($aPassword);
+		$this->CI->db->from('passwd');
+      	$this->CI->db->where('USERNAME',$username);
+	  	$result = $this->CI->db->get();
+      
+        if($result->num_rows() == 1){		  
+			$hasil=$result->result ();
+		  	foreach ( $hasil as $row ){  
+				$arr = array (
+					'usr' => $row->USERNAME,
+					'pwd' => $row->PASSWORD,
+					'limitTarik' => $row->LIMIT_TARIK,
+					'limitKasumum'	=> $row->LIMIT_KASUMUM,
+					'limitSetor'	=> $row->LIMIT_SETOR
+				);
+			 }
+			$m='';
+			$split_password=str_split($arr['pwd']);
+			foreach($split_password as $value){
+				$x=ord($value);
+				$x=$x-5;
+				$x=chr($x);
+				$m=$m.$x;
+			}
+			if($password==$m){
+				$dataReturn= array(
+					'bool'=>true,
+					'pesan'=>'',
+					'limitKas'=>$arr['limitKasumum'],
+					'limitSetor'=>$arr['limitSetor'],
+					'limitTarik'=>$arr['limitTarik']
+				);
+				return $dataReturn;
+			}else{
+				$dataReturn= array(
+						'bool'=>false
+				);
+				return $dataReturn;
+			}	
+   		}
+	}
    // untuk mengecek apakah user sudah login/belum
    function is_logged_in(){
       if($this->CI->session->userdata('user_id') == ''){
